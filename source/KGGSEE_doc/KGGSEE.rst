@@ -115,7 +115,7 @@ Multi-strategy Conditional Gene-based Association framework (MCGA)
 
 Purpose: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_eQTL and MCGA_isoQTL.
 
- - MCGA_Dist input data:
+- MCGA_Dist input data:
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
