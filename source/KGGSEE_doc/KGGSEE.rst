@@ -400,7 +400,7 @@ Explanations and Optional options
 
 The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with "#" is the column names. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. An example of eQTLs file and results of MCGA_eQTL are as follows:
 
-.. code::
+ .. code::
 
     #symbol id	chr	pos	ref	alt	altfreq	beta	se	p	neff	r2
     >WASH7P	ENSG00000227232	1
