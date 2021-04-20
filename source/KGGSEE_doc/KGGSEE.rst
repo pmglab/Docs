@@ -119,12 +119,10 @@ MCGA
      
    1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
    
    3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
    
- .. _: https://pmg-lab-docs.readthedocs.io/en/latest/KGGSEE_doc/KGGSEE.html#gene-based-association-analysis
-
   
 
 
@@ -151,7 +149,7 @@ MCGA
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
 
    3. Gene-level expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*;
 
@@ -183,7 +181,7 @@ MCGA
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
 
    3. Isoform-level expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*;
 
@@ -355,10 +353,10 @@ Explanations and Optional options
 
     columns in the output file are tissue or cell-type names, the *p*-value of enrichment according to the selective expression derived from the robust regression *z*-score, the logarithm of *p*-value.
 
-eQTL-guided gene/transcript-based association
+MCGA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-One can perform gene/transcript-based association analysis guided by eQTLs. The statistical method is still the effective chi-square statistics(ECS). ECS only combines the GWAS *p*-values of eQTLs of a gene or transcript. The pre-calculated cis-eQTLs of gene-level and transcript-level expression in 55 tissues or cell-types from GTEx(version 8) have been integrated into KGGSEE.
+MCGA can be used to perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. The statistical method is the improved effective chi-square statistics(ECS). The pre-calculated cis-eQTLs/isoQTLs of gene-level and isoform(transcript)-level expression in 50 tissues or cell-types from GTEx(version 8) have been integrated into KGGSEE resource (version `hg19 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl>` and `hg38`).
 
 Required options
 --------------------
