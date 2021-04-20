@@ -354,33 +354,47 @@ Explanations and Optional options
 MCGA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MCGA can be used to perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. The statistical method is the improved effective chi-square statistics(ECS). The pre-calculated cis-eQTLs/isoQTLs of gene-level and isoform(transcript)-level expression in 50 tissues or cell-types from GTEx(version 8) have been integrated into KGGSEE resource (`hg19 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl>`_ and `hg38 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg38%2Feqtl>`_).
+MCGA can be used to perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. The statistical method is the improved effective chi-square statistics(ECS). The pre-calculated cis-eQTLs/isoQTLs of gene-level and isoform(transcript)-level expression in 50 tissues or cell-types from GTEx(v8) have been integrated into KGGSEE resource (`hg19 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl>`_ and `hg38 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg38%2Feqtl>`_).
 
 Required options
 --------------------
 
 - ``--gene-finemapping``
 - ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
-- ``--filter-eqtl-p 0.01``
+- ``--filter-eqtl-p``
 - ``--expression-file [path/to/expression/file]``
 - ``--calcu-selectivity``
-- ``--sum-file [/path/to/summary/file]``
-- ``--filter-maf-le 0.02``
+- ``--pfile [/path/to/summary/file]``
+- ``--filter-maf-le``
 - ``--saved-ref  [previous/output/path]``
 - ``--out [output/path/prefix]``
+- ``--nt``
+- ``--chrom-col``
+- ``--pos-col``
+- ``--p-col``
+- ``--only-hgnc-gene``
+- ``--p-value-cutoff``
+- ``--multiple-testing``
+- ``--regions-out``
+
 
 **See an analysis example at:** `eQTL-Gene-based association analysis <#eqtl-guided-gene-based-association-analysis>`_
 
 Explanations and Optional options
 -----------------------------------
 
+- ``--nt``: CPU cores used for the analysis.
 - ``--gene-finemapping``: The main function option.
-- ``--multiple-testing``: See above description.
-- ``--p-value-cutoff``: See above description.
-- ``--only-hgnc-gene``: See above description.
-- ``--gene-score``: See above description.
-- ``--calcu-selectivity``: See above description.
-- ``--eqtl-file``: The path of eQTL file based on the gene-level or transcript-level expression.
+- ``--multiple-testing``: The multiple testing method to select significant genes for the conditional analysis. There are three settings. bonf: Standard Bonferroni correction. benfdr: Benjamini-Hochberg method to control the false discovery rate. fixed: Filtering by a fixed p-value cutoff.
+- ``--p-value-cutoff``: The family-wise cutoff for the multiple testing..
+- ``--only-hgnc-gene``: Only consider genes with HGNC gene symbols.
+- ``--expression-file``: The preproceeded gene expression file. The index column of the preprocessed expression file was gene/isoform symbol name, and each of 50 tissues or cell types had two columns: one representing average expression value (i.e., mean) of all sample and the other representing the standard error of the mean (SE).
+- ``--calcu-selectivity``: Calculate selective expression of a gene or transcripts in a tissue or a cell type.
+- ``--eqtl-file``: The full path of eQTL/isoQTL file.
+- ``--filter-eqtl-p``: a filter used to filter eQTLs/isoQTLs  < the cutoff.
+- ``--pfile``: the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, chromosome, physical position and p-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by ``--chrom-col``, ``--pos-col`` and ``--p-col`` respectively.
+- ``--filter-maf-le``: a filer used to filter variants with MAF > the cutoff.
+- ``--regions-out``: a region used to exclude variants in the specified regions.
 
     The eQTL file has a similar fasta format. The first row is just column names and optional. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL data using GTEx data(version 8). Variants within 1MB upstream and downstream of a gene or a transcript are included. 
 
