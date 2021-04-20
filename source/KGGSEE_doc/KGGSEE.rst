@@ -110,11 +110,12 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      java -Xmx10g -jar kggsee.jar --spa --expression-file resources/hs_scRNA_cluster_mean.tsv.gz --only-hgnc-gene --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --nt 10 --out examples/out/spa --excel
  
 
-eQTL-guided gene-based association analysis
+Multi-strategy Conditional Gene-based Association framework (MCGA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Purpose: Detect associated genes of a phenotype by GWAS summary statistics guided by eQTLs of a celltype
- - Input data:
+Purpose: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies corresponds to three models, i.e., MCGA_Dist, MCGA_eQTL and MCGA_isoQTL.
+
+ - MCGA_Dist input data:
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
      
@@ -122,11 +123,11 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics guide
 
    3. Gene expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*
 
-   4. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz*
 
 .. code:: shell
 
-  java -Xmx10g -jar kggsee.jar --gene-finemapping --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --expression-file resources/gtex.v8.transcript.mean.tsv.gz --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz --filter-eqtl-p 0.01 --nt 10 --out examples/out/geneAssoceQTL
+  java -Xmx10g -jar kggsee.jar --gene-finemapping --p-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --expression-file resources/gtex.v8.transcript.mean.tsv.gz --chrom-col CHR --pos-col BP --p-col P --nt 10 --out examples/out/geneAssoceQTL --filter-maf-le 0.02 --only-hgnc-gene --p-value-cutoff 0.05 --multiple-testing bonf --regions-out chr6:27477797-34448354 --calc-selectivity
+
 
 
 Functions
