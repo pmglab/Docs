@@ -421,7 +421,7 @@ The format of eQTL/isoQTL file is similar to the fasta file. The first row start
  
  .. code::
  
-      #symbol id      chr     pos     ref     alt     altfreq beta    se      p       neff    r2
+        #symbol id      chr     pos     ref     alt     altfreq beta    se      p       neff    r2
         >DDX11L1	ENST000456328	1						
         13418	G	A	0.161	-0.03	0.013	0.027	62	0.076
         19391	G	A	0.11	0.065	0.027	0.017	63	0.085
