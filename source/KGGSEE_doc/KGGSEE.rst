@@ -110,18 +110,18 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      java -Xmx10g -jar kggsee.jar --spa --expression-file resources/hs_scRNA_cluster_mean.tsv.gz --only-hgnc-gene --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --nt 10 --out examples/out/spa --excel
  
 
-Multi-strategy Conditional Gene-based Association framework (MCGA)
+MCGA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_eQTL and MCGA_isoQTL.
 
 - MCGA_Dist input data:
      
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
    2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*;
 
-   3. Gene expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*.
+   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
 
 
 .. code:: shell
@@ -135,7 +135,7 @@ Purpose: Perform conditional gene-based association analysis using different SNP
    --gene-finemapping \
    --p-file examples/gwas.sum.stat.gz \
    --saved-ref  examples/out/geneAssoc \
-   --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
+   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
    --filter-maf-le 0.02 \
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
@@ -166,9 +166,6 @@ Purpose: Perform conditional gene-based association analysis using different SNP
    --saved-ref  examples/out/geneAssoc \
    --expression-file resources/gtex.v8.gene.mean.tsv.gz \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
-   --chrom-col CHR \
-   --pos-col BP \
-   --p-col P \
    --filter-eqtl-p 0.01 \  
    --filter-maf-le 0.02 \
    --only-hgnc-gene \
