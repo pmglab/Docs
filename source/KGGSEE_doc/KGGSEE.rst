@@ -119,7 +119,7 @@ Purpose: Perform conditional gene-based association analysis using different SNP
      
    1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis`__) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
  .. _: https://pmg-lab-docs.readthedocs.io/en/latest/KGGSEE_doc/KGGSEE.html#gene-based-association-analysis
 
    3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
