@@ -396,7 +396,9 @@ Explanations and Optional options
 - ``--filter-maf-le``: a filer used to filter variants with MAF > the cutoff.
 - ``--regions-out``: a region used to exclude variants in the specified regions.
 
-    The eQTL file has a similar fasta format. The first row is just column names and optional. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL data using GTEx data(version 8). Variants within 1MB upstream and downstream of a gene or a transcript are included. 
+- ``--out``: Specify the path and prefix name of the output files. There are three main result files. One is the gene-based association result file, named ***.gene.txt** or ***.gene.xls**. The following
+
+The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with "#" is the column names. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. An example of eQTLs file like:
 
     .. code::
 
@@ -412,10 +414,6 @@ Explanations and Optional options
         99334	A	G	0.088	0.071	0.035	0.043	56	0.07
         …	…	…	…	…	…	…	…	…
     
-- ``--filter-eqtl-p``: Set the *p*-value cutoff to filter out less significant eQTL for the analysis.
-- ``--sum-file``: See above description. 
-- ``--filter-maf-le``: See above description.
-- ``--out``: Specify the path and prefix name of the output files. There are three main result files. One is the gene-based association result file, named ***.gene.txt** or ***.gene.xls**. The following
 
     .. csv-table::
         :file: ./table/demo.gene.csv
