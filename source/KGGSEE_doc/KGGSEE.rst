@@ -61,7 +61,7 @@ Under the folder of kggsee, there is a folder named **resources**, which contain
 Tutorials
 =========================
 
-.. _Gene-based association analysis
+Gene-based association analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Detect associated genes of a phenotype by GWAS summary statistics
@@ -76,7 +76,7 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
   java -Xmx10g -jar kggsee.jar --gene-assoc --sum-file examples/gwas.sum.stat.gz --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz --keep-ref --nt 10 --out examples/out/geneAssoc
 
 
-.. _Gene-based causality analysis
+Gene-based causality analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
