@@ -76,7 +76,7 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
   java -Xmx10g -jar kggsee.jar --gene-assoc --sum-file examples/gwas.sum.stat.gz --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz --keep-ref --nt 10 --out examples/out/geneAssoc
 
 
-Gene-based causality analysis
+.. _Gene-based causality analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
@@ -119,7 +119,7 @@ Purpose: Perform conditional gene-based association analysis using different SNP
      
    1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects(generated in .. `Gene-based association analysis <https://pmg-lab-docs.readthedocs.io/en/latest/KGGSEE_doc/KGGSEE.html#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   2. Genotypes in KGGSEE objects(generated in Gene-based association analysis_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
 
    3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
 
