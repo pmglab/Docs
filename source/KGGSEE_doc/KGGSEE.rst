@@ -126,8 +126,22 @@ Purpose: Perform conditional gene-based association analysis using different SNP
 
 .. code:: shell
 
-  java -Xmx10g \
-  -jar kggsee.jar --gene-finemapping --p-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --expression-file resources/gtex.v8.transcript.mean.tsv.gz --chrom-col CHR --pos-col BP --p-col P --nt 10 --out examples/out/geneAssoceQTL --filter-maf-le 0.02 --only-hgnc-gene --p-value-cutoff 0.05 --multiple-testing bonf --regions-out chr6:27477797-34448354 --calc-selectivity
+ java -Xmx10g \
+ -jar kggsee.jar \
+ --nt 10 \
+ --chrom-col CHR \
+ --pos-col BP \
+ --p-col P \
+ --gene-finemapping \
+ --p-file examples/gwas.sum.stat.gz \
+ --saved-ref  examples/out/geneAssoc \
+ --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
+ --filter-maf-le 0.02 \
+ --only-hgnc-gene \
+ --p-value-cutoff 0.05 \
+ --multiple-testing bonf \
+ --regions-out chr6:27477797-34448354 --calc-selectivity \
+ --out examples/out/geneAssoceQTL
 
 - MCGA_eQTL input data:
      
