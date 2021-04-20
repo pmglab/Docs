@@ -412,7 +412,8 @@ The format of eQTL/isoQTL file is similar to the fasta file. The first row start
     74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
         
 
-.. csv-table::
+ .. csv-table::
+ 
         :file: ./table/demo.gene.csv
         :header-rows: 1
         :align: center
