@@ -117,59 +117,98 @@ Purpose: Perform conditional gene-based association analysis using different SNP
 
  - MCGA_Dist input data:
      
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*
+   2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*;
 
-   3. Gene expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*
+   3. Gene expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*.
 
 
 .. code:: shell
 
- java -Xmx10g \
- -jar kggsee.jar \
- --nt 10 \
- --chrom-col CHR \
- --pos-col BP \
- --p-col P \
- --gene-finemapping \
- --p-file examples/gwas.sum.stat.gz \
- --saved-ref  examples/out/geneAssoc \
- --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
- --filter-maf-le 0.02 \
- --only-hgnc-gene \
- --p-value-cutoff 0.05 \
- --multiple-testing bonf \
- --regions-out chr6:27477797-34448354 --calc-selectivity \
- --out examples/out/geneAssoceQTL
+    java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \
+   --p-file examples/gwas.sum.stat.gz \
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
+   --filter-maf-le 0.02 \
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --regions-out chr6:27477797-34448354 --calc-selectivity \
+   --out examples/out/geneAssoceQTL
 
 - MCGA_eQTL input data:
      
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*
+   2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*;
 
-   3. Gene-level expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*
+   3. Gene-level expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*;
 
-   4. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*
+   4. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.
 
 .. code:: shell
 
-  java -Xmx10g -jar kggsee.jar --gene-finemapping --p-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --expression-file resources/gtex.v8.gene.mean.tsv.gz --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz --chrom-col CHR --pos-col BP --p-col P --filter-eqtl-p 0.01 --nt 10 --out examples/out/geneAssoceQTL --filter-maf-le 0.02 --only-hgnc-gene --p-value-cutoff 0.05 --multiple-testing bonf --regions-out chr6:27477797-34448354 --calc-selectivity
+   java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \
+   --p-file examples/gwas.sum.stat.gz \
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --filter-eqtl-p 0.01 \  
+   --filter-maf-le 0.02 \
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --regions-out chr6:27477797-34448354 \
+   --calc-selectivity \
+   --out examples/out/geneAssoceQTL
   
 - MCGA_isoQTL input data:
      
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*
+   2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*;
 
-   3. Isoform-level expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*
+   3. Isoform-level expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*;
 
-   4. isoQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*
+   4. isoQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.
 
 .. code:: shell
 
-  java -Xmx10g -jar kggsee.jar --gene-finemapping --p-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --expression-file resources/gtex.v8.transcript.mean.tsv.gz --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz --chrom-col CHR --pos-col BP --p-col P --filter-eqtl-p 0.01 --nt 10 --out examples/out/geneAssoceQTL --filter-maf-le 0.02 --only-hgnc-gene --p-value-cutoff 0.05 --multiple-testing bonf --regions-out chr6:27477797-34448354 --calc-selectivity  
+   java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \
+   --p-file examples/gwas.sum.stat.gz \
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz \ 
+   --filter-eqtl-p 0.01 \  
+   --filter-maf-le 0.02 \
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --regions-out chr6:27477797-34448354 \
+   --calc-selectivity \
+   --out examples/out/geneAssoceQTL
 
 Functions
 =========================
