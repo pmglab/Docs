@@ -61,7 +61,7 @@ Under the folder of kggsee, there is a folder named **resources**, which contain
 Tutorials
 =========================
 
-Gene-based association analysis
+.. _Gene-based association analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Detect associated genes of a phenotype by GWAS summary statistics
