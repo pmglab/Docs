@@ -398,10 +398,27 @@ Explanations and Optional options
 
 - ``--out``: Specify the path and prefix name of the output files. There are three main result files. One is the gene-based association result file, named ***.gene.txt** or ***.gene.xls**. The following
 
-The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with "#" is the column names. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. An example of eQTLs file like:
+The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with "#" is the column names. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. An example of eQTLs file and results of MCGA_eQTL are as follows:
 
-    .. code::
+     .. code::
+    #symbol	id	chr	pos	ref	alt	altfreq	beta	se	p	neff	r2
+    >WASH7P	ENSG00000227232	1
+    52238	T	G	0.942	-1.771	0.285	5.16E-10	65	0.38
+    74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
+    92638	A	T	0.241	0.547	0.206	7.93E-3	53	0.121
+    >MIR1302-10	ENSG00000284557	1
+    52238	T	G	0.942	-1.771	0.285	5.16E-10	65	0.38
+    74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
+        
 
+    .. csv-table::
+        :file: ./table/demo.gene.csv
+        :header-rows: 1
+        :align: center
+
+ An example of isoQTLs file and results of MCGA_isoQTL are as follows:
+ 
+     .. code::
         #symbol id      chr     pos     ref     alt     altfreq beta    se      p       neff    r2
         >DDX11L1	ENST000456328	1						
         13418	G	A	0.161	-0.03	0.013	0.027	62	0.076
@@ -414,12 +431,6 @@ The format of eQTL/isoQTL file is similar to the fasta file. The first row start
         99334	A	G	0.088	0.071	0.035	0.043	56	0.07
         …	…	…	…	…	…	…	…	…
     
-
-    .. csv-table::
-        :file: ./table/demo.gene.csv
-        :header-rows: 1
-        :align: center
-
     columns in the output file are gene symbol, number of variants in the gene, chromosome, gene start position, gene end position, the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL. The second is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***. finemapping.gene.ecs.xls**. The third is the selective expression enrichment analysis results at different tissues or cell types, named ***.selectivity.ecs.txt** or ***.selectivity.ecs.xls**. Their file formats are the same as above.
 
 Options Index
