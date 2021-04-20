@@ -413,7 +413,6 @@ The format of eQTL/isoQTL file is similar to the fasta file. The first row start
         
 
  .. csv-table::
- 
         :file: ./table/demo.gene.csv
         :header-rows: 1
         :align: center
@@ -433,6 +432,7 @@ The format of eQTL/isoQTL file is similar to the fasta file. The first row start
         62578	G	A	0.081	0.062	0.024	7.98E-03	67	0.098
         99334	A	G	0.088	0.071	0.035	0.043	56	0.07
         …	…	…	…	…	…	…	…	…
+    
     
     columns in the output file are gene symbol, number of variants in the gene, chromosome, gene start position, gene end position, the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL. The second is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***. finemapping.gene.ecs.xls**. The third is the selective expression enrichment analysis results at different tissues or cell types, named ***.selectivity.ecs.txt** or ***.selectivity.ecs.xls**. Their file formats are the same as above.
 
