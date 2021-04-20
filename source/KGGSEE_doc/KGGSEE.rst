@@ -10,7 +10,7 @@
 Introduction
 =============
 
-KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) unconditional gene-based association guided by expression quantitative trait loci(eQTLs), 2) conditional gene-based association guided by selective expression in tissues or cell types, 3) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, and 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.
+KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) a multi-strategy conditional gene-based association framework, 2) conditional gene-based association guided by selective expression in tissues or cell types, 3) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, and 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.
 
 .. image:: ./media/kggsee_pipeline.png
     :align: center
