@@ -110,7 +110,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      java -Xmx10g -jar kggsee.jar --spa --expression-file resources/hs_scRNA_cluster_mean.tsv.gz --only-hgnc-gene --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --nt 10 --out examples/out/spa --excel
  
 
-.. _MCGA:
+MCGA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Purpose**: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_isoQTL and MCGA_eQTL.
@@ -380,7 +380,7 @@ Required options
 - ``--regions-out``
 
 
-**See analysis examples at:** `MCGA <#MCGA>`_
+**See analysis examples at:** _`MCGA <#MCGA>`_
 
 Explanations and Optional options
 -----------------------------------
