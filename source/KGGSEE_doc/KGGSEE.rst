@@ -109,6 +109,65 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
 
      java -Xmx10g -jar kggsee.jar --spa --expression-file resources/hs_scRNA_cluster_mean.tsv.gz --only-hgnc-gene --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --nt 10 --out examples/out/spa --excel
  
+ 
+Estimate the potential driver tissues of a complex phenotype
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+Purpose: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.
+
+ - Input data:
+    
+   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   
+   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
+     
+.. code:: shell
+
+     java -Xmx10g \
+     -jar kggsee.jar \
+     --nt 10 \
+    --pfile examples/gwas.sum.stat.gz \
+    --chrom-col CHR
+    --pos-col BP
+    --p-col P
+    --gene-finemapping
+    --saved-ref examples/out/geneAssoc \
+    --out examples/out/geneAssoceQTL \
+    --filter-maf-le 0.02 \
+    --only-hgnc-gene \
+    --p-value-cutoff 0.05 \
+    --multiple-testing bonf \
+    --regions-out chr6:27477797-34448354 \
+    --calc-selectivity \
+    --expression-file resources/gtex.v8.gene.mean.tsv.gz
+
+
+Compute the eQTLs and isoQTLs of each tissue
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+Purpose: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
+
+ - Input data:
+     
+   1. Genotypes in KGGSEE objects(generated last time). For GTEx v8, the full genotype data file of all 838 subjects were preproceeded. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
+     
+   2. Gene expression data of certain tissues corresponding to genotype data from the same subject.
+     
+.. code:: shell
+
+     java -Xmx10g \
+     -jar kggsee.jar \
+     --nt 10 \
+    --calc-eqtl \
+    --filter-eqtl-p 0.01 \
+    --saved-ref resources/getxallvar
+    --gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz
+    --out /home/lxy/02ECS_eqtl/eqtls_isqtls/gtexv8_newest/eqtl/Adipose-Subcutaneous.gene.maf05.p01.gz
+    --hwe-all 0.001
+    --filter-maf-le 0.05
+    --neargene 1000000
 
 MCGA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
