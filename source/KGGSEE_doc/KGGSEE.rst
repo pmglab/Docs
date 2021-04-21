@@ -380,7 +380,7 @@ Required options
 - ``--regions-out``
 
 
-**See analysis examples at:** _`MCGA <#MCGA>`_
+**See analysis examples at:** `MCGA <#MCGA>`_
 
 Explanations and Optional options
 -----------------------------------
