@@ -398,22 +398,25 @@ Explanations and Optional options
 - ``--filter-maf-le``: a filer used to filter variants with MAF > the cutoff.
 - ``--regions-out``: a region used to exclude variants in the specified regions.
 
-- ``--eqtl-file``: The full path of eQTL/isoQTL file. The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with "#" is the column names. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. An example of eQTLs file is as follows:
+- ``--eqtl-file``: The full path of eQTL/isoQTL file. The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with "#" is the column names. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. 
+    
+    An example of eQTLs file is as follows:
 
- .. code::
+    .. code::
 
-    #symbol id	chr	pos	ref	alt	altfreq	beta	se	p	neff	r2
-    >WASH7P	ENSG00000227232	1
-    52238	T	G	0.942	-1.771	0.285	5.16E-10	65	0.38
-    74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
-    92638	A	T	0.241	0.547	0.206	7.93E-3	53	0.121
-    >MIR1302-10	ENSG00000284557	1
-    52238	T	G	0.942	-1.771	0.285	5.16E-10	65	0.38
-    74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
+        #symbol id	chr	pos	ref	alt	altfreq	beta	se	p	neff	r2
+        >WASH7P	ENSG00000227232	1
+        52238	T	G	0.942	-1.771	0.285	5.16E-10	65	0.38
+        74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
+        92638	A	T	0.241	0.547	0.206	7.93E-3	53	0.121
+        >MIR1302-10	ENSG00000284557	1
+        52238	T	G	0.942	-1.771	0.285	5.16E-10	65	0.38
+        74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
+         …	…	…	…	…	…	…	…	…
         
-An example of isoQTLs file is as follows:
+   An example of isoQTLs file is as follows:
  
- .. code::
+    .. code::
  
         #symbol id      chr     pos     ref     alt     altfreq beta    se      p       neff    r2
         >DDX11L1	ENST000456328	1						
