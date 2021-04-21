@@ -380,7 +380,7 @@ Required options
 - ``--regions-out``
 
 
-**See analysis examples at:** `MCGA <#MCGA>`_
+**See analysis examples at:** `MCGA <#mcga>`_
 
 Explanations and Optional options
 -----------------------------------
@@ -430,7 +430,8 @@ An example of isoQTLs file is as follows:
 
 - ``--out``: Specify the path and prefix name of the output files. 
 
-    + For MCGA_Dist, the three output files are like:  
+
+    + For MCGA_Dist, the three output files are as follows:  
         First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). The second is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
 
         The following columns in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL.
@@ -475,7 +476,7 @@ An example of isoQTLs file is as follows:
 
         The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that in ***.gene.pvalue.txt**.
 
-    + For MCGA_eQTL, the three output files are like: 
+    + For MCGA_eQTL, the three output files are as follows: 
 
         .. csv-table::
             :file: ./table/MCGA_eqtl_demo.gene.csv
@@ -498,7 +499,7 @@ An example of isoQTLs file is as follows:
         
         The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
 
-    + For MCGA_isoQTL, the three output files are like:  
+    + For MCGA_isoQTL, the three output files are as follows:  
 
         .. csv-table::
             :file: ./table/MCGA_isoqtl_demo.gene.csv
