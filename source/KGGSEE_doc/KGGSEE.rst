@@ -427,9 +427,11 @@ An example of isoQTLs file is as follows:
         99334	A	G	0.088	0.071	0.035	0.043	56	0.07
         …	…	…	…	…	…	…	…	…
 
-- ``--out``: Specify the path and prefix name of the output files. There are three main result files. One is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The following columns in the output file are gene symbol, number of variants in the gene, chromosome, gene start position, gene end position, the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL. The second is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls**. The third is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
 
-For MCGA_Dist, the three output files are like:
+- ``--out``: Specify the path and prefix name of the output files. 
+
+For MCGA_Dist, the three output files are like:  First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this kind of file). The second is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
+
 
  .. csv-table::
         :file: ./table/MCGA_dist_demo.gene.csv
@@ -446,20 +448,38 @@ For MCGA_Dist, the three output files are like:
         :header-rows: 1
         :align: center
         
-For MCGA_eQTL/MCGA_isoQTL, the three output files are like:
+For MCGA_eQTL, the three output files are like: 
 
  .. csv-table::
-        :file: ./table/demo.gene.csv
+        :file: ./table/MCGA_eqtl_demo.gene.csv
         :header-rows: 1
         :align: center
    
  .. csv-table::
-        :file: ./table/demo.finemapping.gene.ecs.csv
+        :file: ./table/MCGA_eqtl_demo.finemapping.gene.ecs.csv
         :header-rows: 1
         :align: center
         
  .. csv-table::
-        :file: ./table/demo.gene.var.pvalue1.csv
+        :file: ./table/MCGA_eqtl_demo.gene.var.pvalue.csv
+        :header-rows: 1
+        :align: center
+        
+        
+For MCGA_isoQTL, the three output files are like:  
+
+ .. csv-table::
+        :file: ./table/MCGA_isoqtl_demo.gene.csv
+        :header-rows: 1
+        :align: center
+   
+ .. csv-table::
+        :file: ./table/MCGA_isoqtl_demo.finemapping.gene.ecs.csv
+        :header-rows: 1
+        :align: center
+        
+ .. csv-table::
+        :file: ./table/MCGA_isoqtl_demo.gene.var.pvalue.csv
         :header-rows: 1
         :align: center
 
