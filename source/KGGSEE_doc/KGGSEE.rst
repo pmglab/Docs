@@ -414,7 +414,7 @@ Explanations and Optional options
         74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
          …	…	…	…	…	…	…	…	…
         
-   An example of isoQTLs file is as follows:
+    An example of isoQTLs file is as follows:
  
     .. code::
  
