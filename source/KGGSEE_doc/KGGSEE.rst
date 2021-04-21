@@ -432,56 +432,87 @@ An example of isoQTLs file is as follows:
 
 For MCGA_Dist, the three output files are like:  First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this kind of file). The second is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
 
+The following columns in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL.
+
 
  .. csv-table::
         :file: ./table/MCGA_dist_demo.gene.csv
         :header-rows: 1
         :align: center
-   
+
+Gene : gene name;
+#Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for MCGA_Dist, isoQTLs for MCGA_isoQTL and gene-level eQTLs for MCGA_eQTL);
+ECSP : the p value of effective chi-square test;
+Chrom : chromosome position of the gene;
+Pos : the position of top variant belonging to the gene;
+VarP: the *p*-value of top variant in GWAS summary statistics.
+
  .. csv-table::
         :file: ./table/MCGA_dist_demo.finemapping.gene.ecs.csv
         :header-rows: 1
         :align: center
         
+ StartPos: gene start position;
+ EndPos:gene end position;
+ CondiECSP:the p value of gene by performing the conditional effective chi-square test;
+ GeneScore: the tissue selective score of the gene by the end of the iterative procedure;
+ Group: the identifier of LD block which the gene belong to.
+ 
  .. csv-table::
         :file: ./table/MCGA_dist_demo.gene.var.pvalue.csv
         :header-rows: 1
         :align: center
-        
+
+The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that in ***.gene.pvalue.txt**.
+
 For MCGA_eQTL, the three output files are like: 
 
  .. csv-table::
         :file: ./table/MCGA_eqtl_demo.gene.csv
         :header-rows: 1
         :align: center
-   
+        
+ GWAS_Var_P : the *p*-value of top variant in GWAS summary statistics.
+ 
  .. csv-table::
         :file: ./table/MCGA_eqtl_demo.finemapping.gene.ecs.csv
         :header-rows: 1
         :align: center
-        
+ 
+ The meaning of the column names in ***.finemapping.gene.ecs.txt** is same as that of MCGA_Dist.
+ 
  .. csv-table::
         :file: ./table/MCGA_eqtl_demo.gene.var.pvalue.csv
         :header-rows: 1
         :align: center
         
-        
+The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
+
 For MCGA_isoQTL, the three output files are like:  
 
  .. csv-table::
         :file: ./table/MCGA_isoqtl_demo.gene.csv
         :header-rows: 1
         :align: center
-   
+  
+  Gene : gene:isoform pair name;
+  eQTL_P: p value of the top variant associated with gene;
+  eQTL_Beta : beta value of the top variant associated with gene;
+  eQTL_SE : se value of the top variant associated with gene.
+  
  .. csv-table::
         :file: ./table/MCGA_isoqtl_demo.finemapping.gene.ecs.csv
         :header-rows: 1
         :align: center
         
+ The meaning of the column names in ***.finemapping.gene.ecs.txt** is same as that of MCGA_Dist.
+        
  .. csv-table::
         :file: ./table/MCGA_isoqtl_demo.gene.var.pvalue.csv
         :header-rows: 1
         :align: center
+
+The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
 
 Options Index
 ===============
