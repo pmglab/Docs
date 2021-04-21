@@ -440,11 +440,16 @@ The following columns in the output file are gene symbol, number of variants in 
         :header-rows: 1
         :align: center
 
-Gene : gene name;  
-#Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for MCGA_Dist, isoQTLs for MCGA_isoQTL and gene-level eQTLs for MCGA_eQTL);  
-ECSP : the p value of effective chi-square test;  
-Chrom : chromosome position of the gene;  
-Pos : the position of top variant belonging to the gene;  
+Gene : gene name;
+
+#Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for MCGA_Dist, isoQTLs for MCGA_isoQTL and gene-level eQTLs for MCGA_eQTL);
+
+ECSP : the p value of effective chi-square test;
+
+Chrom : chromosome position of the gene;
+
+Pos : the position of top variant belonging to the gene;
+
 VarP: the *p*-value of top variant in GWAS summary statistics.  
 
  .. csv-table::
@@ -452,10 +457,14 @@ VarP: the *p*-value of top variant in GWAS summary statistics.
         :header-rows: 1
         :align: center
         
- StartPos: gene start position;  
- EndPos:gene end position;  
- CondiECSP:the p value of gene by performing the conditional effective chi-square test;  
- GeneScore: the tissue selective score of the gene by the end of the iterative procedure;  
+ StartPos: gene start position;
+ 
+ EndPos:gene end position;
+ 
+ CondiECSP:the p value of gene by performing the conditional effective chi-square test;
+ 
+ GeneScore: the tissue selective score of the gene by the end of the iterative procedure;
+ 
  Group: the identifier of LD block which the gene belong to.  
  
  .. csv-table::
@@ -495,9 +504,12 @@ For MCGA_isoQTL, the three output files are like:
         :header-rows: 1
         :align: center
   
- Gene : gene:isoform pair name;  
- eQTL_P: p value of the top variant associated with gene;  
- eQTL_Beta : beta value of the top variant associated with gene;  
+ Gene : gene:isoform pair name;
+ 
+ eQTL_P: p value of the top variant associated with gene;
+ 
+ eQTL_Beta : beta value of the top variant associated with gene;
+ 
  eQTL_SE : se value of the top variant associated with gene.  
   
  .. csv-table::
