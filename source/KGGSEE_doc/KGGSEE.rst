@@ -353,7 +353,7 @@ Explanations and Optional options
 
     columns in the output file are tissue or cell-type names, the *p*-value of enrichment according to the selective expression derived from the robust regression *z*-score, the logarithm of *p*-value.
 
-MCGA
+Multi-strategy Conditional Gene-based Association framework (MCGA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MCGA can be used to perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. The statistical method is the improved effective chi-square statistics(ECS). The pre-calculated cis-eQTLs/isoQTLs of gene-level and isoform(transcript)-level expression in 50 tissues or cell-types from GTEx(v8) have been integrated into KGGSEE resource (`hg19 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl>`_ and `hg38 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg38%2Feqtl>`_).
@@ -431,7 +431,7 @@ An example of isoQTLs file is as follows:
 - ``--out``: Specify the path and prefix name of the output files. 
 
     + For MCGA_Dist, the three output files are like:  
-        First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this kind of file). The second is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
+        First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). The second is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
 
         The following columns in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL.
 
@@ -484,19 +484,19 @@ An example of isoQTLs file is as follows:
         
         GWAS_Var_P : the *p*-value of top variant in GWAS summary statistics.
  
-    .. csv-table::
+        .. csv-table::
             :file: ./table/MCGA_eqtl_demo.finemapping.gene.ecs.csv
             :header-rows: 1
             :align: center
  
-    The meaning of the column names in ***.finemapping.gene.ecs.txt** is same as that of MCGA_Dist.
+        The meaning of the column names in ***.finemapping.gene.ecs.txt** is same as that of MCGA_Dist.
  
-    .. csv-table::
-        :file: ./table/MCGA_eqtl_demo.gene.var.pvalue.csv
-        :header-rows: 1
-        :align: center
+        .. csv-table::
+            :file: ./table/MCGA_eqtl_demo.gene.var.pvalue.csv
+            :header-rows: 1
+            :align: center
         
-    The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
+        The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
 
     + For MCGA_isoQTL, the three output files are like:  
 
