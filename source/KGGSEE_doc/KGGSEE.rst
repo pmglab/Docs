@@ -142,7 +142,8 @@ Estimate the potential driver tissues of a complex phenotype
         --regions-out chr6:27477797-34448354 \
         --calc-selectivity \
         --expression-file resources/gtex.v8.gene.mean.tsv.gz
-
+        
+Details of the options can be seen in `Options Index <#Options-Index>`_.
 
 Compute the eQTLs and isoQTLs of each tissue
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -168,6 +169,8 @@ Compute the eQTLs and isoQTLs of each tissue
         --hwe-all 0.001 \
         --filter-maf-le 0.05 \
         --neargene 1000000
+        
+Details of the options can be seen in `Options Index <#Options-Index>`_.
 
 MCGA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
