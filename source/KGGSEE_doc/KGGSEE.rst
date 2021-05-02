@@ -73,7 +73,13 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
 
 .. code:: shell 
 
-  java -Xmx10g -jar kggsee.jar --gene-assoc --sum-file examples/gwas.sum.stat.gz --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz --keep-ref --nt 10 --out examples/out/geneAssoc
+  java -Xmx10g -jar kggsee.jar \
+  --nt 10 \
+  --gene-assoc \
+  --sum-file examples/gwas.sum.stat.gz \
+  --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz \
+  --keep-ref \  
+  --out examples/out/geneAssoc
 
 
 Gene-based causality analysis
@@ -90,7 +96,16 @@ Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
      
 .. code:: shell  
 
-   java -Xmx10g -jar kggsee.jar --macg --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz --filter-maf-le 0.05 --sum-file examples/gwas.sum.stat.gz --beta-or y --saved-ref  examples/out/geneAssoc --nt 10 --out examples/out/macg --excel
+   java -Xmx10g  -jar kggsee.jar \
+   --nt 10 \
+   --macg \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
+   --filter-maf-le 0.05 \
+   --sum-file examples/gwas.sum.stat.gz \
+   --beta-or y \
+   --saved-ref  examples/out/geneAssoc \
+   --out examples/out/macg \
+   --excel
 
 
 Estimate relevant cell-types of a phenotype
@@ -107,7 +122,15 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      
 .. code:: shell
 
-     java -Xmx10g -jar kggsee.jar --spa --expression-file resources/hs_scRNA_cluster_mean.tsv.gz --only-hgnc-gene --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --nt 10 --out examples/out/spa --excel
+     java -Xmx10g -jar kggsee.jar \
+     --nt 10 \
+     --spa \
+     --expression-file resources/hs_scRNA_cluster_mean.tsv.gz \
+     --only-hgnc-gene \
+     --sum-file examples/gwas.sum.stat.gz \
+     --saved-ref  examples/out/geneAssoc \
+     --out examples/out/spa \
+     --excel
  
  
 Estimate the potential driver tissues of a complex phenotype
@@ -128,7 +151,7 @@ Estimate the potential driver tissues of a complex phenotype
         java -Xmx10g \
         -jar kggsee.jar \
         --nt 10 \
-        --pfile examples/gwas.sum.stat.gz \
+        --sum-file examples/gwas.sum.stat.gz \
         --chrom-col CHR
         --pos-col BP
         --p-col P
@@ -139,7 +162,6 @@ Estimate the potential driver tissues of a complex phenotype
         --only-hgnc-gene \
         --p-value-cutoff 0.05 \
         --multiple-testing bonf \
-        --regions-out chr6:27477797-34448354 \
         --calc-selectivity \
         --expression-file resources/gtex.v8.gene.mean.tsv.gz
         
@@ -152,7 +174,7 @@ Compute the eQTLs and isoQTLs of each tissue
 
  - Input data:
      
-   1. Genotypes in KGGSEE objects(generated last time). For GTEx v8, the full genotype data file of all 838 subjects were preproceeded. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
+   1. Genotypes in KGGSEE objects(generated last time). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
      
    2. Gene expression data of certain tissues corresponding to genotype data from the same subject.
      
@@ -162,13 +184,14 @@ Compute the eQTLs and isoQTLs of each tissue
         -jar kggsee.jar \
         --nt 10 \
         --calc-eqtl \
-        --filter-eqtl-p 0.01 \
-        --saved-ref resources/getxallvar \
+        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression/
         --gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz \
-        --out /home/lxy/02ECS_eqtl/eqtls_isqtls/gtexv8_newest/eqtl/Adipose-Subcutaneous.gene.maf05.p01.gz \
+        --filter-eqtl-p 0.01 \
         --hwe-all 0.001 \
         --filter-maf-le 0.05 \
-        --neargene 1000000
+        --neargene 1000000 \
+        --out /path/Adipose-Subcutaneous.gene.maf05.p01 \
+
         
 Details of the options can be seen in `Options Index <#id18>`_.
 
@@ -191,18 +214,18 @@ MCGA
     java -Xmx20g \
    -jar kggsee.jar \
    --nt 10 \
+   --sum-file examples/gwas.sum.stat.gz \
    --chrom-col CHR \
    --pos-col BP \
    --p-col P \
-   --gene-finemapping \
-   --p-file examples/gwas.sum.stat.gz \
+   --gene-finemapping \   
    --saved-ref  examples/out/geneAssoc \
    --expression-file resources/gtex.v8.gene.mean.tsv.gz \
    --filter-maf-le 0.02 \
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
-   --regions-out chr6:27477797-34448354 --calc-selectivity \
+   --calc-selectivity \
    --out examples/out/geneAssoceQTL
 
 - MCGA_isoQTL input data:
@@ -220,11 +243,11 @@ MCGA
    java -Xmx20g \
    -jar kggsee.jar \
    --nt 10 \
+   --sum-file examples/gwas.sum.stat.gz \
    --chrom-col CHR \
    --pos-col BP \
    --p-col P \
    --gene-finemapping \
-   --p-file examples/gwas.sum.stat.gz \
    --saved-ref  examples/out/geneAssoc \
    --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz \ 
@@ -233,7 +256,6 @@ MCGA
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
-   --regions-out chr6:27477797-34448354 \
    --calc-selectivity \
    --out examples/out/geneAssoceQTL
 
@@ -257,7 +279,7 @@ MCGA
    --pos-col BP \
    --p-col P \
    --gene-finemapping \
-   --p-file examples/gwas.sum.stat.gz \
+   --sum-file examples/gwas.sum.stat.gz \
    --saved-ref  examples/out/geneAssoc \
    --expression-file resources/gtex.v8.gene.mean.tsv.gz \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
@@ -266,7 +288,6 @@ MCGA
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
-   --regions-out chr6:27477797-34448354 \
    --calc-selectivity \
    --out examples/out/geneAssoceQTL
   

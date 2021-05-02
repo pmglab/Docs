@@ -95,7 +95,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#gene-based-association-analysis">Gene-based association analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gene-based-causality-analysis">Gene-based causality analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#estimate-relevant-cell-types-of-a-phenotype">Estimate relevant cell-types of a phenotype</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#eqtl-guided-gene-based-association-analysis">eQTL-guided gene-based association analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#estimate-the-potential-driver-tissues-of-a-complex-phenotype">Estimate the potential driver tissues of a complex phenotype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compute-the-eqtls-and-isoqtls-of-each-tissue">Compute the eQTLs and isoQTLs of each tissue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcga">MCGA</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
@@ -105,26 +107,26 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#infer-causal-genes-based-on-gwas-summary-statistics-and-eqtls-by-mendelian-randomization-analysis-framework-for-causal-gene-estimation-macg">Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(MACG)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Required options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">Explanations and Optional options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Required options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Explanations and Optional options</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#finely-map-genes-and-estimate-relevant-cell-types-of-a-phenotype-by-the-single-cell-or-bulk-cell-type-and-phenotype-cross-annotation-framework-spa">Finely map genes and estimate relevant cell-types of a phenotype by the single-cell(or bulk-cell) type and phenotype cross annotation framework(SPA)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id6">Required options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">Explanations and Optional options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Required options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">Explanations and Optional options</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#eqtl-guided-gene-transcript-based-association">eQTL-guided gene/transcript-based association</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id9">Required options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">Explanations and Optional options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-strategy-conditional-gene-based-association-framework-mcga">Multi-strategy Conditional Gene-based Association framework (MCGA)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">Required options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Explanations and Optional options</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#options-index">Options Index</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id18">Options Index</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#inputs-outputs">Inputs/outputs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quality-control">Quality control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a></li>
 </ul>
 </li>
@@ -203,7 +205,7 @@
 <strong>User manual 1.0</strong></p><p class="centered">
 <strong>Miaoxin Li, Lin Jiang</strong></p><div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) unconditional gene-based association guided by expression quantitative trait loci(eQTLs), 2) conditional gene-based association guided by selective expression in tissues or cell types, 3) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, and 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.</p>
+<p>KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) a multi-strategy conditional gene-based association framework, 2) conditional gene-based association guided by selective expression in tissues or cell types, 3) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, and 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.</p>
 <img alt="../_images/kggsee_pipeline.png" class="align-center" src="../_images/kggsee_pipeline.png" />
 </div>
 <div class="section" id="installation">
@@ -234,13 +236,13 @@ More installation instruction can be found at <a class="reference external" href
 <li><p>MendelianRandomization</p>
 <blockquote>
 <div><p>The first step is to install the PhenoScanner package(and the MendelianRandomization package if you haven't done this previously):</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
-<span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;phenoscanner/phenoscanner&quot;</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">phenoscanner</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>install.packages<span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
+install_github<span class="p">(</span><span class="s">&quot;phenoscanner/phenoscanner&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>phenoscanner<span class="p">)</span>
 
-<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;MendelianRandomization&quot;</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">MendelianRandomization</span><span class="p">)</span>
+install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomization&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>MendelianRandomization<span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -267,7 +269,13 @@ More installation instruction can be found at <a class="reference external" href
 </ul>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g -jar kggsee.jar --gene-assoc --sum-file examples/gwas.sum.stat.gz --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz --keep-ref --nt <span class="m">10</span> --out examples/out/geneAssoc
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g -jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--gene-assoc <span class="se">\</span>
+--sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
+--vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz <span class="se">\</span>
+--keep-ref <span class="se">\</span>
+--out examples/out/geneAssoc
 </pre></div>
 </div>
 </div>
@@ -278,14 +286,23 @@ More installation instruction can be found at <a class="reference external" href
 <li><p>Input data:</p>
 <ol class="arabic simple">
 <li><p>GWAS summary statistics compressed in a text file(a fabled data set for education purpose): <em>examples/gwas.sum.stat.gz</em></p></li>
-<li><p>Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: <em>examples/out/geneAssoc</em></p></li>
+<li><p>Genotypes in KGGSEE objects(generated in last time) to approximate correction between summary statistics: <em>examples/out/geneAssoc</em></p></li>
 <li><p>eQTL summary statistics compressed in a text file: <em>resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz</em></p></li>
 </ol>
 </li>
 </ul>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g -jar kggsee.jar --macg --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz --filter-maf-le <span class="m">0</span>.05 --sum-file examples/gwas.sum.stat.gz --beta-or y --saved-ref  examples/out/geneAssoc --nt <span class="m">10</span> --out examples/out/macg --excel
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g  -jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--macg <span class="se">\</span>
+--eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz <span class="se">\</span>
+--filter-maf-le <span class="m">0</span>.05 <span class="se">\</span>
+--sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
+--beta-or y <span class="se">\</span>
+--saved-ref  examples/out/geneAssoc <span class="se">\</span>
+--out examples/out/macg <span class="se">\</span>
+--excel
 </pre></div>
 </div>
 </div>
@@ -303,26 +320,178 @@ More installation instruction can be found at <a class="reference external" href
 </ul>
 </dd>
 </dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g -jar kggsee.jar --spa --expression-file resources/hs_scRNA_cluster_mean.tsv.gz --only-hgnc-gene --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --nt <span class="m">10</span> --out examples/out/spa --excel
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g -jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--spa <span class="se">\</span>
+--expression-file resources/hs_scRNA_cluster_mean.tsv.gz <span class="se">\</span>
+--only-hgnc-gene <span class="se">\</span>
+--sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
+--saved-ref  examples/out/geneAssoc <span class="se">\</span>
+--out examples/out/spa <span class="se">\</span>
+--excel
 </pre></div>
 </div>
 </div>
-<div class="section" id="eqtl-guided-gene-based-association-analysis">
-<h2>eQTL-guided gene-based association analysis<a class="headerlink" href="#eqtl-guided-gene-based-association-analysis" title="Permalink to this headline">¶</a></h2>
-<dl class="simple">
-<dt>Purpose: Detect associated genes of a phenotype by GWAS summary statistics guided by eQTLs of a celltype</dt><dd><ul class="simple">
+<div class="section" id="estimate-the-potential-driver-tissues-of-a-complex-phenotype">
+<h2>Estimate the potential driver tissues of a complex phenotype<a class="headerlink" href="#estimate-the-potential-driver-tissues-of-a-complex-phenotype" title="Permalink to this headline">¶</a></h2>
+<p><strong>Purpose</strong>: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.</p>
+<blockquote>
+<div><ul>
 <li><p>Input data:</p>
 <ol class="arabic simple">
-<li><p>GWAS summary statistics compressed in a text file(a fabled data set for education purpose): <em>examples/gwas.sum.stat.gz</em></p></li>
-<li><p>Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: <em>examples/out/geneAssoc</em></p></li>
-<li><p>Gene expression data compressed in a text file: <em>resources/gtex.v8.transcript.mean.tsv.gz</em></p></li>
-<li><p>eQTL summary statistics compressed in a text file: <em>resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz</em></p></li>
+<li><p>GWAS summary statistics compressed in a text file (a fabled data set for education purpose): <em>examples/gwas.sum.stat.gz</em>;</p></li>
+<li><p>Genotypes in KGGSEE objects (generated in <a class="reference external" href="#gene-based-association-analysis">Gene-based association analysis</a>) to approximate correction between summary statistics: <em>examples/out/geneAssoc</em>;</p></li>
+<li><p>Gene expression data compressed in a text file: <em>resources/gtex.v8.gene.mean.tsv.gz</em>.</p></li>
 </ol>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g <span class="se">\</span>
+-jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
+--chrom-col CHR
+--pos-col BP
+--p-col P
+--gene-finemapping
+--saved-ref examples/out/geneAssoc <span class="se">\</span>
+--out examples/out/geneAssoceQTL <span class="se">\</span>
+--filter-maf-le <span class="m">0</span>.02 <span class="se">\</span>
+--only-hgnc-gene <span class="se">\</span>
+--p-value-cutoff <span class="m">0</span>.05 <span class="se">\</span>
+--multiple-testing bonf <span class="se">\</span>
+--calc-selectivity <span class="se">\</span>
+--expression-file resources/gtex.v8.gene.mean.tsv.gz
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 </ul>
-</dd>
-</dl>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g -jar kggsee.jar --gene-finemapping --sum-file examples/gwas.sum.stat.gz --saved-ref  examples/out/geneAssoc --expression-file resources/gtex.v8.transcript.mean.tsv.gz --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz --filter-eqtl-p <span class="m">0</span>.01 --nt <span class="m">10</span> --out examples/out/geneAssoceQTL
+</div></blockquote>
+<p>Details of the options can be seen in <a class="reference external" href="#id18">Options Index</a>.</p>
+</div>
+<div class="section" id="compute-the-eqtls-and-isoqtls-of-each-tissue">
+<h2>Compute the eQTLs and isoQTLs of each tissue<a class="headerlink" href="#compute-the-eqtls-and-isoqtls-of-each-tissue" title="Permalink to this headline">¶</a></h2>
+<p><strong>Purpose</strong>: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.</p>
+<blockquote>
+<div><ul>
+<li><p>Input data:</p>
+<ol class="arabic simple">
+<li><p>Genotypes in KGGSEE objects(generated last time). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;</p></li>
+<li><p>Gene expression data of certain tissues corresponding to genotype data from the same subject.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx10g <span class="se">\</span>
+-jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--calc-eqtl <span class="se">\</span>
+--expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression/
+--gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz <span class="se">\</span>
+--filter-eqtl-p <span class="m">0</span>.01 <span class="se">\</span>
+--hwe-all <span class="m">0</span>.001 <span class="se">\</span>
+--filter-maf-le <span class="m">0</span>.05 <span class="se">\</span>
+--neargene <span class="m">1000000</span> <span class="se">\</span>
+--out /path/Adipose-Subcutaneous.gene.maf05.p01 <span class="se">\</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>Details of the options can be seen in <a class="reference external" href="#id18">Options Index</a>.</p>
+</div>
+<div class="section" id="mcga">
+<h2>MCGA<a class="headerlink" href="#mcga" title="Permalink to this headline">¶</a></h2>
+<p><strong>Purpose</strong>: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_isoQTL and MCGA_eQTL.</p>
+<ul>
+<li><p>MCGA_Dist input data:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>GWAS summary statistics compressed in a text file (a fabled data set for education purpose): <em>examples/gwas.sum.stat.gz</em>;</p></li>
+<li><p>Genotypes in KGGSEE objects (generated in <a class="reference external" href="#gene-based-association-analysis">Gene-based association analysis</a>) to approximate correction between summary statistics: <em>examples/out/geneAssoc</em>;</p></li>
+<li><p>Gene expression data compressed in a text file: <em>resources/gtex.v8.gene.mean.tsv.gz</em>.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span> java -Xmx20g <span class="se">\</span>
+-jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
+--chrom-col CHR <span class="se">\</span>
+--pos-col BP <span class="se">\</span>
+--p-col P <span class="se">\</span>
+--gene-finemapping <span class="se">\</span>
+--saved-ref  examples/out/geneAssoc <span class="se">\</span>
+--expression-file resources/gtex.v8.gene.mean.tsv.gz <span class="se">\</span>
+--filter-maf-le <span class="m">0</span>.02 <span class="se">\</span>
+--only-hgnc-gene <span class="se">\</span>
+--p-value-cutoff <span class="m">0</span>.05 <span class="se">\</span>
+--multiple-testing bonf <span class="se">\</span>
+--calc-selectivity <span class="se">\</span>
+--out examples/out/geneAssoceQTL
+</pre></div>
+</div>
+<ul>
+<li><p>MCGA_isoQTL input data:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>GWAS summary statistics compressed in a text file(a fabled data set for education purpose): <em>examples/gwas.sum.stat.gz</em>;</p></li>
+<li><p>Genotypes in KGGSEE objects (generated in <a class="reference external" href="#gene-based-association-analysis">Gene-based association analysis</a>) to approximate correction between summary statistics: <em>examples/out/geneAssoc</em>;</p></li>
+<li><p>Isoform-level expression data compressed in a text file: <em>resources/gtex.v8.transcript.mean.tsv.gz</em>;</p></li>
+<li><p>isoQTL summary statistics compressed in a text file: <em>resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz</em>.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx20g <span class="se">\</span>
+-jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
+--chrom-col CHR <span class="se">\</span>
+--pos-col BP <span class="se">\</span>
+--p-col P <span class="se">\</span>
+--gene-finemapping <span class="se">\</span>
+--saved-ref  examples/out/geneAssoc <span class="se">\</span>
+--expression-file resources/gtex.v8.transcript.mean.tsv.gz <span class="se">\</span>
+--eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz <span class="se">\</span>
+--filter-eqtl-p <span class="m">0</span>.01 <span class="se">\</span>
+--filter-maf-le <span class="m">0</span>.02 <span class="se">\</span>
+--only-hgnc-gene <span class="se">\</span>
+--p-value-cutoff <span class="m">0</span>.05 <span class="se">\</span>
+--multiple-testing bonf <span class="se">\</span>
+--calc-selectivity <span class="se">\</span>
+--out examples/out/geneAssoceQTL
+</pre></div>
+</div>
+<ul>
+<li><p>MCGA_eQTL input data:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>GWAS summary statistics compressed in a text file(a fabled data set for education purpose): <em>examples/gwas.sum.stat.gz</em>;</p></li>
+<li><p>Genotypes in KGGSEE objects (generated in <a class="reference external" href="#gene-based-association-analysis">Gene-based association analysis</a>) to approximate correction between summary statistics: <em>examples/out/geneAssoc</em>;</p></li>
+<li><p>Gene-level expression data compressed in a text file: <em>resources/gtex.v8.gene.mean.tsv.gz</em>;</p></li>
+<li><p>eQTL summary statistics compressed in a text file: <em>resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz</em>.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>java -Xmx20g <span class="se">\</span>
+-jar kggsee.jar <span class="se">\</span>
+--nt <span class="m">10</span> <span class="se">\</span>
+--chrom-col CHR <span class="se">\</span>
+--pos-col BP <span class="se">\</span>
+--p-col P <span class="se">\</span>
+--gene-finemapping <span class="se">\</span>
+--sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
+--saved-ref  examples/out/geneAssoc <span class="se">\</span>
+--expression-file resources/gtex.v8.gene.mean.tsv.gz <span class="se">\</span>
+--eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz <span class="se">\</span>
+--filter-eqtl-p <span class="m">0</span>.01 <span class="se">\</span>
+--filter-maf-le <span class="m">0</span>.02 <span class="se">\</span>
+--only-hgnc-gene <span class="se">\</span>
+--p-value-cutoff <span class="m">0</span>.05 <span class="se">\</span>
+--multiple-testing bonf <span class="se">\</span>
+--calc-selectivity <span class="se">\</span>
+--out examples/out/geneAssoceQTL
 </pre></div>
 </div>
 </div>
@@ -460,8 +629,8 @@ More installation instruction can be found at <a class="reference external" href
 <div class="section" id="infer-causal-genes-based-on-gwas-summary-statistics-and-eqtls-by-mendelian-randomization-analysis-framework-for-causal-gene-estimation-macg">
 <h2>Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(MACG)<a class="headerlink" href="#infer-causal-genes-based-on-gwas-summary-statistics-and-eqtls-by-mendelian-randomization-analysis-framework-for-causal-gene-estimation-macg" title="Permalink to this headline">¶</a></h2>
 <p>One can perform multiple IVs based MR analysis to infer casual gene or transcript by an integrative framework named MACG. MACG adopted two multiple IVs based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. MACG needs two major inputs, GWAS and eQTL summary statistics respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating association between IVs and expression of genes or transcripts in a tissue or cell type. MACG has integrated the pre-calculated cis-eQTLs in 55 tissues or cell-types with gene-level and transcript-level expression from GTEx(version 8).</p>
-<div class="section" id="id2">
-<h3>Required options<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Required options<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--macg</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span> <span class="pre">[path/to/eQTL/file</span> <span class="pre">of</span> <span class="pre">genes</span> <span class="pre">or</span> <span class="pre">transcripts]</span></code></p></li>
@@ -472,8 +641,8 @@ More installation instruction can be found at <a class="reference external" href
 </ul>
 <p><strong>See an analysis example at:</strong> <a class="reference external" href="#gene-based-causality-analysis">Gene-based causality analysis</a></p>
 </div>
-<div class="section" id="id4">
-<h3>Explanations and Optional options<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Explanations and Optional options<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">--macg</span></code>: The main function option.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span></code>: See above description.</p></li>
@@ -573,8 +742,8 @@ More installation instruction can be found at <a class="reference external" href
 <div class="section" id="finely-map-genes-and-estimate-relevant-cell-types-of-a-phenotype-by-the-single-cell-or-bulk-cell-type-and-phenotype-cross-annotation-framework-spa">
 <h2>Finely map genes and estimate relevant cell-types of a phenotype by the single-cell(or bulk-cell) type and phenotype cross annotation framework(SPA)<a class="headerlink" href="#finely-map-genes-and-estimate-relevant-cell-types-of-a-phenotype-by-the-single-cell-or-bulk-cell-type-and-phenotype-cross-annotation-framework-spa" title="Permalink to this headline">¶</a></h2>
 <p>One can simultaneously prioritize phenotype associated genes and cell-types with GWAS <em>p</em>-values and gene/transcript expression profile. The GWAS <em>p</em>-values types and expression were analyzed by an iterative prioritization procedure. In the procedure, phenotype-associated genes were prioritized by a conditional gene-based association(using the ECS again) according to the genes’ selective expression in disease related cell-types while the phenotype related cell-types were prioritized by an enrichment analysis of Wilcoxon rank-sum test for phenotype-associated genes’ selective expression. The phenotype-associated gene list and phenotype related cell-type list were updated by turns until the two list were unchanged. The detailed method is described in our paper(<a class="reference external" href="http://bing.com">Paper Link</a>).</p>
-<div class="section" id="id6">
-<h3>Required options<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>Required options<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--spa</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--expression-file</span> <span class="pre">[path/to/expression/file]</span></code></p></li>
@@ -586,8 +755,8 @@ More installation instruction can be found at <a class="reference external" href
 </ul>
 <p><strong>See an analysis example at:</strong> <a class="reference external" href="#estimate-relevant-cell-types-of-a-phenotype">Estimate relevant cell-types of a phenotype</a></p>
 </div>
-<div class="section" id="id8">
-<h3>Explanations and Optional options<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h3>Explanations and Optional options<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">--spa</span></code>: The main function option.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--multiple-testing</span></code>: The multiple testing method to select significant genes for the conditional analysis. There are three settings. <em>bonf</em>: Standard Bonferroni correction given a family-wise error rate specified by <code class="docutils literal notranslate"><span class="pre">--p-value-cutoff</span></code>.  <em>benfdr</em>: Benjamini-Hochberg method to control the false discovery rate. <em>fixed</em>: Filtering by a fixed <em>p</em>-value cutoff.</p></li>
@@ -755,36 +924,61 @@ More installation instruction can be found at <a class="reference external" href
 </ul>
 </div>
 </div>
-<div class="section" id="eqtl-guided-gene-transcript-based-association">
-<h2>eQTL-guided gene/transcript-based association<a class="headerlink" href="#eqtl-guided-gene-transcript-based-association" title="Permalink to this headline">¶</a></h2>
-<p>One can perform gene/transcript-based association analysis guided by eQTLs. The statistical method is still the effective chi-square statistics(ECS). ECS only combines the GWAS <em>p</em>-values of eQTLs of a gene or transcript. The pre-calculated cis-eQTLs of gene-level and transcript-level expression in 55 tissues or cell-types from GTEx(version 8) have been integrated into KGGSEE.</p>
-<div class="section" id="id9">
-<h3>Required options<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="multi-strategy-conditional-gene-based-association-framework-mcga">
+<h2>Multi-strategy Conditional Gene-based Association framework (MCGA)<a class="headerlink" href="#multi-strategy-conditional-gene-based-association-framework-mcga" title="Permalink to this headline">¶</a></h2>
+<p>MCGA can be used to perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. The statistical method is the improved effective chi-square statistics(ECS). The pre-calculated cis-eQTLs/isoQTLs of gene-level and isoform(transcript)-level expression in 50 tissues or cell-types from GTEx(v8) have been integrated into KGGSEE resource (<a class="reference external" href="https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&amp;id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl">hg19</a> and <a class="reference external" href="https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&amp;id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg38%2Feqtl">hg38</a>).</p>
+<div class="section" id="id14">
+<h3>Required options<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--gene-finemapping</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span> <span class="pre">[path/to/eQTL/file</span> <span class="pre">of</span> <span class="pre">genes</span> <span class="pre">or</span> <span class="pre">transcripts]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--filter-eqtl-p</span> <span class="pre">0.01</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--filter-eqtl-p</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--expression-file</span> <span class="pre">[path/to/expression/file]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--calcu-selectivity</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--sum-file</span> <span class="pre">[/path/to/summary/file]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--filter-maf-le</span> <span class="pre">0.02</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--pfile</span> <span class="pre">[/path/to/summary/file]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--filter-maf-le</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--saved-ref</span>&#160; <span class="pre">[previous/output/path]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--out</span> <span class="pre">[output/path/prefix]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--chrom-col</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--pos-col</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--p-col</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--only-hgnc-gene</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--p-value-cutoff</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--multiple-testing</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--regions-out</span></code></p></li>
 </ul>
-<p><strong>See an analysis example at:</strong> <a class="reference external" href="#eqtl-guided-gene-based-association-analysis">eQTL-Gene-based association analysis</a></p>
+<p><strong>See analysis examples at:</strong> <a class="reference external" href="#mcga">MCGA</a></p>
 </div>
-<div class="section" id="id10">
-<h3>Explanations and Optional options<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id16">
+<h3>Explanations and Optional options<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nt</span></code>: CPU cores used for the analysis.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--gene-finemapping</span></code>: The main function option.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--multiple-testing</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--p-value-cutoff</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--only-hgnc-gene</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--gene-score</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--calcu-selectivity</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span></code>: The path of eQTL file based on the gene-level or transcript-level expression.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">--multiple-testing</span></code>: The multiple testing method to select significant genes for the conditional analysis. There are three settings. bonf: Standard Bonferroni correction. benfdr: Benjamini-Hochberg method to control the false discovery rate. fixed: Filtering by a fixed p-value cutoff.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--p-value-cutoff</span></code>: The family-wise cutoff for the multiple testing..</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--only-hgnc-gene</span></code>: Only consider genes with HGNC gene symbols.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--expression-file</span></code>: The preproceeded gene expression file. The index column of the preprocessed expression file was gene/isoform symbol name, and each of 50 tissues or cell types had two columns: one representing average expression value (i.e., mean) of all sample and the other representing the standard error of the mean (SE).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--calcu-selectivity</span></code>: Calculate selective expression of a gene or transcripts in a tissue or a cell type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--filter-eqtl-p</span></code>: a filter used to filter eQTLs/isoQTLs  &lt; the cutoff.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--pfile</span></code>: the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, chromosome, physical position and p-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by <code class="docutils literal notranslate"><span class="pre">--chrom-col</span></code>, <code class="docutils literal notranslate"><span class="pre">--pos-col</span></code> and <code class="docutils literal notranslate"><span class="pre">--p-col</span></code> respectively.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--filter-maf-le</span></code>: a filer used to filter variants with MAF &gt; the cutoff.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--regions-out</span></code>: a region used to exclude variants in the specified regions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span></code>: The full path of eQTL/isoQTL file. The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with &quot;#&quot; is the column names. The eQTL data of a gene or transcript start with the symbol “&gt;”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, <em>p</em>-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. The commands to compute eQTLs/isoQTLs can be seen in <a class="reference external" href="#compute-the-eqtls-and-isoqtls-of-each-tissue">Compute the eQTLs and isoQTLs of each tissue</a>.</p>
 <blockquote>
-<div><p>The eQTL file has a similar fasta format. The first row is just column names and optional. The eQTL data of a gene or transcript start with the symbol “&gt;”. In the same row, the gene symbol, Ensembl transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, <em>p</em>-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL data using GTEx data(version 8). Variants within 1MB upstream and downstream of a gene or a transcript are included.</p>
+<div><p>An example of eQTLs file is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#symbol id      chr     pos     ref     alt     altfreq beta    se      p       neff    r2
+&gt;WASH7P ENSG00000227232 1
+52238   T       G       0.942   -1.771  0.285   5.16E-10        65      0.38
+74681   G       T       0.95    -1.457  0.333   1.19E-5 63      0.239
+92638   A       T       0.241   0.547   0.206   7.93E-3 53      0.121
+&gt;MIR1302-10     ENSG00000284557 1
+52238   T       G       0.942   -1.771  0.285   5.16E-10        65      0.38
+74681   G       T       0.95    -1.457  0.333   1.19E-5 63      0.239
+ …      …       …       …       …       …       …       …       …
+</pre></div>
+</div>
+<p>An example of isoQTLs file is as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#symbol id      chr     pos     ref     alt     altfreq beta    se      p       neff    r2
 &gt;DDX11L1        ENST000456328   1
 13418   G       A       0.161   -0.03   0.013   0.027   62      0.076
@@ -800,10 +994,449 @@ More installation instruction can be found at <a class="reference external" href
 </div>
 </div></blockquote>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--filter-eqtl-p</span></code>: Set the <em>p</em>-value cutoff to filter out less significant eQTL for the analysis.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--sum-file</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--filter-maf-le</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--out</span></code>: Specify the path and prefix name of the output files. There are three main result files. One is the gene-based association result file, named <strong>*.gene.txt</strong> or <strong>*.gene.xls</strong>. The following</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">--out</span></code>: Specify the path and prefix name of the output files.</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt>For MCGA_Dist, the three output files are as follows:</dt><dd><p>First one is the conditional gene-based analysis results, named <strong>*.finemapping.gene.ecs.txt</strong> or <strong>*.finemapping.gene.ecs.xls</strong> (We got the susceptible genes based on this file). The second is the gene-based association result file, named <strong>*.gene.pvalue.txt</strong> or <strong>*.gene.pvalue.xls</strong>. The third is the p-value of all variants belonging to a genes, named <strong>*.gene.var.pvalue.txt.gz</strong>. Their file formats are the same as above.</p>
+<p>The following columns in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the <em>p</em>-value, coefficient and standard error of the variant for gene expression as an eQTL.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>Pos</p></th>
+<th class="head"><p>VarP</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RNU6-1199P</p></td>
+<td><p>1</p></td>
+<td><p>0.9428</p></td>
+<td><p>1</p></td>
+<td><p>693731</p></td>
+<td><p>0.9428</p></td>
+</tr>
+<tr class="row-odd"><td><p>FAM87B</p></td>
+<td><p>22</p></td>
+<td><p>0.342697746</p></td>
+<td><p>1</p></td>
+<td><p>754105</p></td>
+<td><p>0.1067</p></td>
+</tr>
+<tr class="row-even"><td><p>LINC01128</p></td>
+<td><p>53</p></td>
+<td><p>0.351123025</p></td>
+<td><p>1</p></td>
+<td><p>783071</p></td>
+<td><p>0.04703</p></td>
+</tr>
+<tr class="row-odd"><td><p>LINC00115</p></td>
+<td><p>14</p></td>
+<td><p>0.556109469</p></td>
+<td><p>1</p></td>
+<td><p>761881</p></td>
+<td><p>0.1923</p></td>
+</tr>
+<tr class="row-even"><td><p>FAM41C</p></td>
+<td><p>23</p></td>
+<td><p>0.926282946</p></td>
+<td><p>1</p></td>
+<td><p>812670</p></td>
+<td><p>0.3068</p></td>
+</tr>
+<tr class="row-odd"><td><p>TUBB8P11</p></td>
+<td><p>11</p></td>
+<td><p>0.882103279</p></td>
+<td><p>1</p></td>
+<td><p>812670</p></td>
+<td><p>0.3068</p></td>
+</tr>
+</tbody>
+</table>
+<p>Gene : gene name;</p>
+<p>#Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for MCGA_Dist, isoQTLs for MCGA_isoQTL and gene-level eQTLs for MCGA_eQTL);</p>
+<p>ECSP : the p value of effective chi-square test;</p>
+<p>Chrom : chromosome position of the gene;</p>
+<p>Pos : the position of top variant belonging to the gene;</p>
+<p>VarP: the <em>p</em>-value of top variant in GWAS summary statistics.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>StartPos</p></th>
+<th class="head"><p>EndPos</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>Group</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>CondiECSP</p></th>
+<th class="head"><p>GeneScore</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PLCH2</p></td>
+<td><p>1</p></td>
+<td><p>2394074</p></td>
+<td><p>2441392</p></td>
+<td><p>112</p></td>
+<td><p>0</p></td>
+<td><p>1.05E-06</p></td>
+<td><p>1.16E-04</p></td>
+<td><p>2304.327881</p></td>
+</tr>
+<tr class="row-odd"><td><p>PLEKHG5</p></td>
+<td><p>1</p></td>
+<td><p>6521170</p></td>
+<td><p>6584657</p></td>
+<td><p>147</p></td>
+<td><p>0</p></td>
+<td><p>1.27E-06</p></td>
+<td><p>0.003892706</p></td>
+<td><p>2036.35083</p></td>
+</tr>
+<tr class="row-even"><td><p>NOL9</p></td>
+<td><p>1</p></td>
+<td><p>6577765</p></td>
+<td><p>6619354</p></td>
+<td><p>115</p></td>
+<td><p>0</p></td>
+<td><p>2.75E-08</p></td>
+<td><p>1</p></td>
+<td><p>606.8980103</p></td>
+</tr>
+<tr class="row-odd"><td><p>KLHL21</p></td>
+<td><p>1</p></td>
+<td><p>6645867</p></td>
+<td><p>6679456</p></td>
+<td><p>44</p></td>
+<td><p>0</p></td>
+<td><p>5.52E-07</p></td>
+<td><p>0.040296863</p></td>
+<td><p>581.3381958</p></td>
+</tr>
+<tr class="row-even"><td><p>DNAJC11</p></td>
+<td><p>1</p></td>
+<td><p>6689319</p></td>
+<td><p>6766960</p></td>
+<td><p>146</p></td>
+<td><p>0</p></td>
+<td><p>1.37E-06</p></td>
+<td><p>0.395464903</p></td>
+<td><p>638.5668945</p></td>
+</tr>
+</tbody>
+</table>
+<p>StartPos: gene start position;</p>
+<p>EndPos:gene end position;</p>
+<p>CondiECSP:the p value of gene by performing the conditional effective chi-square test;</p>
+<p>GeneScore: the tissue selective score of the gene by the end of the iterative procedure;</p>
+<p>Group: the identifier of LD block which the gene belong to.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>Pos</p></th>
+<th class="head"><p>VarP</p></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RNU6-1199P</p></td>
+<td><p>1</p></td>
+<td><p>0.9428</p></td>
+<td><p>1</p></td>
+<td><p>693731</p></td>
+<td><p>0.9428</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>FAM87B</p></td>
+<td><p>22</p></td>
+<td><p>0.342697746</p></td>
+<td><p>1</p></td>
+<td><p>754105</p></td>
+<td><p>0.1067</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>FAM87B</p></td>
+<td><p>22</p></td>
+<td><p>0.342697746</p></td>
+<td><p>1</p></td>
+<td><p>754629</p></td>
+<td><p>0.1202</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>FAM87B</p></td>
+<td><p>22</p></td>
+<td><p>0.342697746</p></td>
+<td><p>1</p></td>
+<td><p>754211</p></td>
+<td><p>0.1236</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>FAM87B</p></td>
+<td><p>22</p></td>
+<td><p>0.342697746</p></td>
+<td><p>1</p></td>
+<td><p>754063</p></td>
+<td><p>0.1486</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>FAM87B</p></td>
+<td><p>22</p></td>
+<td><p>0.342697746</p></td>
+<td><p>1</p></td>
+<td><p>752478</p></td>
+<td><p>0.2151</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The meaning of the column names in <strong>*.gene.var.pvalue.txt.gz</strong> is same as that in <strong>*.gene.pvalue.txt</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><p>For MCGA_eQTL, the three output files are as follows:</p>
+<blockquote>
+<div><table class="docutils align-center">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>Pos</p></th>
+<th class="head"><p>GWAS_Var_P</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OR4G4P</p></td>
+<td><p>2</p></td>
+<td><p>0.836453248</p></td>
+<td><p>1</p></td>
+<td><p>921071</p></td>
+<td><p>0.5559</p></td>
+</tr>
+<tr class="row-odd"><td><p>LINC00115</p></td>
+<td><p>45</p></td>
+<td><p>0.553784408</p></td>
+<td><p>1</p></td>
+<td><p>1453921</p></td>
+<td><p>0.04947</p></td>
+</tr>
+<tr class="row-even"><td><p>CPTP</p></td>
+<td><p>17</p></td>
+<td><p>0.002951945</p></td>
+<td><p>1</p></td>
+<td><p>1838374</p></td>
+<td><p>6.45E-04</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANKRD65</p></td>
+<td><p>64</p></td>
+<td><p>0.392843939</p></td>
+<td><p>1</p></td>
+<td><p>1293343</p></td>
+<td><p>0.04382</p></td>
+</tr>
+<tr class="row-even"><td><p>LINC01770</p></td>
+<td><p>81</p></td>
+<td><p>0.030888201</p></td>
+<td><p>1</p></td>
+<td><p>2110848</p></td>
+<td><p>0.005738</p></td>
+</tr>
+<tr class="row-odd"><td><p>FAM87B</p></td>
+<td><p>70</p></td>
+<td><p>0.733937073</p></td>
+<td><p>1</p></td>
+<td><p>721290</p></td>
+<td><p>0.1215</p></td>
+</tr>
+</tbody>
+</table>
+<p>GWAS_Var_P : the <em>p</em>-value of top variant in GWAS summary statistics.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>StartPos</p></th>
+<th class="head"><p>EndPos</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>Group</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>CondiECSP</p></th>
+<th class="head"><p>GeneScore</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ATAD3C</p></td>
+<td><p>1</p></td>
+<td><p>845635</p></td>
+<td><p>2404321</p></td>
+<td><p>68</p></td>
+<td><p>0</p></td>
+<td><p>1.64E-07</p></td>
+<td><p>1.64E-07</p></td>
+<td><p>0.739010096</p></td>
+</tr>
+<tr class="row-odd"><td><p>MIB2</p></td>
+<td><p>1</p></td>
+<td><p>851204</p></td>
+<td><p>2372321</p></td>
+<td><p>48</p></td>
+<td><p>0</p></td>
+<td><p>1.39E-07</p></td>
+<td><p>0.01368601</p></td>
+<td><p>0.184869051</p></td>
+</tr>
+<tr class="row-even"><td><p>SLC35E2A</p></td>
+<td><p>1</p></td>
+<td><p>1103150</p></td>
+<td><p>2368706</p></td>
+<td><p>61</p></td>
+<td><p>0</p></td>
+<td><p>1.38E-06</p></td>
+<td><p>9.02E-04</p></td>
+<td><p>NaN</p></td>
+</tr>
+<tr class="row-odd"><td><p>CALML6</p></td>
+<td><p>1</p></td>
+<td><p>1112982</p></td>
+<td><p>2401364</p></td>
+<td><p>53</p></td>
+<td><p>0</p></td>
+<td><p>4.18E-07</p></td>
+<td><p>1.41E-05</p></td>
+<td><p>0.357095003</p></td>
+</tr>
+<tr class="row-even"><td><p>RER1</p></td>
+<td><p>1</p></td>
+<td><p>1429996</p></td>
+<td><p>3207780</p></td>
+<td><p>21</p></td>
+<td><p>0</p></td>
+<td><p>1.81E-07</p></td>
+<td><p>1</p></td>
+<td><p>0.005418475</p></td>
+</tr>
+</tbody>
+</table>
+<p>The meaning of the column names in <strong>*.finemapping.gene.ecs.txt</strong> is same as that of MCGA_Dist.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>Pos</p></th>
+<th class="head"><p>GWAS_Var_P</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OR4G4P</p></td>
+<td><p>2</p></td>
+<td><p>0.836453248</p></td>
+<td><p>1</p></td>
+<td><p>921071</p></td>
+<td><p>0.5559</p></td>
+</tr>
+<tr class="row-odd"><td><p>OR4G4P</p></td>
+<td><p>2</p></td>
+<td><p>0.836453248</p></td>
+<td><p>1</p></td>
+<td><p>705882</p></td>
+<td><p>0.9933</p></td>
+</tr>
+<tr class="row-even"><td><p>LINC00115</p></td>
+<td><p>45</p></td>
+<td><p>0.553784408</p></td>
+<td><p>1</p></td>
+<td><p>1453921</p></td>
+<td><p>0.04947</p></td>
+</tr>
+<tr class="row-odd"><td><p>LINC00115</p></td>
+<td><p>45</p></td>
+<td><p>0.553784408</p></td>
+<td><p>1</p></td>
+<td><p>721290</p></td>
+<td><p>0.1215</p></td>
+</tr>
+<tr class="row-even"><td><p>LINC00115</p></td>
+<td><p>45</p></td>
+<td><p>0.553784408</p></td>
+<td><p>1</p></td>
+<td><p>715265</p></td>
+<td><p>0.1429</p></td>
+</tr>
+<tr class="row-odd"><td><p>LINC00115</p></td>
+<td><p>45</p></td>
+<td><p>0.553784408</p></td>
+<td><p>1</p></td>
+<td><p>715367</p></td>
+<td><p>0.1632</p></td>
+</tr>
+</tbody>
+</table>
+<p>The meaning of the column names in <strong>*.gene.var.pvalue.txt.gz</strong> is same as that of MCGA_Dist.</p>
+</div></blockquote>
+</li>
+<li><p>For MCGA_isoQTL, the three output files are as follows:</p>
 <blockquote>
 <div><table class="docutils align-center">
 <colgroup>
@@ -823,74 +1456,266 @@ More installation instruction can be found at <a class="reference external" href
 <th class="head"><p>ECSP</p></th>
 <th class="head"><p>Chrom</p></th>
 <th class="head"><p>Pos</p></th>
-<th class="head"><p>VarP</p></th>
+<th class="head"><p>GWAS_Var_P</p></th>
 <th class="head"><p>eQTL_P</p></th>
 <th class="head"><p>eQTL_Beta</p></th>
 <th class="head"><p>eQTL_SE</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>MTCO1P12</p></td>
-<td><p>419</p></td>
-<td><p>0.151394</p></td>
+<tr class="row-even"><td><p>LINC00115:ENST00000473798</p></td>
+<td><p>38</p></td>
+<td><p>0.6399446659796347</p></td>
 <td><p>1</p></td>
-<td><p>1155757</p></td>
-<td><p>0.008248</p></td>
-<td><p>0.00102</p></td>
-<td><p>271.508</p></td>
-<td><p>82.652</p></td>
+<td><p>1453921</p></td>
+<td><p>0.04947</p></td>
+<td><p>0.00661</p></td>
+<td><p>0.494</p></td>
+<td><p>0.182</p></td>
 </tr>
-<tr class="row-odd"><td><p>WBP1LP7</p></td>
-<td><p>9</p></td>
-<td><p>0.906045</p></td>
+<tr class="row-odd"><td><p>HES4:ENST00000484667</p></td>
+<td><p>53</p></td>
+<td><p>0.06254437207363488</p></td>
 <td><p>1</p></td>
-<td><p>956327</p></td>
-<td><p>0.3727</p></td>
-<td><p>0.00375</p></td>
-<td><p>0.145</p></td>
-<td><p>0.05</p></td>
+<td><p>1888193</p></td>
+<td><p>0.007353</p></td>
+<td><p>0.00874</p></td>
+<td><p>0.424</p></td>
+<td><p>0.162</p></td>
 </tr>
-<tr class="row-even"><td><p>LINC01770</p></td>
-<td><p>58</p></td>
-<td><p>0.125738</p></td>
+<tr class="row-even"><td><p>ANKRD65:ENST00000537107</p></td>
+<td><p>71</p></td>
+<td><p>0.042331217566648344</p></td>
 <td><p>1</p></td>
-<td><p>1493727</p></td>
-<td><p>0.01111</p></td>
-<td><p>0.00159</p></td>
-<td><p>-0.212</p></td>
-<td><p>0.067</p></td>
+<td><p>1829424</p></td>
+<td><p>7.524E-4</p></td>
+<td><p>0.00428</p></td>
+<td><p>-0.496</p></td>
+<td><p>0.174</p></td>
 </tr>
-<tr class="row-odd"><td><p>OR4F5</p></td>
-<td><p>16</p></td>
-<td><p>0.95193</p></td>
+<tr class="row-odd"><td><p>NADK:ENST00000378625</p></td>
+<td><p>40</p></td>
+<td><p>2.5509647239920406E-9</p></td>
 <td><p>1</p></td>
-<td><p>837192</p></td>
-<td><p>0.75</p></td>
-<td><p>0.01</p></td>
-<td><p>0.082</p></td>
-<td><p>0.032</p></td>
+<td><p>2373168</p></td>
+<td><p>7.195E-12</p></td>
+<td><p>0.00453</p></td>
+<td><p>-0.389</p></td>
+<td><p>0.137</p></td>
 </tr>
-<tr class="row-even"><td><p>MIR6726</p></td>
-<td><p>63</p></td>
-<td><p>0.278839</p></td>
+<tr class="row-even"><td><p>LINC01770:ENST00000434150</p></td>
+<td><p>66</p></td>
+<td><p>1.0</p></td>
 <td><p>1</p></td>
-<td><p>1914487</p></td>
-<td><p>0.01711</p></td>
-<td><p>0.01</p></td>
-<td><p>-0.092</p></td>
-<td><p>0.036</p></td>
+<td><p>1966453</p></td>
+<td><p>0.02534</p></td>
+<td><p>0.00388</p></td>
+<td><p>0.765</p></td>
+<td><p>0.265</p></td>
+</tr>
+<tr class="row-odd"><td><p>DVL1:ENST00000378888</p></td>
+<td><p>62</p></td>
+<td><p>0.010190210501401314</p></td>
+<td><p>1</p></td>
+<td><p>1874581</p></td>
+<td><p>1.972E-5</p></td>
+<td><p>0.00667</p></td>
+<td><p>0.499</p></td>
+<td><p>0.184</p></td>
 </tr>
 </tbody>
 </table>
-<p>columns in the output file are gene symbol, number of variants in the gene, chromosome, gene start position, gene end position, the position of top variant, the <em>p</em>-value, coefficient and standard error of the variant for gene expression as an eQTL. The second is the conditional gene-based analysis results, named <strong>*.finemapping.gene.ecs.txt</strong> or <strong>*. finemapping.gene.ecs.xls</strong>. The third is the selective expression enrichment analysis results at different tissues or cell types, named <strong>*.selectivity.ecs.txt</strong> or <strong>*.selectivity.ecs.xls</strong>. Their file formats are the same as above.</p>
+<p>Gene : gene:isoform pair name;</p>
+<p>eQTL_P: p value of the top variant associated with gene;</p>
+<p>eQTL_Beta : beta value of the top variant associated with gene;</p>
+<p>eQTL_SE : se value of the top variant associated with gene.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>StartPos</p></th>
+<th class="head"><p>EndPos</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>Group</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>CondiECSP</p></th>
+<th class="head"><p>GeneScore</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NADK:ENST00000378625</p></td>
+<td><p>1</p></td>
+<td><p>715265</p></td>
+<td><p>2505713</p></td>
+<td><p>40</p></td>
+<td><p>0</p></td>
+<td><p>2.5509647239920406E-9</p></td>
+<td><p>0.49001916558591097</p></td>
+<td><p>0.4121204912662506</p></td>
+</tr>
+<tr class="row-odd"><td><p>MIB2:ENST00000505820</p></td>
+<td><p>1</p></td>
+<td><p>715265</p></td>
+<td><p>2554120</p></td>
+<td><p>12</p></td>
+<td><p>0</p></td>
+<td><p>1.0281497357792791E-7</p></td>
+<td><p>0.05404762888412341</p></td>
+<td><p>0.24913454055786133</p></td>
+</tr>
+<tr class="row-even"><td><p>ATAD3C:ENST00000484537</p></td>
+<td><p>1</p></td>
+<td><p>797281</p></td>
+<td><p>2403854</p></td>
+<td><p>13</p></td>
+<td><p>0</p></td>
+<td><p>6.281932027672856E-7</p></td>
+<td><p>1.0</p></td>
+<td><p>0.7975806593894958</p></td>
+</tr>
+<tr class="row-odd"><td><p>CFAP74:ENST00000412120</p></td>
+<td><p>1</p></td>
+<td><p>924368</p></td>
+<td><p>2875906</p></td>
+<td><p>65</p></td>
+<td><p>0</p></td>
+<td><p>1.385295185307669E-6</p></td>
+<td><p>1.385295185307669E-6</p></td>
+<td><p>0.817357063293457</p></td>
+</tr>
+<tr class="row-even"><td><p>PRKCZ-AS1:ENST00000333854</p></td>
+<td><p>1</p></td>
+<td><p>1130660</p></td>
+<td><p>3011558</p></td>
+<td><p>37</p></td>
+<td><p>0</p></td>
+<td><p>1.942873144890924E-8</p></td>
+<td><p>2.584870685504903E-4</p></td>
+<td><p>0.4307031035423279</p></td>
+</tr>
+<tr class="row-odd"><td><p>MORN1:ENST00000606372</p></td>
+<td><p>1</p></td>
+<td><p>1346972</p></td>
+<td><p>3319777</p></td>
+<td><p>71</p></td>
+<td><p>0</p></td>
+<td><p>8.877373532310207E-7</p></td>
+<td><p>0.04914216330168187</p></td>
+<td><p>0.5989813208580017</p></td>
+</tr>
+</tbody>
+</table>
+<p>The meaning of the column names in <strong>*.finemapping.gene.ecs.txt</strong> is same as that of MCGA_Dist.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Gene</p></th>
+<th class="head"><p>#Var</p></th>
+<th class="head"><p>ECSP</p></th>
+<th class="head"><p>Chrom</p></th>
+<th class="head"><p>Pos</p></th>
+<th class="head"><p>GWAS_Var_P</p></th>
+<th class="head"><p>eQTL_P</p></th>
+<th class="head"><p>eQTL_Beta</p></th>
+<th class="head"><p>eQTL_SE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LINC00115:ENST00000473798</p></td>
+<td><p>38</p></td>
+<td><p>0.6399446659796347</p></td>
+<td><p>1</p></td>
+<td><p>1453921</p></td>
+<td><p>0.04947</p></td>
+<td><p>0.00661</p></td>
+<td><p>0.494</p></td>
+<td><p>0.182</p></td>
+</tr>
+<tr class="row-odd"><td><p>LINC00115:ENST00000473798</p></td>
+<td><p>38</p></td>
+<td><p>0.6399446659796347</p></td>
+<td><p>1</p></td>
+<td><p>721290</p></td>
+<td><p>0.1215</p></td>
+<td><p>0.00174</p></td>
+<td><p>1.049</p></td>
+<td><p>0.335</p></td>
+</tr>
+<tr class="row-even"><td><p>LINC00115:ENST00000473798</p></td>
+<td><p>38</p></td>
+<td><p>0.6399446659796347</p></td>
+<td><p>1</p></td>
+<td><p>715265</p></td>
+<td><p>0.1429</p></td>
+<td><p>0.00174</p></td>
+<td><p>1.049</p></td>
+<td><p>0.335</p></td>
+</tr>
+<tr class="row-odd"><td><p>LINC00115:ENST00000473798</p></td>
+<td><p>38</p></td>
+<td><p>0.6399446659796347</p></td>
+<td><p>1</p></td>
+<td><p>715367</p></td>
+<td><p>0.1632</p></td>
+<td><p>0.00174</p></td>
+<td><p>1.049</p></td>
+<td><p>0.335</p></td>
+</tr>
+<tr class="row-even"><td><p>LINC00115:ENST00000473798</p></td>
+<td><p>38</p></td>
+<td><p>0.6399446659796347</p></td>
+<td><p>1</p></td>
+<td><p>726794</p></td>
+<td><p>0.1814</p></td>
+<td><p>0.00263</p></td>
+<td><p>1.012</p></td>
+<td><p>0.337</p></td>
+</tr>
+<tr class="row-odd"><td><p>LINC00115:ENST00000473798</p></td>
+<td><p>38</p></td>
+<td><p>0.6399446659796347</p></td>
+<td><p>1</p></td>
+<td><p>1425816</p></td>
+<td><p>0.3526</p></td>
+<td><p>0.00138</p></td>
+<td><p>0.84</p></td>
+<td><p>0.262</p></td>
+</tr>
+</tbody>
+</table>
+<p>The meaning of the column names in <strong>*.gene.var.pvalue.txt.gz</strong> is same as that of MCGA_Dist.</p>
+</div></blockquote>
+</li>
+</ul>
 </div></blockquote>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="section" id="options-index">
-<h1>Options Index<a class="headerlink" href="#options-index" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id18">
+<h1>Options Index<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="inputs-outputs">
 <h2>Inputs/outputs<a class="headerlink" href="#inputs-outputs" title="Permalink to this headline">¶</a></h2>
 <blockquote>
@@ -1039,8 +1864,8 @@ More installation instruction can be found at <a class="reference external" href
 </table>
 </div></blockquote>
 </div>
-<div class="section" id="id11">
-<h2>Functions<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id19">
+<h2>Functions<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><table class="docutils align-center">
 <colgroup>
