@@ -170,6 +170,32 @@ Conditional gene-based association analysis with isoform-level eQTLs
    --calc-selectivity \
    --out examples/out/geneAssoceQTL
 
+- MCGA_eQTL input data:
+     
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   3. Gene-level expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*;
+   4. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.
+.. code:: shell
+   java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \
+   --sum-file examples/gwas.sum.stat.gz \
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
+   --filter-eqtl-p 0.01 \  
+   --filter-maf-le 0.02 \
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --calc-selectivity \
+   --out examples/out/geneAssoceQTL
  
 Gene-based causality analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
