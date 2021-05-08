@@ -12,7 +12,7 @@ Introduction
 
 KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) a multi-strategy conditional gene-based association framework, 2) conditional gene-based association guided by selective expression in tissues or cell types, 3) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, and 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.
 
-.. image:: ./media/kggsee_pipeline.png
+.. image:: ./media/kggsee_pipeline1.jpg
     :align: center
 
 Installation
@@ -285,39 +285,6 @@ Explanations and Optional options
 
     columns in the output file are gene symbol, number of variants in the gene, *p*-values of gene-based association test, and the detailed information of the top variant within the gene(i.e., the variant with smallest *p*-value). These columns include chromosome, physical position, *p*-value, whether the top variant was ignored in the gene-based association analysis, and gene feature annotations according to RefGene and GENCODE.
 
-Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(MACG)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-One can perform multiple IVs based MR analysis to infer casual gene or transcript by an integrative framework named MACG. MACG adopted two multiple IVs based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. MACG needs two major inputs, GWAS and eQTL summary statistics respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating association between IVs and expression of genes or transcripts in a tissue or cell type. MACG has integrated the pre-calculated cis-eQTLs in 55 tissues or cell-types with gene-level and transcript-level expression from GTEx(version 8).
-
-Required options
----------------------
-
-- ``--macg``
-- ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
-- ``--sum-file [/path/to/summary/file]``
-- ``--beta-or [y/n]``
-- ``--saved-ref  [previous/output/path]``
-- ``--out [output/path/prefix]``
-
-**See an analysis example at:** `Gene-based causality analysis <#gene-based-causality-analysis>`_
-
-Explanations and Optional options
----------------------------------------
-
-- ``--macg``: The main function option.
-- ``--eqtl-file``: See above description.
-- ``--sum-file``: See above description.
-- ``--beta-or``: Indicate whether the coefficients(i.e., betas) in the summary statistics file are conventional odds ratios. If yes, KGGSee will automatically transform the betas and SEs by the natural logarithm. 
-- ``--saved-ref``: See above description.
-- ``--out``: Specify the path and prefix name of the output files. The main output file is the Mendelian randomization analysis results for causal gene estimation, named ***.mr.gene.txt** or ***. gene.mr.gene.xls**. The following
-
-    .. csv-table::
-        :file: ./table/demo.mr.gene.csv
-        :header-rows: 1
-        :align: center
-
-    columns in the output file are gene symbol, number of variants in the gene, *p*-values of causality tests by Median-based MR, detailed causality estimation by Median-based MR, *p*-values of causality tests by maximal likelihood-based MR, detailed causality estimation by maximal likelihood-based MR, chromosome, top GWAS variant position, *p*-value, beta and SE of the top GWAS variant, *p*-value, beta and SE of the top GWAS variant as an eQTL. When a gene has multiple transcripts, the detailed MR results will show MR analysis of all transcripts. Each MR analysis result has four components, the number IVs for the estimation, the estimated causal effect, the standard error of the estimation, and the *p*-values.
 
 Finely map genes and estimate relevant cell-types of a phenotype by the single-cell(or bulk-cell) type and phenotype cross annotation framework(SPA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -552,6 +519,41 @@ Explanations and Optional options
         The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
 
 
+Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(EMIC)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One can perform multiple IVs based MR analysis to infer casual gene or transcript by an integrative framework named MACG. MACG adopted two multiple IVs based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. MACG needs two major inputs, GWAS and eQTL summary statistics respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating association between IVs and expression of genes or transcripts in a tissue or cell type. MACG has integrated the pre-calculated cis-eQTLs in 55 tissues or cell-types with gene-level and transcript-level expression from GTEx(version 8).
+
+Required options
+---------------------
+
+- ``--macg``
+- ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
+- ``--sum-file [/path/to/summary/file]``
+- ``--beta-or [y/n]``
+- ``--saved-ref  [previous/output/path]``
+- ``--out [output/path/prefix]``
+
+**See an analysis example at:** `Gene-based causality analysis <#gene-based-causality-analysis>`_
+
+Explanations and Optional options
+---------------------------------------
+
+- ``--macg``: The main function option.
+- ``--eqtl-file``: See above description.
+- ``--sum-file``: See above description.
+- ``--beta-or``: Indicate whether the coefficients(i.e., betas) in the summary statistics file are conventional odds ratios. If yes, KGGSee will automatically transform the betas and SEs by the natural logarithm. 
+- ``--saved-ref``: See above description.
+- ``--out``: Specify the path and prefix name of the output files. The main output file is the Mendelian randomization analysis results for causal gene estimation, named ***.mr.gene.txt** or ***. gene.mr.gene.xls**. The following
+
+    .. csv-table::
+        :file: ./table/demo.mr.gene.csv
+        :header-rows: 1
+        :align: center
+
+    columns in the output file are gene symbol, number of variants in the gene, *p*-values of causality tests by Median-based MR, detailed causality estimation by Median-based MR, *p*-values of causality tests by maximal likelihood-based MR, detailed causality estimation by maximal likelihood-based MR, chromosome, top GWAS variant position, *p*-value, beta and SE of the top GWAS variant, *p*-value, beta and SE of the top GWAS variant as an eQTL. When a gene has multiple transcripts, the detailed MR results will show MR analysis of all transcripts. Each MR analysis result has four components, the number IVs for the estimation, the estimated causal effect, the standard error of the estimation, and the *p*-values.
+    
+ 
 Compute the eQTLs and isoQTLs of each tissue
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
@@ -579,6 +581,7 @@ Compute the eQTLs and isoQTLs of each tissue
 
         
 Details of the options can be seen in `Options Index <#id18>`_.
+
 
 Estimate the potential driver tissues of a complex phenotype
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
