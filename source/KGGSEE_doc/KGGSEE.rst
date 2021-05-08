@@ -167,33 +167,6 @@ Estimate the potential driver tissues of a complex phenotype
         
 Details of the options can be seen in `Options Index <#id18>`_.
 
-Compute the eQTLs and isoQTLs of each tissue
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  
-**Purpose**: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
-
- - Input data:
-     
-   1. Genotypes in KGGSEE objects(generated last time). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
-     
-   2. Gene expression data of certain tissues corresponding to genotype data from the same subject.
-     
-    .. code:: shell
-
-        java -Xmx10g \
-        -jar kggsee.jar \
-        --nt 10 \
-        --calc-eqtl \
-        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression/
-        --gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz \
-        --filter-eqtl-p 0.01 \
-        --hwe-all 0.001 \
-        --filter-maf-le 0.05 \
-        --neargene 1000000 \
-        --out /path/Adipose-Subcutaneous.gene.maf05.p01 \
-
-        
-Details of the options can be seen in `Options Index <#id18>`_.
 
 MCGA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -613,6 +586,35 @@ Explanations and Optional options
             :align: center
 
         The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
+
+
+Compute the eQTLs and isoQTLs of each tissue
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+**Purpose**: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
+
+ - Input data:
+     
+   1. Genotypes in KGGSEE objects(generated last time). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
+     
+   2. Gene expression data of certain tissues corresponding to genotype data from the same subject.
+     
+    .. code:: shell
+
+        java -Xmx10g \
+        -jar kggsee.jar \
+        --nt 10 \
+        --calc-eqtl \
+        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression/
+        --gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz \
+        --filter-eqtl-p 0.01 \
+        --hwe-all 0.001 \
+        --filter-maf-le 0.05 \
+        --neargene 1000000 \
+        --out /path/Adipose-Subcutaneous.gene.maf05.p01 \
+
+        
+Details of the options can be seen in `Options Index <#id18>`_.
 
 Options Index
 ===============
