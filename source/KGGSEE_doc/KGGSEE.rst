@@ -112,7 +112,33 @@ Conditional gene-based association analysis with isoform-level eQTLs
 
 **Purpose**: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_isoQTL and MCGA_eQTL.
 
-
+- MCGA_Dist input data:
+     
+   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   
+   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
+   
+  
+.. code:: shell
+    java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --sum-file examples/gwas.sum.stat.gz \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \   
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
+   --filter-maf-le 0.02 \
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --calc-selectivity \
+   --out examples/out/geneAssoceQTL
+   
 - MCGA_isoQTL input data:
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
