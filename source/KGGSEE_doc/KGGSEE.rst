@@ -107,7 +107,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      --excel
  
 
-Conditional gene-based association analysis with isoform-level eQTLs
+Multi-strategy conditional gene-based association analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Purpose**: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_isoQTL and MCGA_eQTL.
