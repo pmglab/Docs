@@ -82,32 +82,6 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
   --out examples/out/geneAssoc
 
 
-Gene-based causality analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
- - Input data:
-
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
-   
-   2. Genotypes in KGGSEE objects(generated in last time) to approximate correction between summary statistics: *examples/out/geneAssoc*
-   
-   3. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz*
-     
-.. code:: shell  
-
-   java -Xmx10g  -jar kggsee.jar \
-   --nt 10 \
-   --macg \
-   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
-   --filter-maf-le 0.05 \
-   --sum-file examples/gwas.sum.stat.gz \
-   --beta-or y \
-   --saved-ref  examples/out/geneAssoc \
-   --out examples/out/macg \
-   --excel
-
-
 Estimate relevant cell-types of a phenotype
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
@@ -132,74 +106,12 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      --out examples/out/spa \
      --excel
  
- 
-Estimate the potential driver tissues of a complex phenotype
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  
-**Purpose**: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.
 
- - Input data:
-    
-   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
-     
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
-   
-   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
-     
-    .. code:: shell
-
-        java -Xmx10g \
-        -jar kggsee.jar \
-        --nt 10 \
-        --sum-file examples/gwas.sum.stat.gz \
-        --chrom-col CHR
-        --pos-col BP
-        --p-col P
-        --gene-finemapping
-        --saved-ref examples/out/geneAssoc \
-        --out examples/out/geneAssoceQTL \
-        --filter-maf-le 0.02 \
-        --only-hgnc-gene \
-        --p-value-cutoff 0.05 \
-        --multiple-testing bonf \
-        --calc-selectivity \
-        --expression-file resources/gtex.v8.gene.mean.tsv.gz
-        
-Details of the options can be seen in `Options Index <#id18>`_.
-
-
-MCGA
+Conditional gene-based association analysis with isoform-level eQTLs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Purpose**: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_isoQTL and MCGA_eQTL.
 
-- MCGA_Dist input data:
-     
-   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
-     
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
-   
-   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
-   
-  
-.. code:: shell
-
-    java -Xmx20g \
-   -jar kggsee.jar \
-   --nt 10 \
-   --sum-file examples/gwas.sum.stat.gz \
-   --chrom-col CHR \
-   --pos-col BP \
-   --p-col P \
-   --gene-finemapping \   
-   --saved-ref  examples/out/geneAssoc \
-   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
-   --filter-maf-le 0.02 \
-   --only-hgnc-gene \
-   --p-value-cutoff 0.05 \
-   --multiple-testing bonf \
-   --calc-selectivity \
-   --out examples/out/geneAssoceQTL
 
 - MCGA_isoQTL input data:
      
@@ -232,39 +144,34 @@ MCGA
    --calc-selectivity \
    --out examples/out/geneAssoceQTL
 
+ 
+Gene-based causality analysis
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- MCGA_eQTL input data:
+Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
+ - Input data:
+
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
+   
+   2. Genotypes in KGGSEE objects(generated in last time) to approximate correction between summary statistics: *examples/out/geneAssoc*
+   
+   3. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz*
      
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
-     
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+.. code:: shell  
 
-   3. Gene-level expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*;
-
-   4. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.
-
-.. code:: shell
-
-   java -Xmx20g \
-   -jar kggsee.jar \
+   java -Xmx10g  -jar kggsee.jar \
    --nt 10 \
-   --chrom-col CHR \
-   --pos-col BP \
-   --p-col P \
-   --gene-finemapping \
+   --macg \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
+   --filter-maf-le 0.05 \
    --sum-file examples/gwas.sum.stat.gz \
+   --beta-or y \
    --saved-ref  examples/out/geneAssoc \
-   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
-   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
-   --filter-eqtl-p 0.01 \  
-   --filter-maf-le 0.02 \
-   --only-hgnc-gene \
-   --p-value-cutoff 0.05 \
-   --multiple-testing bonf \
-   --calc-selectivity \
-   --out examples/out/geneAssoceQTL
-  
-
+   --out examples/out/macg \
+   --excel
+ 
+ 
+ 
 Functions
 =========================
 
@@ -615,6 +522,41 @@ Compute the eQTLs and isoQTLs of each tissue
 
         
 Details of the options can be seen in `Options Index <#id18>`_.
+
+Estimate the potential driver tissues of a complex phenotype
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+**Purpose**: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.
+
+ - Input data:
+    
+   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   
+   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
+     
+    .. code:: shell
+
+        java -Xmx10g \
+        -jar kggsee.jar \
+        --nt 10 \
+        --sum-file examples/gwas.sum.stat.gz \
+        --chrom-col CHR
+        --pos-col BP
+        --p-col P
+        --gene-finemapping
+        --saved-ref examples/out/geneAssoc \
+        --out examples/out/geneAssoceQTL \
+        --filter-maf-le 0.02 \
+        --only-hgnc-gene \
+        --p-value-cutoff 0.05 \
+        --multiple-testing bonf \
+        --calc-selectivity \
+        --expression-file resources/gtex.v8.gene.mean.tsv.gz
+        
+Details of the options can be seen in `Options Index <#id18>`_.
+
 
 Options Index
 ===============
