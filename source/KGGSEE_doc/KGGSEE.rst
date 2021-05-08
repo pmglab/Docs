@@ -122,6 +122,7 @@ Conditional gene-based association analysis with isoform-level eQTLs
    
   
 .. code:: shell
+
     java -Xmx20g \
    -jar kggsee.jar \
    --nt 10 \
@@ -181,6 +182,7 @@ Conditional gene-based association analysis with isoform-level eQTLs
    
    
 .. code:: shell
+
    java -Xmx20g \
    -jar kggsee.jar \
    --nt 10 \
