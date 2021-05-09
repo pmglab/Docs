@@ -6,7 +6,7 @@
 --chrom-col ,column name of chromosome ID,--chrom-col CHR
 --eqtl-file,path of eQTL file,
 --excel,Output results in Excel format,
---expression-gty-vcf,,
+--expression-gty-vcf,path to vcf file of subjects with expression,
 --freq-a1-col,column name of frequencies of A1 allele,--freq-a1-col FRQ_U
 --keep-ref,save the encoded genotypes in VCF for future usage,
 --nmiss-col,column name of sample size with non-missing genotypes,--nmiss-col Neff
