@@ -10,7 +10,7 @@
 Introduction
 =============
 
-KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) a multi-strategy conditional gene-based association framework, 2) conditional gene-based association guided by selective expression in tissues or cell types, 3) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, and 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.
+KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) gene-based association analysis, 2) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, 3) conditional gene-based association analysis based on multi-strategy, 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.
 
 .. image:: ./media/kggsee_pipeline3_1.jpg
     :align: center
@@ -353,7 +353,7 @@ Required options
 - ``--filter-eqtl-p``
 - ``--expression-file [path/to/expression/file]``
 - ``--calcu-selectivity``
-- ``--pfile [/path/to/summary/file]``
+- ``--sum-file [/path/to/summary/file]``
 - ``--filter-maf-le``
 - ``--saved-ref  [previous/output/path]``
 - ``--out [output/path/prefix]``
@@ -381,7 +381,7 @@ Explanations and Optional options
 - ``--calcu-selectivity``: Calculate selective expression of a gene or transcripts in a tissue or a cell type.
 
 - ``--filter-eqtl-p``: a filter used to filter eQTLs/isoQTLs  < the cutoff.
-- ``--pfile``: the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, chromosome, physical position and p-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by ``--chrom-col``, ``--pos-col`` and ``--p-col`` respectively.
+- ``--sum-file``: the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, chromosome, physical position and p-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by ``--chrom-col``, ``--pos-col`` and ``--p-col`` respectively.
 - ``--filter-maf-le``: a filer used to filter variants with MAF > the cutoff.
 - ``--regions-out``: a region used to exclude variants in the specified regions.
 
