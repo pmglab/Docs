@@ -561,7 +561,7 @@ Compute the eQTLs and isoQTLs of each tissue
 
  - Input data:
      
-   1. Genotypes in KGGSEE objects(generated last time). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
+   1. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
      
    2. Gene expression data of certain tissues corresponding to genotype data from the same subject.
      
