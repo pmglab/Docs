@@ -2,9 +2,6 @@
 --filter-eqtl-p,filter eQTLs with p-value > the cutoff ,--filter-eqtl-p 1E-2
 --filter-maf-le,filer variants with MAF ≤ the cutoff,--filter-maf-le 0.02
 --hwe-all,filter variants with HWD test p-value < the cutoff,--filter-eqtl-p 1E-5
---ld-pruning-mr,prune a variant with genotypic correlation to another variant> the cutoff for causal gene estimation by MR,--ld-pruning-mr 0.5
---multiple-testing [bonf/benfdr/ fixed],the multiple testing method used to select significant genes for the conditional gene-based analysis. There are three settings. bonf: Standard Bonferroni correction given a family-wise error rate specified by --p-value-cutoff.  benfdr: Benjamini-Hochberg method to control the false discovery rate. fixed: Filtering by a fixed p-value cutoff.,--multiple-testing bonf
---p-value-cutoff,the family-wise cutoff for the multiple testing.,--p-value-cutoff 0.05
 --only-hgnc-gene,only consider genes with HGNC gene symbols,
 --neargene,set the extension window size of a gene to cover more potential regulatory variants.,--neargene 5000
 --regions-out,exclude variants in the specified regions,

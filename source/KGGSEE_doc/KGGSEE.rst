@@ -218,13 +218,13 @@ Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
 
    java -Xmx10g  -jar kggsee.jar \
    --nt 10 \
-   --macg \
+   --emic \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
    --filter-maf-le 0.05 \
    --sum-file examples/gwas.sum.stat.gz \
    --beta-or y \
    --saved-ref  examples/out/geneAssoc \
-   --out examples/out/macg \
+   --out examples/out/emic \
    --excel
  
  
@@ -522,12 +522,12 @@ Explanations and Optional options
 Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(EMIC)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-One can perform multiple IVs based MR analysis to infer casual gene or transcript by an integrative framework named MACG. MACG adopted two multiple IVs based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. MACG needs two major inputs, GWAS and eQTL summary statistics respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating association between IVs and expression of genes or transcripts in a tissue or cell type. MACG has integrated the pre-calculated cis-eQTLs in 55 tissues or cell-types with gene-level and transcript-level expression from GTEx(version 8).
+One can perform multiple IVs based MR analysis to infer casual gene or transcript by an integrative framework named EMIC. EMIC adopted two multiple IVs based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. EMIC needs two major inputs, GWAS and eQTL summary statistics respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating association between IVs and expression of genes or transcripts in a tissue or cell type. EMIC has integrated the pre-calculated cis-eQTLs in 55 tissues or cell-types with gene-level and transcript-level expression from GTEx(version 8).
 
 Required options
 ---------------------
 
-- ``--macg``
+- ``--emic``
 - ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
 - ``--sum-file [/path/to/summary/file]``
 - ``--beta-or [y/n]``
@@ -539,7 +539,7 @@ Required options
 Explanations and Optional options
 ---------------------------------------
 
-- ``--macg``: The main function option.
+- ``--emic``: The main function option.
 - ``--eqtl-file``: See above description.
 - ``--sum-file``: See above description.
 - ``--beta-or``: Indicate whether the coefficients(i.e., betas) in the summary statistics file are conventional odds ratios. If yes, KGGSee will automatically transform the betas and SEs by the natural logarithm. 
@@ -571,7 +571,7 @@ Compute the eQTLs and isoQTLs of each tissue
         -jar kggsee.jar \
         --nt 10 \
         --calc-eqtl \
-        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression/
+        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression
         --gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz \
         --filter-eqtl-p 0.01 \
         --hwe-all 0.001 \

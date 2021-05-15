@@ -1,5 +1,5 @@
 ﻿Option,Description,Examples with default value
---a-col ,column name of alternative or minor allele,--a1-col A1
+--a1-col ,column name of alternative or minor allele,--a1-col A1
 --a2-col,column name of reference or major allele,--a2-col A2
 --beta-col,column name of coefficients,--beta-col OR
 --beta-or,whether the coefficients are odds ratio,--beta-or y
