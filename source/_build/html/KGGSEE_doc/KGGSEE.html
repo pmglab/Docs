@@ -1732,7 +1732,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>--a-col</p></td>
+<tr class="row-even"><td><p>--a1-col</p></td>
 <td><p>column name of alternative or minor allele</p></td>
 <td><p>--a1-col A1</p></td>
 </tr>
@@ -1836,27 +1836,15 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 <td><p>filter variants with HWD test p-value &lt; the cutoff</p></td>
 <td><p>--filter-eqtl-p 1E-5</p></td>
 </tr>
-<tr class="row-odd"><td><p>--ld-pruning-mr</p></td>
-<td><p>prune a variant with genotypic correlation to another variant&gt; the cutoff for causal gene estimation by MR</p></td>
-<td><p>--ld-pruning-mr 0.5</p></td>
-</tr>
-<tr class="row-even"><td><p>--multiple-testing [bonf/benfdr/ fixed]</p></td>
-<td><p>the multiple testing method used to select significant genes for the conditional gene-based analysis. There are three settings. bonf: Standard Bonferroni correction given a family-wise error rate specified by --p-value-cutoff.  benfdr: Benjamini-Hochberg method to control the false discovery rate. fixed: Filtering by a fixed p-value cutoff.</p></td>
-<td><p>--multiple-testing bonf</p></td>
-</tr>
-<tr class="row-odd"><td><p>--p-value-cutoff</p></td>
-<td><p>the family-wise cutoff for the multiple testing.</p></td>
-<td><p>--p-value-cutoff 0.05</p></td>
-</tr>
-<tr class="row-even"><td><p>--only-hgnc-gene</p></td>
+<tr class="row-odd"><td><p>--only-hgnc-gene</p></td>
 <td><p>only consider genes with HGNC gene symbols</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p>--neargene</p></td>
+<tr class="row-even"><td><p>--neargene</p></td>
 <td><p>set the extension window size of a gene to cover more potential regulatory variants.</p></td>
 <td><p>--neargene 5000</p></td>
 </tr>
-<tr class="row-even"><td><p>--regions-out</p></td>
+<tr class="row-odd"><td><p>--regions-out</p></td>
 <td><p>exclude variants in the specified regions</p></td>
 <td></td>
 </tr>
