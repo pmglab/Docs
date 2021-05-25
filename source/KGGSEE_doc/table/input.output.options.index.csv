@@ -17,4 +17,4 @@
 --saved-ref,the path of encoded genotypes by last time,--saved-ref 、test/test1
 --se-col ,column name of standard errors of the coefficients,--se-col SE
 --sum-file,path of the file storing GWAS summary statistics,--sum-ref /path/to/gwas_summary_file
---vcf-ref,the path of vcf file and name,--vcf-ref /path/to/vcf_file
+--vcf-ref,the path of vcf file and name,--vcf-ref /path/to/vcf_file/hg19.chr*.vcf.gz

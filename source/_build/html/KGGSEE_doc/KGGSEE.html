@@ -273,7 +273,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 --nt <span class="m">10</span> <span class="se">\</span>
 --gene-assoc <span class="se">\</span>
 --sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
---vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz <span class="se">\</span>
+--vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr*.vcf.gz <span class="se">\</span>
 --keep-ref <span class="se">\</span>
 --out examples/out/geneAssoc
 </pre></div>
@@ -491,7 +491,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 </table>
 </div></blockquote>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--vcf-ref</span></code>: The file containing genotypes to calculate genotypic correlations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--vcf-ref</span></code>: The file containing genotypes to calculate genotypic correlations. For data separated in multiple files by chromosomes, one can use asterisk wildcard (e.g., hg19.chr*.vcf.gz) to denote the chromosome names.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--keep-ref</span></code>: Save the encoded genotypes in VCF for future usage, which will speed up next analysis.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--saved-ref</span></code>: Instead of using <code class="docutils literal notranslate"><span class="pre">--vcf-ref</span></code>, one can directly specify the path of encoded genotypes last time by specifying last output path.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--filter-maf-le</span></code>: Filter out variants with minor allele frequency less or equal than the specified value.</p></li>
@@ -1754,7 +1754,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 </tr>
 <tr class="row-odd"><td><p>--eqtl-file</p></td>
 <td><p>path of eQTL file</p></td>
-<td></td>
+<td><p>--eqtl-file /path/to/eqtl_file</p></td>
 </tr>
 <tr class="row-even"><td><p>--excel</p></td>
 <td><p>Output results in Excel format</p></td>
@@ -1762,47 +1762,51 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 </tr>
 <tr class="row-odd"><td><p>--expression-gty-vcf</p></td>
 <td><p>path to vcf file of subjects with expression</p></td>
-<td></td>
+<td><p>--expression-gty-vcf /path/to/vcf_file</p></td>
 </tr>
-<tr class="row-even"><td><p>--freq-a1-col</p></td>
+<tr class="row-even"><td><p>--gene-expression</p></td>
+<td><p>path to file with gene expression</p></td>
+<td><p>--gene-expression /path/to/gene_expression_file</p></td>
+</tr>
+<tr class="row-odd"><td><p>--freq-a1-col</p></td>
 <td><p>column name of frequencies of A1 allele</p></td>
 <td><p>--freq-a1-col FRQ_U</p></td>
 </tr>
-<tr class="row-odd"><td><p>--keep-ref</p></td>
+<tr class="row-even"><td><p>--keep-ref</p></td>
 <td><p>save the encoded genotypes in VCF for future usage</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>--nmiss-col</p></td>
+<tr class="row-odd"><td><p>--nmiss-col</p></td>
 <td><p>column name of sample size with non-missing genotypes</p></td>
 <td><p>--nmiss-col Neff</p></td>
 </tr>
-<tr class="row-odd"><td><p>--out</p></td>
+<tr class="row-even"><td><p>--out</p></td>
 <td><p>output path and prefix name</p></td>
 <td><p>--out ./test/test1</p></td>
 </tr>
-<tr class="row-even"><td><p>--pos-col</p></td>
+<tr class="row-odd"><td><p>--pos-col</p></td>
 <td><p>column name of positions</p></td>
 <td><p>--pos-col BP</p></td>
 </tr>
-<tr class="row-odd"><td><p>--p-col</p></td>
+<tr class="row-even"><td><p>--p-col</p></td>
 <td><p>column name of p-values</p></td>
 <td><p>--p-col P</p></td>
 </tr>
-<tr class="row-even"><td><p>--saved-ref</p></td>
+<tr class="row-odd"><td><p>--saved-ref</p></td>
 <td><p>the path of encoded genotypes by last time</p></td>
-<td><p>--saved-ref ./test/test1</p></td>
+<td><p>--saved-ref 、test/test1</p></td>
 </tr>
-<tr class="row-odd"><td><p>--se-col</p></td>
+<tr class="row-even"><td><p>--se-col</p></td>
 <td><p>column name of standard errors of the coefficients</p></td>
 <td><p>--se-col SE</p></td>
 </tr>
-<tr class="row-even"><td><p>--sum-file</p></td>
+<tr class="row-odd"><td><p>--sum-file</p></td>
 <td><p>path of the file storing GWAS summary statistics</p></td>
-<td><p>--sum-ref ./path/to/gwas_summary_file</p></td>
+<td><p>--sum-ref /path/to/gwas_summary_file</p></td>
 </tr>
-<tr class="row-odd"><td><p>--vcf-ref</p></td>
+<tr class="row-even"><td><p>--vcf-ref</p></td>
 <td><p>the path of vcf file and name</p></td>
-<td><p>--vcf-ref ./path/to/vcf_file</p></td>
+<td><p>--vcf-ref /path/to/vcf_file/hg19.chr*.vcf.gz</p></td>
 </tr>
 </tbody>
 </table>

@@ -77,7 +77,7 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
   --nt 10 \
   --gene-assoc \
   --sum-file examples/gwas.sum.stat.gz \
-  --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz \
+  --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr*.vcf.gz \
   --keep-ref \  
   --out examples/out/geneAssoc
 
@@ -272,7 +272,7 @@ Explanations and Optional options
         === ====== ======
 
 
-- ``--vcf-ref``: The file containing genotypes to calculate genotypic correlations.
+- ``--vcf-ref``: The file containing genotypes to calculate genotypic correlations. For data separated in multiple files by chromosomes, one can use asterisk wildcard (e.g., hg19.chr*.vcf.gz) to denote the chromosome names.
 - ``--keep-ref``: Save the encoded genotypes in VCF for future usage, which will speed up next analysis.
 - ``--saved-ref``: Instead of using ``--vcf-ref``, one can directly specify the path of encoded genotypes last time by specifying last output path.
 - ``--filter-maf-le``: Filter out variants with minor allele frequency less or equal than the specified value.
