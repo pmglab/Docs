@@ -133,7 +133,6 @@ Multi-strategy conditional gene-based association analysis
    --gene-finemapping \   
    --saved-ref  examples/out/geneAssoc \
    --expression-file resources/gtex.v8.gene.mean.tsv.gz \
-   --filter-maf-le 0.02 \
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
@@ -165,7 +164,6 @@ Multi-strategy conditional gene-based association analysis
    --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz \ 
    --filter-eqtl-p 0.01 \  
-   --filter-maf-le 0.02 \
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
@@ -195,7 +193,6 @@ Multi-strategy conditional gene-based association analysis
    --expression-file resources/gtex.v8.gene.mean.tsv.gz \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
    --filter-eqtl-p 0.01 \  
-   --filter-maf-le 0.02 \
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
@@ -220,7 +217,6 @@ Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
    --nt 10 \
    --emic \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
-   --filter-maf-le 0.05 \
    --sum-file examples/gwas.sum.stat.gz \
    --beta-or y \
    --saved-ref  examples/out/geneAssoc \
@@ -299,7 +295,6 @@ Required options
 - ``--only-hgnc-gene``
 - ``--sum-file [/path/to/summary/file]``
 - ``--saved-ref  [previous/output/path/prefix]``
-- ``--filter-maf-le 0.02``
 - ``--out [output/path/prefix]``
 
 **See an analysis example at:** `Estimate relevant cell-types of a phenotype <#estimate-relevant-cell-types-of-a-phenotype>`_
@@ -608,7 +603,6 @@ Estimate the potential driver tissues of a complex phenotype
         --gene-finemapping
         --saved-ref examples/out/geneAssoc \
         --out examples/out/geneAssoceQTL \
-        --filter-maf-le 0.02 \
         --only-hgnc-gene \
         --p-value-cutoff 0.05 \
         --multiple-testing bonf \
