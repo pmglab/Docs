@@ -1,6 +1,6 @@
 ﻿Option,Description,Examples with default value
 --filter-eqtl-p,filter eQTLs with p-value > the cutoff ,--filter-eqtl-p 1E-2
---filter-maf-le,filer variants with MAF ≤ the cutoff,--filter-maf-le 0.02
+--filter-maf-le,filer variants with MAF ≤ the cutoff,--filter-maf-le 0.05
 --hwe-all,filter variants with HWD test p-value < the cutoff,--filter-eqtl-p 1E-5
 --only-hgnc-gene,only consider genes with HGNC gene symbols,
 --neargene,set the extension window size of a gene to cover more potential regulatory variants.,--neargene 5000
