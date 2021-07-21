@@ -418,7 +418,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 --emic <span class="se">\</span>
 --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz <span class="se">\</span>
 --sum-file examples/gwas.sum.stat.gz <span class="se">\</span>
---beta-or y <span class="se">\</span>
+--beta-type <span class="m">2</span> <span class="se">\</span>
 --saved-ref  examples/out/geneAssoc <span class="se">\</span>
 --out examples/out/emic <span class="se">\</span>
 --excel
@@ -1538,7 +1538,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 <li><p><code class="docutils literal notranslate"><span class="pre">--emic</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span> <span class="pre">[path/to/eQTL/file</span> <span class="pre">of</span> <span class="pre">genes</span> <span class="pre">or</span> <span class="pre">transcripts]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--sum-file</span> <span class="pre">[/path/to/summary/file]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--beta-or</span> <span class="pre">[y/n]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--beta-type</span> <span class="pre">[0/1/2]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--saved-ref</span>&#160; <span class="pre">[previous/output/path]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--out</span> <span class="pre">[output/path/prefix]</span></code></p></li>
 </ul>
@@ -1828,7 +1828,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 </tr>
 <tr class="row-odd"><td><p>--filter-maf-le</p></td>
 <td><p>filer variants with MAF ≤ the cutoff</p></td>
-<td><p>--filter-maf-le 0.02</p></td>
+<td><p>--filter-maf-le 0.05</p></td>
 </tr>
 <tr class="row-even"><td><p>--hwe-all</p></td>
 <td><p>filter variants with HWD test p-value &lt; the cutoff</p></td>

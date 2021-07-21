@@ -218,7 +218,7 @@ Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
    --emic \
    --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
    --sum-file examples/gwas.sum.stat.gz \
-   --beta-or y \
+   --beta-type 2 \
    --saved-ref  examples/out/geneAssoc \
    --out examples/out/emic \
    --excel
@@ -525,7 +525,7 @@ Required options
 - ``--emic``
 - ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
 - ``--sum-file [/path/to/summary/file]``
-- ``--beta-or [y/n]``
+- ``--beta-type [0/1/2]``
 - ``--saved-ref  [previous/output/path]``
 - ``--out [output/path/prefix]``
 

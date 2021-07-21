@@ -2,7 +2,7 @@
 --a1-col ,column name of alternative or minor allele,--a1-col A1
 --a2-col,column name of reference or major allele,--a2-col A2
 --beta-col,column name of coefficients,--beta-col OR
---beta-or,whether the coefficients are odds ratio,--beta-or y
+--beta-type,whether the coefficients are odds ratio. 0 means coefficients of linear regression for a quantitative phenotype beta; 1 means coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 means the odds ratio for a qualitative phenotype,--beta-type 0
 --chrom-col ,column name of chromosome ID,--chrom-col CHR
 --eqtl-file,path of eQTL file,--eqtl-file /path/to/eqtl_file
 --excel,Output results in Excel format,
