@@ -417,11 +417,8 @@ Explanations and Optional options
 - ``--out``: Specify the path and prefix name of the output files. 
 
 
-    + For eDESE:dist, the three output files are as follows:  
-        First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). The second one is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third one is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
-
-        The column names of the following table in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL.
-
+    + For eDESE:dist, the six output files are as follows:  
+        The first output file is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). 
 
         .. csv-table::
             :file: ./table/MCGA_dist_demo.gene.csv
@@ -430,30 +427,39 @@ Explanations and Optional options
 
         Gene : gene name;
 
-        #Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for eDESE:dist, gene-level eQTLs (also are variants) for eDESE:gene, isoform-level eQTLs (also are variants) for eDESE:isoform);
-
-        ECSP : the p value of effective chi-square test;
-
         Chrom : chromosome position of the gene;
+        
+        StartPos: gene start position (refGene hg19);
+        
+        EndPos : gene end postion (refGene hg19);
+        
+        #Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for eDESE:dist, gene-level eQTLs (also are variants) for eDESE:gene, isoform-level eQTLs (also are variants) for eDESE:isoform);
+        
+        Group : the identifier of LD block which the gene belong to;
 
-        Pos : the position of top variant belonging to the gene;
+        ECSP : the p value of effective chi-square test (without conditioning on gene expression profiles);
 
-        VarP: the *p*-value of top variant in GWAS summary statistics.  
+        CondiECSP : the p value of gene by performing the conditional effective chi-square test;
 
+        GeneScore : the tissue selective score of the gene by the end of the iterative procedure; 
+    
+    The second output file is the gene-based association result file (ECS result), named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**.
         .. csv-table::
             :file: ./table/MCGA_dist_demo.finemapping.gene.ecs.csv
             :header-rows: 1
             :align: center
         
-        StartPos: gene start position;
- 
-        EndPos:gene end position;
- 
-        CondiECSP:the p value of gene by performing the conditional effective chi-square test;
- 
-        GeneScore: the tissue selective score of the gene by the end of the iterative procedure;
- 
-        Group: the identifier of LD block which the gene belong to.  
+        Gene : gene name;
+       
+        #Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for eDESE:dist, gene-level eQTLs (also are variants) for eDESE:gene, isoform-level eQTLs (also are variants) for eDESE:isoform);
+        
+        ECSP : the p value of effective chi-square test (without conditioning on gene expression profiles);
+        
+        Chrom : chromosome position of the gene;
+        
+        Position : 
+        
+    The third output file is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
  
         .. csv-table::
             :file: ./table/MCGA_dist_demo.gene.var.pvalue.csv
