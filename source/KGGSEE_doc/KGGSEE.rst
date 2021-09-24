@@ -421,7 +421,7 @@ Explanations and Optional options
         The first output file is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). 
 
 .. csv-table::      
-        :file: ./table/MCGA_dist_demo.gene.csv
+        :file: ./table/eDESE_demo.finemapping.gene.ecs.csv
         :header-rows: 1
         :align: center
 
