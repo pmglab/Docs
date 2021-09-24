@@ -420,7 +420,7 @@ Explanations and Optional options
     + For eDESE:dist, the three output files are as follows:  
         First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). The second one is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third one is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
 
-        The following columns in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL.
+        The column names of the following table in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL.
 
 
         .. csv-table::
@@ -430,7 +430,7 @@ Explanations and Optional options
 
         Gene : gene name;
 
-        #Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for MCGA_Dist, isoQTLs for MCGA_isoQTL and gene-level eQTLs for MCGA_eQTL);
+        #Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for eDESE:dist, gene-level eQTLs (also are variants) for eDESE:gene, isoform-level eQTLs (also are variants) for eDESE:isoform);
 
         ECSP : the p value of effective chi-square test;
 
