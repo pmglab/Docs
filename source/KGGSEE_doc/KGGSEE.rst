@@ -420,7 +420,7 @@ Explanations and Optional options
     + For eDESE, the six output files are as follows:  
         The first output file is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). 
 
-.. csv-table::      
+     .. csv-table::      
         :file: ./table/eDESE_demo.finemapping.gene.ecs.csv
         :header-rows: 1
         :align: center
@@ -446,7 +446,7 @@ Explanations and Optional options
     
        The second output file is the gene-based association result file ("gene-top variant" ECS result), named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**.
        
-.. csv-table::
+         .. csv-table::
             :file: ./table/eDESE_demo.gene.pvalue.csv
             :header-rows: 1
             :align: center
@@ -473,7 +473,7 @@ Explanations and Optional options
         
       The third output file is the p-value of all variants belonging to a genes (raw ECS results), named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
  
-.. csv-table::
+         .. csv-table::
             :file: ./table/eDESE_demo.gene.var.pvalue.csv
             :header-rows: 1
             :align: center
@@ -483,7 +483,7 @@ Explanations and Optional options
         
      The fourth output file is the significance of phenotype-associated tissues, named ***.celltype.txt.
      
-.. csv-table::
+         .. csv-table::
             :file: ./table/eDESE_demo.celltype.csv
             :header-rows: 1
             :align: center
