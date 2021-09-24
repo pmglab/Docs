@@ -107,7 +107,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      --excel
  
 
-Conditional gene-based association analysis based on eDESE
+Conditional gene-based association analysis with eDESE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Purpose**: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, gene-level and isoform-level eQTLs. Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform.
