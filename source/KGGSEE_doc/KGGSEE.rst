@@ -420,18 +420,18 @@ Explanations and Optional options
     + For eDESE, the six output files are as follows:  
         The first output file is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). 
 
-        .. csv-table::
-            :file: ./table/eDESE_demo.finemapping.gene.ecs.csv
-            :header-rows: 1
-            :align: center
+.. csv-table::      
+        :file: ./table/MCGA_dist_demo.gene.csv
+        :header-rows: 1
+        :align: center
 
-        Gene : gene name;
+- Gene : gene name;
 
-        Chrom : chromosome position of the gene;
+    Chrom : chromosome position of the gene;
         
-        StartPos: gene start position (refGene hg19);
+     StartPos: gene start position (refGene hg19);
         
-        EndPos : gene end postion (refGene hg19);
+     EndPos : gene end postion (refGene hg19);
         
         #Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for eDESE:dist, gene-level eQTLs (also are variants) for eDESE:gene, isoform-level eQTLs (also are variants) for eDESE:isoform);
         
@@ -445,10 +445,12 @@ Explanations and Optional options
         
     
        The second output file is the gene-based association result file ("gene-top variant" ECS result), named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**.
-        .. csv-table::
+       
+.. csv-table::
             :file: ./table/eDESE_demo.gene.pvalue.csv
             :header-rows: 1
             :align: center
+        
         
         Gene : gene name;
        
@@ -471,19 +473,21 @@ Explanations and Optional options
         
       The third output file is the p-value of all variants belonging to a genes (raw ECS results), named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
  
-        .. csv-table::
+       .. csv-table::
             :file: ./table/eDESE_demo.gene.var.pvalue.csv
             :header-rows: 1
             :align: center
+
 
         The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that in ***.gene.pvalue.txt**.
         
      The fourth output file is the significance of phenotype-associated tissues, named ***.celltype.txt.
      
-     .. csv-table::
+      .. csv-table::
             :file: ./table/eDESE_demo.celltype.csv
             :header-rows: 1
             :align: center
+     
      
      TissueName : tissue names;
      
