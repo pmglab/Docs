@@ -541,7 +541,7 @@ Explanations and Optional options
     columns in the output file are gene symbol, number of variants in the gene, *p*-values of causality tests by Median-based MR, detailed causality estimation by Median-based MR, *p*-values of causality tests by maximal likelihood-based MR, detailed causality estimation by maximal likelihood-based MR, chromosome, top GWAS variant position, *p*-value, beta and SE of the top GWAS variant, *p*-value, beta and SE of the top GWAS variant as an eQTL. When a gene has multiple transcripts, the detailed MR results will show MR analysis of all transcripts. Each MR analysis result has four components, the number IVs for the estimation, the estimated causal effect, the standard error of the estimation, and the *p*-values.
     
  
-Compute the eQTLs and isoQTLs of each tissue
+Compute the gene/isoform-level eQTLs of each tissue
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 **Purpose**: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
@@ -550,7 +550,9 @@ Compute the eQTLs and isoQTLs of each tissue
      
    1. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
      
-   2. Gene expression data of certain tissues corresponding to genotype data from the same subject.
+   2. Gene expression data of certain tissues corresponding to genotype data from the same subject;
+   
+   3. Subject information, such as subject ID and covariates.
      
     .. code:: shell
 
@@ -558,8 +560,9 @@ Compute the eQTLs and isoQTLs of each tissue
         -jar kggsee.jar \
         --nt 10 \
         --calc-eqtl \
-        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression
+        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression \
         --gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz \
+        --expression-subjects path/to/subjectID/covariates.txt \
         --filter-eqtl-p 0.01 \
         --hwe-all 0.001 \
         --filter-maf-le 0.05 \
