@@ -81,15 +81,15 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
      
    2. Genotypes in VCF format to approximate correction between summary statistics: *resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz*
 
-.. code:: shell 
+  .. code:: shell 
 
-  java -Xmx10g -jar kggsee.jar \
-  --nt 10 \
-  --gene-assoc \
-  --sum-file examples/gwas.sum.stat.gz \
-  --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr*.vcf.gz \
-  --keep-ref \  
-  --out examples/out/geneAssoc
+     java -Xmx10g -jar kggsee.jar \
+     --nt 10 \
+     --gene-assoc \
+     --sum-file examples/gwas.sum.stat.gz \
+     --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr*.vcf.gz \
+     --keep-ref \  
+     --out examples/out/geneAssoc
 
 
 3.2 Estimate relevant cell-types of a phenotype
@@ -104,17 +104,17 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      
    3. Gene expression data compressed in a text file: *resources/hs_scRNA_cluster_mean.tsv.gz*
      
-.. code:: shell
+   .. code:: shell
 
-     java -Xmx10g -jar kggsee.jar \
-     --nt 10 \
-     --spa \
-     --expression-file resources/hs_scRNA_cluster_mean.tsv.gz \
-     --only-hgnc-gene \
-     --sum-file examples/gwas.sum.stat.gz \
-     --saved-ref  examples/out/geneAssoc \
-     --out examples/out/spa \
-     --excel
+      java -Xmx10g -jar kggsee.jar \
+      --nt 10 \
+      --spa \
+      --expression-file resources/hs_scRNA_cluster_mean.tsv.gz \
+      --only-hgnc-gene \
+      --sum-file examples/gwas.sum.stat.gz \
+      --saved-ref  examples/out/geneAssoc \
+      --out examples/out/spa \
+      --excel
  
 
 3.3 Conditional gene-based association analysis with eDESE
@@ -122,8 +122,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
 
 **Purpose**: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform.
 
-   **eDESE:dist**
-   
+   **eDESE:dist**  
    input data:
      
    1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
@@ -151,8 +150,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
       --calc-selectivity \
       --out examples/out/geneAssoceQTL
 
-   **eDESE:gene**
-   
+   **eDESE:gene**  
    input data:
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
@@ -182,8 +180,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
       --calc-selectivity \
       --out examples/out/geneAssoceQTL
 
-   **eDESE:isoform**
-   
+   **eDESE:isoform**   
    input data:
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
@@ -228,17 +225,17 @@ Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
    
    3. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz*
      
-.. code:: shell  
+  .. code:: shell  
 
-   java -Xmx10g  -jar kggsee.jar \
-   --nt 10 \
-   --emic \
-   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
-   --sum-file examples/gwas.sum.stat.gz \
-   --beta-type 2 \
-   --saved-ref  examples/out/geneAssoc \
-   --out examples/out/emic \
-   --excel
+     java -Xmx10g  -jar kggsee.jar \
+     --nt 10 \
+     --emic \
+     --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
+     --sum-file examples/gwas.sum.stat.gz \
+     --beta-type 2 \
+     --saved-ref  examples/out/geneAssoc \
+     --out examples/out/emic \
+     --excel
  
  
  
