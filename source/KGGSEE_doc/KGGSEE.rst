@@ -8,6 +8,8 @@
 .. centered:: User manual 1.0
 .. centered:: Miaoxin Li, Lin Jiang
 
+- This is :red:`Red` text.
+
 Introduction
 ============
 
