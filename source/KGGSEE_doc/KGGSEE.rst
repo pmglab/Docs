@@ -110,7 +110,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
 Conditional gene-based association analysis with eDESE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Purpose**: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, gene-level and isoform-level eQTLs. Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform.
+**Purpose**: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform.
 
 - eDESE:dist input data:
      
@@ -121,23 +121,23 @@ Conditional gene-based association analysis with eDESE
    3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
    
   
-.. code:: shell
+   .. code:: shell
 
-    java -Xmx20g \
-   -jar kggsee.jar \
-   --nt 10 \
-   --sum-file examples/gwas.sum.stat.gz \
-   --chrom-col CHR \
-   --pos-col BP \
-   --p-col P \
-   --gene-finemapping \   
-   --saved-ref  examples/out/geneAssoc \
-   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
-   --only-hgnc-gene \
-   --p-value-cutoff 0.05 \
-   --multiple-testing bonf \
-   --calc-selectivity \
-   --out examples/out/geneAssoceQTL
+      java -Xmx20g \
+      -jar kggsee.jar \
+      --nt 10 \
+      --sum-file examples/gwas.sum.stat.gz \
+      --chrom-col CHR \
+      --pos-col BP \
+      --p-col P \
+      --gene-finemapping \   
+      --saved-ref  examples/out/geneAssoc \
+      --expression-file resources/gtex.v8.gene.mean.tsv.gz \
+      --only-hgnc-gene \
+      --p-value-cutoff 0.05 \
+      --multiple-testing bonf \
+      --calc-selectivity \
+      --out examples/out/geneAssoceQTL
 
 - eDESE:gene input data:
      
