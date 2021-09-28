@@ -8,8 +8,6 @@
 .. centered:: User manual 1.0
 .. centered:: Miaoxin Li, Lin Jiang
 
-
-
 Introduction
 ============
 
