@@ -61,3 +61,5 @@ html_static_path = ['_static']
 
 def setup(app):
     app.add_stylesheet('./custom-style.css')
+    
+rst_epilog = '\n.. include:: .custom-style.rst\n'
