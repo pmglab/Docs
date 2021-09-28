@@ -145,7 +145,7 @@ Conditional gene-based association analysis with eDESE
      
    2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
    3. Gene-level expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*;
-   4. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.
+   4. eQTL data compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.
    
    
    .. code:: shell
@@ -176,7 +176,7 @@ Conditional gene-based association analysis with eDESE
 
    3. Isoform-level expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*;
 
-   4. isoQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.
+   4. isoQTL data compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.
 
 
    .. code:: shell
