@@ -8,24 +8,33 @@
 .. centered:: User manual 1.0
 .. centered:: Miaoxin Li, Lin Jiang
 
-Introduction
+1 Introduction
 ============
--This is :red:`Red` text.
+KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It can perform four major integrative analyses:
 
-KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) gene-based association analysis, 2) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, 3) conditional gene-based association analysis based on the improved effective chi-squared statistic (ECS) and multiple variant-gene mapping strategies, 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.
+1) gene-based association analysis; 
+
+2) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues; 
+
+3) conditional gene-based association analysis based on the improved effective chi-squared statistic (ECS) and multiple variant-gene mapping strategies; 
+
+4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. 
+
+More integrative analysis functions will be added into this analysis platform in the future.
 
 .. image:: ./media/kggsee_pipeline3_1.jpg
     :align: center
 
-Installation
+
+2 Installation
 ==============
 
-kggsee.jar
+2.1 kggsee.jar
 ~~~~~~~~~~~~~~~
 
 The main library of KGGSEE, kggsee.jar, does not need an installation procedure as long as its `Java Runtime Environment(JRE) v1.8 <https://www.oracle.com/java/technologies/javase-jre8-downloads.html>`_ (or up) is pre-installed in your machine. The kggsee.jar can be directly executed given a file path
 
-R packages
+2.2 R packages
 ~~~~~~~~~~~~~
 
 .. note::
@@ -55,15 +64,15 @@ R packages
         install.packages("MendelianRandomization")
         library(MendelianRandomization)
 
-Resource data
+2.3 Resource data
 ~~~~~~~~~~~~~~~~~~
 
 Under the folder of kggsee, there is a folder named **resources**, which contains running resource data, e.g., gene boundary and gene expression. KGGSEE will automatically download required resource files. Users can all manually download the files and put them into the corresponding folders.
 
-Tutorials
+3 Tutorials
 =========================
 
-Gene-based association analysis
+3.1 Gene-based association analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Detect associated genes of a phenotype by GWAS summary statistics
@@ -84,7 +93,7 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
   --out examples/out/geneAssoc
 
 
-Estimate relevant cell-types of a phenotype
+3.2 Estimate relevant cell-types of a phenotype
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 Purpose: Estimate relevant cell-types of a phenotype and finely map associated genes according to selective expression
@@ -109,7 +118,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
      --excel
  
 
-Conditional gene-based association analysis with eDESE
+3.3 Conditional gene-based association analysis with eDESE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Purpose**: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform.
@@ -202,7 +211,7 @@ Conditional gene-based association analysis with eDESE
       --out examples/out/geneAssoceQTL
 
  
-Gene-based causality analysis
+3.4 Gene-based causality analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
@@ -228,10 +237,10 @@ Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
  
  
  
-Functions
+5 Functions
 =========================
 
-Gene-based association analysis by an effective chi-square statistics(ECS)
+5.1 Gene-based association analysis by an effective chi-square statistics(ECS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One can perform gene-based association analysis by an effective chi-square statistics(ECS) with GWAS *p*-values of variants. The *p*-values are converted to chi-square statistics(degree of freedom = 1). The ECS merges all chi-square statistics of a gene after correcting the redundancy of the statistics due to LD. The LD is calculated from genotypes of an ancestrally matched sample in VCF format, e.g. a panel of 1000 Genomes Project. The method of ECS is described in our paper(`Paper Link <http://bing.com>`_).
@@ -285,8 +294,8 @@ Explanations and Optional options
     columns in the output file are gene symbol, number of variants in the gene, *p*-values of gene-based association test, and the detailed information of the top variant within the gene(i.e., the variant with smallest *p*-value). These columns include chromosome, physical position, *p*-value, whether the top variant was ignored in the gene-based association analysis, and gene feature annotations according to RefGene and GENCODE.
 
 
-Finely map genes and estimate relevant cell-types of a phenotype by the single-cell(or bulk-cell) type and phenotype cross annotation framework(SPA)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5.2 Finely map genes and estimate relevant cell-types of a phenotype by the single-cell(or bulk-cell) type and phenotype cross annotation framework(SPA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One can simultaneously prioritize phenotype associated genes and cell-types with GWAS *p*-values and gene/transcript expression profile. The GWAS *p*-values types and expression were analyzed by an iterative prioritization procedure. In the procedure, phenotype-associated genes were prioritized by a conditional gene-based association(using the ECS again) according to the genes’ selective expression in disease related cell-types while the phenotype related cell-types were prioritized by an enrichment analysis of Wilcoxon rank-sum test for phenotype-associated genes’ selective expression. The phenotype-associated gene list and phenotype related cell-type list were updated by turns until the two list were unchanged. The detailed method is described in our paper(`Paper Link <http://bing.com>`_).
 
@@ -338,8 +347,8 @@ Explanations and Optional options
 
     columns in the output file are tissue or cell-type names, the *p*-value of enrichment according to the selective expression derived from the robust regression *z*-score, the logarithm of *p*-value.
 
-Multi-strategy Conditional Gene-based Association framework mainly guided by eQTLs(eDESE)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5.3 Multi-strategy Conditional Gene-based Association framework mainly guided by eQTLs(eDESE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 eDESE can be used to perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, gene-level and isoform-level eQTLs. The statistical method is the improved effective chi-square statistics(ECS). The pre-calculated gene-level and isoform-level eQTLs of 50 tissues or cell-types from GTEx(v8) have been integrated into KGGSEE resource (`hg19 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl>`_ and `hg38 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg38%2Feqtl>`_).
 
@@ -508,7 +517,7 @@ Explanations and Optional options
       - The sixth output file is the log file in which the detailed parameter settings and computation procedures can be found.
 
 
-Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(EMIC)
+5.4 Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(EMIC)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One can perform multiple IVs based MR analysis to infer casual gene or transcript by an integrative framework named EMIC. EMIC adopted two multiple IVs based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. EMIC needs two major inputs, GWAS and eQTL summary statistics respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating association between IVs and expression of genes or transcripts in a tissue or cell type. EMIC has integrated the pre-calculated cis-eQTLs in 55 tissues or cell-types with gene-level and transcript-level expression from GTEx(version 8).
@@ -543,8 +552,8 @@ Explanations and Optional options
     columns in the output file are gene symbol, number of variants in the gene, *p*-values of causality tests by Median-based MR, detailed causality estimation by Median-based MR, *p*-values of causality tests by maximal likelihood-based MR, detailed causality estimation by maximal likelihood-based MR, chromosome, top GWAS variant position, *p*-value, beta and SE of the top GWAS variant, *p*-value, beta and SE of the top GWAS variant as an eQTL. When a gene has multiple transcripts, the detailed MR results will show MR analysis of all transcripts. Each MR analysis result has four components, the number IVs for the estimation, the estimated causal effect, the standard error of the estimation, and the *p*-values.
     
  
-Compute the gene/isoform-level eQTLs of each tissue
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 Compute the gene/isoform-level eQTLs of each tissue
+===================================================
   
 **Purpose**: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
 
@@ -575,8 +584,8 @@ Compute the gene/isoform-level eQTLs of each tissue
 Details of the options can be seen in `Options Index <#id18>`_.
 
 
-Estimate the potential driver tissues of a complex phenotype
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+7 Estimate the potential driver tissues of a complex phenotype
+==============================================================
   
 **Purpose**: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.
 
