@@ -122,8 +122,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
 
 **Purpose**: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform.
 
-   3.3.1 eDESE:dist
-   ----------------
+   **eDESE:dist**
    
    input data:
      
@@ -152,8 +151,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
       --calc-selectivity \
       --out examples/out/geneAssoceQTL
 
-   3.3.2 eDESE:gene
-   ----------------
+   **eDESE:gene**
    
    input data:
      
@@ -184,8 +182,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
       --calc-selectivity \
       --out examples/out/geneAssoceQTL
 
-   3.3.3 eDESE:isoform
-   -------------------
+   **eDESE:isoform**
    
    input data:
      
