@@ -1,6 +1,6 @@
 .. raw:: html
 
-    <p style="font-size: 28px; line-height: 35px; font-weight: bold" align=left>
+    <p style="font-size: 26px; line-height: 35px; font-weight: bold" align=left>
         KGGSEE: A biological Knowledge-based mining platform for Genomic and Genetic association Summary statistics using gEne Expression
     </p>
 
