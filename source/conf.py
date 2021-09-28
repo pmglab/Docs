@@ -59,6 +59,7 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_css_files = ['css/custom-style.css']
+def setup(app):
+    app.add_stylesheet('css/custom-style.css')
     
 rst_epilog = '\n.. include:: ./custom-style.rst\n'
