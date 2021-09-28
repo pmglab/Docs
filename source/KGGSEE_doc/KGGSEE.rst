@@ -4,9 +4,9 @@
         KGGSEE: A biological Knowledge-based mining platform for Genomic and Genetic association Summary statistics using gEne Expression
     </p>
 
+
 .. centered:: User manual 1.0
 .. centered:: Miaoxin Li, Lin Jiang
-
 Introduction
 =============
 
