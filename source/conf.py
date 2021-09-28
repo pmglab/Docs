@@ -61,4 +61,4 @@ html_static_path = ['_static']
 
 html_css_files = ['css/custom-style.css']
     
-rst_epilog = '\n.. include:: .custom-style.rst\n'
+rst_epilog = '\n.. include:: ./custom-style.rst\n'
