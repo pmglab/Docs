@@ -73,8 +73,7 @@ Under the folder of kggsee, there is a folder named **resources**, which contain
 =========================
 
 3.1 Gene-based association analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Purpose: Detect associated genes of a phenotype by GWAS summary statistics
  - Input data:
      
@@ -94,7 +93,7 @@ Purpose: Detect associated genes of a phenotype by GWAS summary statistics
 
 
 3.2 Estimate relevant cell-types of a phenotype
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 Purpose: Estimate relevant cell-types of a phenotype and finely map associated genes according to selective expression
  - Input data:
@@ -218,7 +217,7 @@ Purpose: Estimate relevant cell-types of a phenotype and finely map associated g
 
  
 3.4 Gene-based causality analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
  - Input data:
@@ -244,7 +243,7 @@ Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
  
  
 4 Functions
-=========================
+===========
 
 4.1 Gene-based association analysis by an effective chi-square statistics(ECS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -559,7 +558,7 @@ Explanations and Optional options
     
  
 4.5 Compute the gene/isoform-level eQTLs of each tissue
-===================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 **Purpose**: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
 
@@ -591,7 +590,7 @@ Details of the options can be seen in `Options Index <#id18>`_.
 
 
 4.6 Estimate the potential driver tissues of a complex phenotype
-==============================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 **Purpose**: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.
 
