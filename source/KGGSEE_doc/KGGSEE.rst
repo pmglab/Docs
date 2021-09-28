@@ -6,7 +6,7 @@
 
 
 .. centered:: User manual 1.0
-.. centered:: Miaoxin Li, Lin Jiang
+.. centered:: Miaoxin Li, Lin Jiang, Xiangyi Li
 
 1 Introduction
 ============
@@ -558,7 +558,7 @@ Explanations and Optional options
     columns in the output file are gene symbol, number of variants in the gene, *p*-values of causality tests by Median-based MR, detailed causality estimation by Median-based MR, *p*-values of causality tests by maximal likelihood-based MR, detailed causality estimation by maximal likelihood-based MR, chromosome, top GWAS variant position, *p*-value, beta and SE of the top GWAS variant, *p*-value, beta and SE of the top GWAS variant as an eQTL. When a gene has multiple transcripts, the detailed MR results will show MR analysis of all transcripts. Each MR analysis result has four components, the number IVs for the estimation, the estimated causal effect, the standard error of the estimation, and the *p*-values.
     
  
-5 Compute the gene/isoform-level eQTLs of each tissue
+4.5 Compute the gene/isoform-level eQTLs of each tissue
 ===================================================
   
 **Purpose**: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
@@ -590,7 +590,7 @@ Explanations and Optional options
 Details of the options can be seen in `Options Index <#id18>`_.
 
 
-6 Estimate the potential driver tissues of a complex phenotype
+4.6 Estimate the potential driver tissues of a complex phenotype
 ==============================================================
   
 **Purpose**: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.
