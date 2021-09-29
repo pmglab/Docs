@@ -123,7 +123,8 @@ Purpose: Estimate the relevant cell-types of a phenotype and finely map associat
 Purpose: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform, respectively.
 
    **eDESE:dist**  
-   input data:
+   
+   -Input data:
      
    1. GWAS summary statistics compressed in a text file (a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
      
@@ -152,7 +153,8 @@ Purpose: Perform conditional gene-based association analysis using different str
       --out examples/out/geneAssoceQTL
 
    **eDESE:gene**  
-   input data:
+   
+   - Input data:
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;     
    2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
@@ -181,7 +183,8 @@ Purpose: Perform conditional gene-based association analysis using different str
       --out examples/out/geneAssoceQTL
 
    **eDESE:isoform**   
-   input data:
+   
+   - Input data:
      
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
      
