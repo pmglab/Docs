@@ -26,6 +26,8 @@ More integrative analysis functions will be added into this analysis platform in
     :align: center
 
 
+- This is :red:`Red` text.
+
 2 Installation
 ==============
 
