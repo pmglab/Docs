@@ -590,10 +590,10 @@ Explanations and Optional options
 Details of the options can be seen in `Options Index <#id18>`_.
 
 
-Options Index
+5 Options Index
 ===============
 
-Inputs/outputs
+5.1 Inputs/outputs
 ~~~~~~~~~~~~~~~~
 
     .. csv-table::
@@ -601,7 +601,7 @@ Inputs/outputs
         :header-rows: 1
         :align: center
 
-Quality control
+5.2 Quality control
 ~~~~~~~~~~~~~~~~~~~
 
     .. csv-table::
@@ -609,7 +609,7 @@ Quality control
         :header-rows: 1
         :align: center
 
-Functions
+5.3 Functions
 ~~~~~~~~~~~
 
     .. csv-table::
@@ -617,7 +617,7 @@ Functions
         :header-rows: 1
         :align: center
 
-Utilities
+5.4 Utilities
 ~~~~~~~~~~~
 
     .. csv-table::
