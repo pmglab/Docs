@@ -60,3 +60,5 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
 html_css_files = ['./_build/html/_static/css/custom-style.css']
+
+rst_epilog = '\n.. include:: .custom-style.rst\n'
