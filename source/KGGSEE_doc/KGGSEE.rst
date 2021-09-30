@@ -123,7 +123,7 @@ Purpose: Perform conditional gene-based association analysis using different str
 
    **eDESE:dist**  
    
-   -Input data:
+   - Input data:
      
    1. GWAS summary statistics compressed in a text file (a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
      
