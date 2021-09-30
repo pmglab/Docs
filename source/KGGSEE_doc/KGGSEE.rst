@@ -121,15 +121,16 @@ Purpose: Estimate the relevant cell-types of a phenotype and finely map associat
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Purpose: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform, respectively.
-    **eDESE:dist**
-   
-    - Input data:
+
+eDESE:dist
+----------
+- Input data:
      
-   1. GWAS summary statistics compressed in a text file (a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
+1. GWAS summary statistics compressed in a text file (a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
+2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
    
-   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
+3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
    
   
    .. code:: shell
@@ -151,13 +152,14 @@ Purpose: Perform conditional gene-based association analysis using different str
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
 
-   **eDESE:gene**     
-   - Input data:
+eDESE:gene
+----------
+- Input data:
      
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;     
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
-   3. Gene-level expression data compressed in a .gz or text file: *resources/gtex.v8.gene.mean.tsv.gz*;
-   4. eQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.   
+1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;     
+2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
+3. Gene-level expression data compressed in a .gz or text file: *resources/gtex.v8.gene.mean.tsv.gz*;
+4. eQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.   
    
    .. code:: shell
 
@@ -180,16 +182,17 @@ Purpose: Perform conditional gene-based association analysis using different str
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
 
-   **eDESE:isoform**   
-   - Input data:
+eDESE:isoform
+-------------
+- Input data:
      
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
+1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
      
-   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
+2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
 
-   3. Isoform-level expression data compressed in a .gz or text file: *resources/gtex.v8.transcript.mean.tsv.gz*;
+3. Isoform-level expression data compressed in a .gz or text file: *resources/gtex.v8.transcript.mean.tsv.gz*;
 
-   4. isoQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.
+4. isoQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.
 
 
    .. code:: shell
