@@ -22,7 +22,7 @@ KGGSEE is a standalone Java tool for knowledge-based analyses and can perform as
 
 More integrative analysis functions will be added to KGGSEE in the future.
 
-.. image:: ./media/kggsee_pipeline3_1.jpg
+.. image:: ./media/kggsee_workFlow.png
     :align: center
 
 
@@ -118,12 +118,11 @@ Purpose: Estimate the relevant cell-types of a phenotype and finely map associat
       
 
 3.3 Conditional gene-based association analysis with eDESE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Purpose: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform, respectively.
 
-eDESE:dist
-----------
+**eDESE:dist**
+
 - Input data:
      
 1. GWAS summary statistics compressed in a text file (a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
@@ -152,8 +151,8 @@ eDESE:dist
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
 
-eDESE:gene
-----------
+**eDESE:gene**
+
 - Input data:
      
 1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;     
@@ -182,8 +181,8 @@ eDESE:gene
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
 
-eDESE:isoform
--------------
+**eDESE:isoform**
+
 - Input data:
      
 1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
