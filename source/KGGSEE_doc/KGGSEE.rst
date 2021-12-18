@@ -151,7 +151,8 @@ Purpose: Perform conditional gene-based association analysis using different str
       --calc-selectivity \
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
-Important Note: The parameter of "--vcf-ref" is the genotypes in VCF format to approximate the correction between summary statistics and can be downloaded from https://pmglab.top/genotypes/#/. The users should download the proper vcf files according to their research subjects' ancestry. The combination of "--vcf-ref" and "--keep-ref" can keep the parsed vcf data (as KGGSEE object) in a folder named "VCFRefhg19" in the output folder (here is the "examples/out/geneAssoceQTL"). When the users want to run another analysis, the users can use the option "--saved-ref" instead of the "--vcf-ref" and "keep-ref" to save time. The parameter of "--saved-ref" is the full path of "VCFRefhg19" (as used in eDESE:gene and eDESE:isoform).
+      
+Important Note: The parameter of "--vcf-ref" is the genotypes in VCF format to approximate the correction between summary statistics and can be downloaded from https://pmglab.top/genotypes/#/. The users should download the proper vcf files according to their research subjects' ancestry. The combination of "--vcf-ref" and "--keep-ref" can keep the parsed vcf data (KGGSEE object format) in a folder named "VCFRefhg19" under the output folder (here is the "examples/out/geneAssoceQTL"). When the users want to run another analysis, the users can use the option "--saved-ref" instead of the "--vcf-ref" and "keep-ref" to save time. The parameter of "--saved-ref" is the full path of "VCFRefhg19" (as that used in eDESE:gene and eDESE:isoform).
 
 **eDESE:gene**
 
