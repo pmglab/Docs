@@ -108,7 +108,7 @@ Purpose: Estimate the relevant cell-types of a phenotype and finely map associat
 
       java -Xmx10g -jar kggsee.jar \
       --nt 10 \
-      --spa \
+      --gene-finemapping \
       --expression-file resources/hs_scRNA_cluster_mean.tsv.gz \
       --only-hgnc-gene \
       --sum-file examples/gwas.sum.stat.gz \
@@ -307,7 +307,7 @@ One can simultaneously prioritize phenotype-associated genes and cell types with
 Required options
 -------------------
 
-- ``--spa``
+- ``--gene-finemapping``
 - ``--expression-file [path/to/expression/file]``
 - ``--only-hgnc-gene``
 - ``--sum-file [/path/to/summary/file]``
@@ -319,7 +319,7 @@ Required options
 Explanations and Optional options
 ----------------------------------
 
-- ``--spa``: The main function option.
+- ``--gene-finemapping``: The main function option.
 - ``--multiple-testing``: The multiple testing method to select significant genes for the conditional analysis. There are three settings. *bonf*: Standard Bonferroni correction given a family-wise error rate specified by ``--p-value-cutoff``.  *benfdr*: Benjamini-Hochberg method to control the false discovery rate. *fixed*: Filtering by a fixed *p*-value cutoff.
 - ``--p-value-cutoff``: The cutoff for the multiple testing.
 - ``--only-hgnc-gene``: Only consider genes with hgnc gene symbols.
