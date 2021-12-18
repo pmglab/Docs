@@ -90,7 +90,7 @@ Purpose: Detect the phenotype-associated genes of a phenotype using the GWAS sum
       --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr*.vcf.gz \
       --keep-ref \  
       --out examples/out/geneAssoc
-
+**Important Note:** The parameter of "--vcf-ref" is the genotypes in VCF format and can be downloaded from https://pmglab.top/genotypes/#/. The users should download the proper vcf files according to their research subjects' ancestry. The combination of "--vcf-ref" and "--keep-ref" can keep the parsed vcf data (KGGSEE object format) in a local folder named like "VCFRefhg19" under the output folder (here is the "examples/out/geneAssoc"). When the users want to run another analysis, the users can use the option "--saved-ref" instead of the "--vcf-ref" and "keep-ref" to save time. The parameter of "--saved-ref" is the full path of folder "VCFRefhg19" (see example in the following part).
 
 3.2 Estimate the phenotype-associated cell-types of a phenotype
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,7 +100,7 @@ Purpose: Estimate the relevant cell-types of a phenotype and finely map associat
     
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*
      
-   2. Genotypes in KGGSEE objects(generated last time) to approximate the correction between summary statistics: *examples/out/geneAssoc*
+   2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*
      
    3. Gene expression data compressed in a text file: *resources/hs_scRNA_cluster_mean.tsv.gz*
      
@@ -142,8 +142,7 @@ Purpose: Perform conditional gene-based association analysis using different str
       --pos-col BP \
       --p-col P \
       --gene-finemapping \
-      --vcf-ref local_path/eur/1kg.phase3.v5.shapeit2.eur.hg19.chr_CHROM_.vcf.gz 
-      --keep-ref
+      --saved-ref  examples/out/geneAssoc \
       --expression-file resources/gtex.v8.gene.mean.tsv.gz \
       --only-hgnc-gene \
       --p-value-cutoff 0.05 \
@@ -152,7 +151,6 @@ Purpose: Perform conditional gene-based association analysis using different str
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
       
-Important Note: The parameter of "--vcf-ref" is the genotypes in VCF format to approximate the correction between summary statistics and can be downloaded from https://pmglab.top/genotypes/#/. The users should download the proper vcf files according to their research subjects' ancestry. The combination of "--vcf-ref" and "--keep-ref" can keep the parsed vcf data (KGGSEE object format) in a folder named "VCFRefhg19" under the output folder (here is the "examples/out/geneAssoceQTL"). When the users want to run another analysis, the users can use the option "--saved-ref" instead of the "--vcf-ref" and "keep-ref" to save time. The parameter of "--saved-ref" is the full path of "VCFRefhg19" (as that used in eDESE:gene and eDESE:isoform).
 
 **eDESE:gene**
 
@@ -227,7 +225,7 @@ Purpose: Detect the causal genes of a phenotype using the GWAS summary statistic
 
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
    
-   2. Genotypes in KGGSEE objects(generated last time) to approximate the correction between summary statistics: *examples/out/geneAssoc*
+   2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*
    
    3. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz*
      
