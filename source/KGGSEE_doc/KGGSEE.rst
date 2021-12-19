@@ -119,6 +119,7 @@ Purpose: Estimate the relevant cell-types of a phenotype and finely map associat
 
 3.3 Conditional gene-based association analysis with eDESE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Purpose: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform, respectively.
    
 **eDESE:dist**
