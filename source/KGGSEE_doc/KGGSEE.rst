@@ -130,7 +130,7 @@ Purpose: Perform conditional gene-based association analysis using different str
      
 2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
    
-3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
+3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*. We have provided the dataset based on the gene-expression profiles of ~50 tissues in GTEX(v8) and has been packaged this file in the download of "KGGSEE+Resources" at http://pmglab.top/kggsee/#/download. Users can also use their own gene expression profiles. The row index is gene name, and the column name is tissue name and tissue name +".SE". Each tissue has two columns, one representing the average expression value of all samples of the tissue and the other representing the standard error of the mean (SE).
    
   
    .. code:: shell
@@ -157,10 +157,10 @@ Purpose: Perform conditional gene-based association analysis using different str
 
 - Input data:
      
-1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;     
-2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
-3. Gene-level expression data compressed in a .gz or text file: *resources/gtex.v8.gene.mean.tsv.gz*;
-4. eQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.   
+1. The GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;     
+2. Genotypes in KGGSEE objects to approximate the correction between summary statistics (generated in `Gene-based association analysis <#gene-based-association-analysis>`_): *examples/out/geneAssoc*;
+3. Gene-level expression data compressed in a .gz or text file: *resources/gtex.v8.gene.mean.tsv.gz*. We have provided the dataset based on the gene-expression profiles of ~50 tissues in GTEX(v8) and has been packaged this file in the download of "KGGSEE+Resources" at http://pmglab.top/kggsee/#/download. Users can also use their own gene expression profiles.
+4. eQTLs data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*. Our pre-calculated gene-level eQTLs based on GTEx(v8) can be downloaded from https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604.
    
    .. code:: shell
 
@@ -187,13 +187,13 @@ Purpose: Perform conditional gene-based association analysis using different str
 
 - Input data:
      
-1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
+1. The GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
      
-2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
+2. Genotypes in KGGSEE objects to approximate the correction between summary statistics(generated in `Gene-based association analysis <#gene-based-association-analysis>`_): *examples/out/geneAssoc*;
 
-3. Isoform-level expression data compressed in a .gz or text file: *resources/gtex.v8.transcript.mean.tsv.gz*;
+3. Isoform-level expression data compressed in a .gz or text file: *resources/gtex.v8.transcript.mean.tsv.gz*. We have provided the dataset based on the isoform/transcript-expression profiles of ~ 50 tissues in GTEX(v8) and has been packaged this file in the download of "KGGSEE+Resources" at http://pmglab.top/kggsee/#/download. Users can also use their own isoform-level expression profiles.
 
-4. isoQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.
+4. IsoQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.Our pre-calculated isoform-level eQTLs based on GTEx(v8) can be downloaded from https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616. 
 
 
    .. code:: shell
