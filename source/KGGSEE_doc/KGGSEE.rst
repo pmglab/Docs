@@ -547,7 +547,7 @@ Explanations and Optional options
 - ``--emic``: No parameters required. The main function option.
 - ``--eqtl-file``: See above description.
 - ``--sum-file``: See above description.
-- ``--beta-or``: Indicate whether the coefficients(i.e., betas) in the summary statistics file are conventional odds ratios. If yes, KGGSee will automatically transform the betas and SEs by the natural logarithm. 
+- ``--beta-type``: Indicate whether the coefficients(i.e., betas) in the summary statistics file are conventional odds ratios. If yes, KGGSee will automatically transform the betas and SEs by the natural logarithm. 
 - ``--saved-ref``: See above description.
 - ``--out``: Specify the path and prefix name of the output files. The main output file is the Mendelian randomization analysis results for causal gene estimation, named ***.mr.gene.txt** or ***. gene.mr.gene.xls**. The following
 
