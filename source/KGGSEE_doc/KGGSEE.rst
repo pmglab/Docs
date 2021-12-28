@@ -547,7 +547,7 @@ Explanations and Optional options
 - ``--emic``: No parameters required. The main function option.
 - ``--eqtl-file``: See above description.
 - ``--sum-file``: See above description.
-- ``--beta-type``: The altenative types are 0, 1 or 2. Specially, 0 represents the coefficients of linear regression for a quantitative phenotype; 1 represents the coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 represents the odds ratio for a qualitative phenotype.
+- ``--beta-type``: The altenative values are 0, 1 or 2. Specially, 0 represents the coefficients of linear regression for a quantitative phenotype; 1 represents the coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 represents the odds ratio for a qualitative phenotype.
 - ``--saved-ref``: See above description.
 - ``--out``: Specify the path and prefix name of the output files. The main output file is the Mendelian randomization analysis results for causal gene estimation, named ***.mr.gene.txt** or ***. gene.mr.gene.xls**. The following
 
