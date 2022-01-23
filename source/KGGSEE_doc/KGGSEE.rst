@@ -35,15 +35,16 @@ More integrative analysis functions will be added to KGGSEE in the future.
 
 The main library of KGGSEE, kggsee.jar, does not need an installation procedure as long as its `Java Runtime Environment(JRE) v1.8 <https://www.oracle.com/java/technologies/javase-jre8-downloads.html>`_ (or up) is pre-installed in your machine. The kggsee.jar can be directly executed given a file path.
 
-2.2 R packages
-~~~~~~~~~~~~~
+..
+ 2.2 R packages
+ ~~~~~~~~~~~~~
 
-User may need to install three R packages which will be called by KGGSEE. The following are the instructions for R package installation under the interactive working interface of R.
+ User may need to install three R packages which will be called by KGGSEE. The following are the instructions for R package installation under the interactive working interface of R.
 
-- Rserve
+ - Rserve
 
-    ``install.packages(“Rserve”, dep=TRUE)``
-    More installation instructions can be found at https://www.dundas.com/support/support-center/support-articles/installation/install-and-configure-r.
+     ``install.packages(“Rserve”, dep=TRUE)``
+     More installation instructions can be found at https://www.dundas.com/support/support-center/support-articles/installation/install-and-configure-r.
 
 - NNLM
 
