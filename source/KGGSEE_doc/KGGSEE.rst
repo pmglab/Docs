@@ -46,26 +46,26 @@ The main library of KGGSEE, kggsee.jar, does not need an installation procedure 
      ``install.packages(“Rserve”, dep=TRUE)``
      More installation instructions can be found at https://www.dundas.com/support/support-center/support-articles/installation/install-and-configure-r.
 
-- NNLM
+ - NNLM
 
-    ``install.packages(“NNLM”, dep=TRUE)``
-    More installation instructions can be found at https://github.com/linxihui/NNLM.
+     ``install.packages(“NNLM”, dep=TRUE)``
+     More installation instructions can be found at https://github.com/linxihui/NNLM.
 
-- MendelianRandomization
+ - MendelianRandomization
 
-    The first step is to install the PhenoScanner package(and the MendelianRandomization package if you haven't done this previously):
+     The first step is to install the PhenoScanner package(and the MendelianRandomization package if you haven't done this previously):
 
-    .. code:: R
+     .. code:: R
 
-        install.packages("devtools")
-        library(devtools)
-        install_github("phenoscanner/phenoscanner")
-        library(phenoscanner)
+         install.packages("devtools")
+         library(devtools)
+         install_github("phenoscanner/phenoscanner")
+         library(phenoscanner)
 
-        install.packages("MendelianRandomization")
-        library(MendelianRandomization)
+         install.packages("MendelianRandomization")
+         library(MendelianRandomization)
 
-2.3 Resource data
+2.2 Resource data
 ~~~~~~~~~~~~~~~~~~
 
 In the KGGSEE working folder, a folder named **resources** contains the running resource data, e.g., gene boundary and gene expression. KGGSEE will automatically download the required resource files to this folder. Users can also manually download all the files and put them into the corresponding folders.
