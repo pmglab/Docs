@@ -247,7 +247,7 @@ Purpose: Detect the causal genes of a phenotype using the GWAS summary statistic
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Purpose: Estimate the drug selective perturbation effect on the phenotype-associated genes' expression to aid the drug repositioning for complex diseases.
 
-  - Input data:
+  - Input data:  
     1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
    
     2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
@@ -258,9 +258,9 @@ Purpose: Estimate the drug selective perturbation effect on the phenotype-associ
    
    The original SelDP:
    
-   .. code:: shell
+   .. code:: shell  
    
-   java -Xmx20g \
+      java -Xmx20g \
       -jar kggsee.jar \
       --nt 10 \
       --sum-file examples/gwas.sum.stat.gz \
