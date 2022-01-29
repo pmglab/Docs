@@ -243,7 +243,60 @@ Purpose: Detect the causal genes of a phenotype using the GWAS summary statistic
       --out examples/out/emic \
       --excel
  
- 
+3.5 Drug selective perturbation analysis for drug repositioning analysis (SelDP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Purpose: Estimate the drug selective perturbation effect on the phenotype-associated genes' expression to aid the drug repositioning for complex diseases.
+
+    - Input data:
+    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+   
+   2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
+   
+   3. Drug/compound-induced gene expression fold changes (log2(Treated/Control)) profiles. We provided an example of drug-induced fold changes based on the Level 3 data of LINCS 2017 release) at ...;
+   
+   4. eQTL data of phenotype-associated tissues. The eQTL-guided drug selective perturbation analysis need the eQTL data as one of the inpput dataset. We have procalculated the gene-level and transcript-level eQTL data based on the GTEx (v8), and the eQTL data can be accessed at https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604 and  https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616.
+   
+   The original SelDP: 
+   
+   .. code:: shell   
+   java -Xmx20g \
+      -jar kggsee.jar \
+      --nt 10 \
+      --sum-file examples/gwas.sum.stat.gz \
+      --chrom-col CHR \
+      --pos-col BP \
+      --p-col P \
+      --gene-finemapping \
+      --saved-ref  examples/out/geneAssoc \
+      --expression-file drug-induced.gene.expression.fold.change.profile \
+      --only-hgnc-gene \
+      --p-value-cutoff 0.05 \
+      --multiple-testing bonf \
+      --calc-selectivity \
+      --regions-out chr6:27477797-34448354 \
+      --out examples/out/Selective_Perturbed_Drugs
+      
+   The eQTL-guided SelDP:
+   .. code:: shell
+
+      java -Xmx20g \
+      -jar kggsee.jar \
+      --nt 10 \
+      --chrom-col CHR \
+      --pos-col BP \
+      --p-col P \
+      --gene-finemapping \
+      --sum-file examples/gwas.sum.stat.gz \
+      --saved-ref  examples/out/geneAssoc \
+      --expression-file drug-induced.gene.expression.fold.change.profile \
+      --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
+      --filter-eqtl-p 0.01 \  
+      --only-hgnc-gene \
+      --p-value-cutoff 0.05 \
+      --multiple-testing bonf \
+      --calc-selectivity \
+      --regions-out chr6:27477797-34448354 \
+      --out examples/out/Selective_Perturbed_Drugs
  
 4 Functions
 ===========
