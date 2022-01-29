@@ -253,9 +253,9 @@ Purpose: Estimate the drug selective perturbation effect on the phenotype-associ
    
     2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
    
-    3. Drug/compound-induced gene expression fold changes (log2(Treated/Control)) profiles. We provided an example of drug-induced fold changes based on the Level 3 data of LINCS (2017 release) at 'raw perturbation profile<https://figshare.com/articles/dataset/allTime_allCelline_combined_level3_log2_foldChanges_LINCS_txt/19091306>'_ or 'reverse perturbation profile<https://figshare.com/articles/dataset/allTime_allCelline_combined_reverse_level3_foldChanges_LINCS_txt/19091312>'_.
+    3. Drug/compound-induced gene expression fold changes (log2(Treated/Control)) profiles. We provided an example of drug-induced fold changes based on the Level 3 data of LINCS (2017 release) at `raw perturbation profile<https://figshare.com/articles/dataset/allTime_allCelline_combined_level3_log2_foldChanges_LINCS_txt/19091306>`_ or `reverse perturbation profile<https://figshare.com/articles/dataset/allTime_allCelline_combined_reverse_level3_foldChanges_LINCS_txt/19091312>`_.
    
-    4. eQTL data of phenotype-associated tissues. The eQTL-guided SelDP needs the eQTL data as one of the input datasets. We have procalculated ~50 tissues' gene-level and transcript-level eQTL data based on the GTEx (v8), and the eQTL data can be accessed at 'gene-level<https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604>'_ and 'transcript-level eQTLs<https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616>'_.
+    4. eQTL data of phenotype-associated tissues. The eQTL-guided SelDP needs the eQTL data as one of the input datasets. We have procalculated ~50 tissues' gene-level and transcript-level eQTL data based on the GTEx (v8), and the eQTL data can be accessed at `gene-level<https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604>`_ and `transcript-level eQTLs<https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616>`_.
    
    The command for original SelDP:
    
