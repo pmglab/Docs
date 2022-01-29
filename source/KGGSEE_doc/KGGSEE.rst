@@ -255,7 +255,7 @@ Purpose: Estimate the drug selective perturbation effect on the phenotype-associ
    
     3. Drug/compound-induced gene expression fold changes (log2(Treated/Control)) profiles. We provided an example of drug-induced fold changes based on the Level 3 data of LINCS 2017 release) at ...;
    
-    4. eQTL data of phenotype-associated tissues. The eQTL-guided drug selective perturbation analysis need the eQTL data as one of the inpput dataset. We have procalculated the gene-level and transcript-level eQTL data based on the GTEx (v8), and the eQTL data can be accessed at https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604 and  https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616.
+    4. eQTL data of phenotype-associated tissues. The eQTL-guided drug selective perturbation analysis needs the eQTL data as one of the input dataset. We have procalculated the gene-level and transcript-level eQTL data based on the GTEx (v8), and the eQTL data can be accessed at https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604 and  https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616.
    
    The original SelDP:
    
