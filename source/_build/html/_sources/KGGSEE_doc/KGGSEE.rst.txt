@@ -136,7 +136,6 @@ Multi-strategy conditional gene-based association analysis
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
-   --calc-selectivity \
    --out examples/out/geneAssoceQTL
    
 - MCGA_isoQTL input data:
@@ -196,7 +195,6 @@ Multi-strategy conditional gene-based association analysis
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
-   --calc-selectivity \
    --out examples/out/geneAssoceQTL
  
 Gene-based causality analysis
@@ -347,7 +345,6 @@ Required options
 - ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
 - ``--filter-eqtl-p``
 - ``--expression-file [path/to/expression/file]``
-- ``--calcu-selectivity``
 - ``--sum-file [/path/to/summary/file]``
 - ``--filter-maf-le``
 - ``--saved-ref  [previous/output/path]``
@@ -373,7 +370,6 @@ Explanations and Optional options
 - ``--p-value-cutoff``: The family-wise cutoff for the multiple testing..
 - ``--only-hgnc-gene``: Only consider genes with HGNC gene symbols.
 - ``--expression-file``: The preproceeded gene expression file. The index column of the preprocessed expression file was gene/isoform symbol name, and each of 50 tissues or cell types had two columns: one representing average expression value (i.e., mean) of all sample and the other representing the standard error of the mean (SE).
-- ``--calcu-selectivity``: Calculate selective expression of a gene or transcripts in a tissue or a cell type.
 
 - ``--filter-eqtl-p``: a filter used to filter eQTLs/isoQTLs  < the cutoff.
 - ``--sum-file``: the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, chromosome, physical position and p-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by ``--chrom-col``, ``--pos-col`` and ``--p-col`` respectively.
@@ -537,7 +533,7 @@ Explanations and Optional options
 - ``--emic``: The main function option.
 - ``--eqtl-file``: See above description.
 - ``--sum-file``: See above description.
-- ``--beta-or``: Indicate whether the coefficients(i.e., betas) in the summary statistics file are conventional odds ratios. If yes, KGGSee will automatically transform the betas and SEs by the natural logarithm. 
+- ``--beta-type``: Indicate whether the coefficients(i.e., betas) in the summary statistics file. 0 means coefficients of linear regression for a quantitative phenotype beta; 1 means coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 means the odds ratio for a qualitative phenotype.
 - ``--saved-ref``: See above description.
 - ``--out``: Specify the path and prefix name of the output files. The main output file is the Mendelian randomization analysis results for causal gene estimation, named ***.mr.gene.txt** or ***. gene.mr.gene.xls**. The following
 

@@ -13,6 +13,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/./_build/html/_static/css/custom-style.css" type="text/css" />
 
   
   
@@ -332,7 +333,6 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 --only-hgnc-gene <span class="se">\</span>
 --p-value-cutoff <span class="m">0</span>.05 <span class="se">\</span>
 --multiple-testing bonf <span class="se">\</span>
---calc-selectivity <span class="se">\</span>
 --out examples/out/geneAssoceQTL
 </pre></div>
 </div>
@@ -394,7 +394,6 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 --only-hgnc-gene <span class="se">\</span>
 --p-value-cutoff <span class="m">0</span>.05 <span class="se">\</span>
 --multiple-testing bonf <span class="se">\</span>
---calc-selectivity <span class="se">\</span>
 --out examples/out/geneAssoceQTL
 </pre></div>
 </div>
@@ -750,7 +749,6 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 <li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span> <span class="pre">[path/to/eQTL/file</span> <span class="pre">of</span> <span class="pre">genes</span> <span class="pre">or</span> <span class="pre">transcripts]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--filter-eqtl-p</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--expression-file</span> <span class="pre">[path/to/expression/file]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--calcu-selectivity</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--sum-file</span> <span class="pre">[/path/to/summary/file]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--filter-maf-le</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--saved-ref</span>&#160; <span class="pre">[previous/output/path]</span></code></p></li>
@@ -775,7 +773,6 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 <li><p><code class="docutils literal notranslate"><span class="pre">--p-value-cutoff</span></code>: The family-wise cutoff for the multiple testing..</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--only-hgnc-gene</span></code>: Only consider genes with HGNC gene symbols.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--expression-file</span></code>: The preproceeded gene expression file. The index column of the preprocessed expression file was gene/isoform symbol name, and each of 50 tissues or cell types had two columns: one representing average expression value (i.e., mean) of all sample and the other representing the standard error of the mean (SE).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--calcu-selectivity</span></code>: Calculate selective expression of a gene or transcripts in a tissue or a cell type.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--filter-eqtl-p</span></code>: a filter used to filter eQTLs/isoQTLs  &lt; the cutoff.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--sum-file</span></code>: the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, chromosome, physical position and p-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by <code class="docutils literal notranslate"><span class="pre">--chrom-col</span></code>, <code class="docutils literal notranslate"><span class="pre">--pos-col</span></code> and <code class="docutils literal notranslate"><span class="pre">--p-col</span></code> respectively.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--filter-maf-le</span></code>: a filer used to filter variants with MAF &gt; the cutoff.</p></li>
@@ -1550,7 +1547,7 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 <li><p><code class="docutils literal notranslate"><span class="pre">--emic</span></code>: The main function option.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--eqtl-file</span></code>: See above description.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--sum-file</span></code>: See above description.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--beta-or</span></code>: Indicate whether the coefficients(i.e., betas) in the summary statistics file are conventional odds ratios. If yes, KGGSee will automatically transform the betas and SEs by the natural logarithm.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--beta-type</span></code>: Indicate whether the coefficients(i.e., betas) in the summary statistics file. 0 means coefficients of linear regression for a quantitative phenotype beta; 1 means coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 means the odds ratio for a qualitative phenotype.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--saved-ref</span></code>: See above description.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--out</span></code>: Specify the path and prefix name of the output files. The main output file is the Mendelian randomization analysis results for causal gene estimation, named <strong>*.mr.gene.txt</strong> or <strong>*. gene.mr.gene.xls</strong>. The following</p>
 <blockquote>
@@ -1738,9 +1735,9 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 <td><p>column name of coefficients</p></td>
 <td><p>--beta-col OR</p></td>
 </tr>
-<tr class="row-odd"><td><p>--beta-or</p></td>
-<td><p>whether the coefficients are odds ratio</p></td>
-<td><p>--beta-or y</p></td>
+<tr class="row-odd"><td><p>--beta-type</p></td>
+<td><p>whether the coefficients are odds ratio. 0 means coefficients of linear regression for a quantitative phenotype beta; 1 means coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 means the odds ratio for a qualitative phenotype</p></td>
+<td><p>--beta-type 0</p></td>
 </tr>
 <tr class="row-even"><td><p>--chrom-col</p></td>
 <td><p>column name of chromosome ID</p></td>
@@ -1874,27 +1871,23 @@ install.packages<span class="p">(</span><span class="s">&quot;MendelianRandomiza
 <td><p>perform Mendelian randomization analysis for causal gene estimation</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p>--spa</p></td>
-<td><p>perform single cell type and phenotype association analysis</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>--calcu-selectivity</p></td>
+<tr class="row-even"><td><p>--calcu-selectivity</p></td>
 <td><p>calculate selective expression of gene or transcripts in a tissue or a cell type</p></td>
-<td></td>
+<td><p>--calcu-selectivity true</p></td>
 </tr>
-<tr class="row-even"><td><p>--ld-pruning-mr</p></td>
+<tr class="row-odd"><td><p>--ld-pruning-mr</p></td>
 <td><p>prune a variant with genotypic correlation to another variant&gt; the cutoff for causal gene estimation by MR</p></td>
 <td><p>--ld-pruning-mr 0.5</p></td>
 </tr>
-<tr class="row-odd"><td><p>--multiple-testing [bonf/benfdr/ fixed]</p></td>
+<tr class="row-even"><td><p>--multiple-testing [bonf/benfdr/ fixed]</p></td>
 <td><p>the multiple testing method used to select significant genes for the conditional gene-based analysis. There are three settings. bonf: Standard Bonferroni correction given a family-wise error rate specified by --p-value-cutoff.  benfdr: Benjamini-Hochberg method to control the false discovery rate. fixed: Filtering by a fixed p-value cutoff.</p></td>
 <td><p>--multiple-testing bonf</p></td>
 </tr>
-<tr class="row-even"><td><p>--p-value-cutoff</p></td>
+<tr class="row-odd"><td><p>--p-value-cutoff</p></td>
 <td><p>the family-wise cutoff for the multiple testing.</p></td>
 <td><p>--p-value-cutoff 0.05</p></td>
 </tr>
-<tr class="row-odd"><td><p>--top-gene</p></td>
+<tr class="row-even"><td><p>--top-gene</p></td>
 <td><p>only select the N top significant genes for subsequent gene-based conditional analysis by ECS</p></td>
 <td><p>--top-gene N</p></td>
 </tr>

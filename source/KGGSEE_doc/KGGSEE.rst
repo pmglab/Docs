@@ -1,316 +1,238 @@
 .. raw:: html
 
-    <p style="font-size: 26px; line-height: 35px; font-weight: bold" align=left>
+    <p style="font-size: 28px; line-height: 35px; font-weight: bold" align=center>
         KGGSEE: A biological Knowledge-based mining platform for Genomic and Genetic association Summary statistics using gEne Expression
     </p>
 
-
 .. centered:: User manual 1.0
-.. centered:: Miaoxin Li, Lin Jiang, Xiangyi Li
+.. centered:: Miaoxin Li, Lin Jiang
 
-1 Introduction
-==============
-KGGSEE is a standalone Java tool for knowledge-based analyses and can perform association analysis and causative inference analysis based on the genomic and genetic association summary statistics of complex phenotypes, gene expression profiles and related data. It can perform four major integrative analyses:
+Introduction
+=============
 
-- Gene-based association analysis; 
+KGGSEE is a standalone Java tool for knowledge-based analyses of genomic and genetic association summary statistics of complex phenotypes by integrating gene expression and related data. It has four major integrative analyses, 1) gene-based association analysis, 2) estimation of phenotype-associated tissues or cell-type based on gene expression in single-cell or bulk cells of different tissues, 3) conditional gene-based association analysis based on multi-strategy, 4) causal gene inference for complex diseases and/or traits based-on multiple eQTL. More integrative analysis functions will be added into this analysis platform in the future.
 
-- Estimate phenotype-associated tissues or cell-type based on gene expression of single-cell or bulk cells in different tissues; 
-
-- Conditional gene-based association analysis based on an improved effective chi-squared statistic (ECS) and multiple variant-gene mapping strategies; 
-
-- Causal gene inference for complex diseases and traits based on multiple eQTLs. 
-
-More integrative analysis functions will be added to KGGSEE in the future.
-
-.. image:: ./media/kggsee_workFlow.png
+.. image:: ./media/kggsee_pipeline3_1.jpg
     :align: center
 
-
-
-2 Installation
+Installation
 ==============
 
-2.1 kggsee.jar
+kggsee.jar
 ~~~~~~~~~~~~~~~
 
-The main library of KGGSEE, kggsee.jar, does not need an installation procedure as long as its `Java Runtime Environment(JRE) v1.8 <https://www.oracle.com/java/technologies/javase-jre8-downloads.html>`_ (or up) is pre-installed in your machine. The kggsee.jar can be directly executed given a file path.
+The main library of KGGSEE, kggsee.jar, does not need an installation procedure as long as its `Java Runtime Environment(JRE) v1.8 <https://www.oracle.com/java/technologies/javase-jre8-downloads.html>`_ (or up) is pre-installed in your machine. The kggsee.jar can be directly executed given a file path
 
-..
- 2.2 R packages
- ~~~~~~~~~~~~~
+R packages
+~~~~~~~~~~~~~
 
- User may need to install three R packages which will be called by KGGSEE. The following are the instructions for R package installation under the interactive working interface of R.
+.. note::
+    However, you many need to install several R packages which will be called by kggsee.jar. The following are instructions for R package installation under the interactive working interface of R.
 
- - Rserve
+- Rserve
 
-     ``install.packages(“Rserve”, dep=TRUE)``
-     More installation instructions can be found at https://www.dundas.com/support/support-center/support-articles/installation/install-and-configure-r.
+    ``install.packages(“Rserve”, dep=TRUE)``
+    More installation instruction can be found at https://www.dundas.com/support/support-center/support-articles/installation/install-and-configure-r.
 
- - NNLM
+- NNLM
 
-     ``install.packages(“NNLM”, dep=TRUE)``
-     More installation instructions can be found at https://github.com/linxihui/NNLM.
+    ``install.packages(“NNLM”, dep=TRUE)``
+    More installation instruction can be found at https://github.com/linxihui/NNLM.
 
- - MendelianRandomization
+- MendelianRandomization
 
-     The first step is to install the PhenoScanner package(and the MendelianRandomization package if you haven't done this previously):
+    The first step is to install the PhenoScanner package(and the MendelianRandomization package if you haven't done this previously):
 
-     .. code:: R
+    .. code:: R
 
-         install.packages("devtools")
-         library(devtools)
-         install_github("phenoscanner/phenoscanner")
-         library(phenoscanner)
+        install.packages("devtools")
+        library(devtools)
+        install_github("phenoscanner/phenoscanner")
+        library(phenoscanner)
 
-         install.packages("MendelianRandomization")
-         library(MendelianRandomization)
+        install.packages("MendelianRandomization")
+        library(MendelianRandomization)
 
-2.2 Resource data
+Resource data
 ~~~~~~~~~~~~~~~~~~
 
-In the KGGSEE working folder, a folder named **resources** contains the running resource data, e.g., gene boundary and gene expression. KGGSEE will automatically download the required resource files to this folder. Users can also manually download all the files and put them into the corresponding folders.
+Under the folder of kggsee, there is a folder named **resources**, which contains running resource data, e.g., gene boundary and gene expression. KGGSEE will automatically download required resource files. Users can all manually download the files and put them into the corresponding folders.
 
-3 Tutorials
-===========
+Tutorials
+=========================
 
-3.1 Gene-based association analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Purpose: Detect the phenotype-associated genes of a phenotype using the GWAS summary statistics.
-   - Input data:
+Gene-based association analysis
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Purpose: Detect associated genes of a phenotype by GWAS summary statistics
+ - Input data:
      
-   1. GWAS summary statistics compressed in a text file (a fabled data set for education purposes): *examples/gwas.sum.stat.gz*
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
      
-   2. Genotypes in VCF format to approximate the correction between summary statistics: *resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz*
+   2. Genotypes in VCF format to approximate correction between summary statistics: *resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr1.vcf.gz*
 
-   .. code:: shell 
+.. code:: shell 
 
-      java -Xmx10g -jar kggsee.jar \
-      --nt 10 \
-      --gene-assoc \
-      --sum-file examples/gwas.sum.stat.gz \
-      --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr*.vcf.gz \
-      --keep-ref \  
-      --out examples/out/geneAssoc
-**Important Note:** The parameter of "--vcf-ref" is the genotypes in VCF format and can be downloaded from https://pmglab.top/genotypes/#/. The users should download the proper vcf files according to their research subjects' ancestry. The combination of "--vcf-ref" and "--keep-ref" can keep the parsed vcf data (KGGSEE object format) in a local folder named like "VCFRefhg19" under the output folder (here is the "examples/out/geneAssoc"). When the users want to run another analysis, the users can use the option "--saved-ref" instead of the "--vcf-ref" and "keep-ref" to save time. The parameter of "--saved-ref" is the full path of folder "VCFRefhg19" (see example in the following part).
+  java -Xmx10g -jar kggsee.jar \
+  --nt 10 \
+  --gene-assoc \
+  --sum-file examples/gwas.sum.stat.gz \
+  --vcf-ref resources/hg19/gty/1kg.phase3.v5.shapeit2.eur.hg19.chr*.vcf.gz \
+  --keep-ref \  
+  --out examples/out/geneAssoc
 
-3.2 Estimate the phenotype-associated cell-types of a phenotype
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Estimate relevant cell-types of a phenotype
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
-Purpose: Estimate the relevant cell-types of a phenotype and finely map associated genes according to selective expression.
-   - Input data:
+Purpose: Estimate relevant cell-types of a phenotype and finely map associated genes according to selective expression
+ - Input data:
     
-   1. GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
      
-   2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*
+   2. Genotypes in KGGSEE objects(generated last time) to approximate correction between summary statistics: *examples/out/geneAssoc*
      
    3. Gene expression data compressed in a text file: *resources/hs_scRNA_cluster_mean.tsv.gz*
      
-   .. code:: shell
+.. code:: shell
 
-      java -Xmx10g -jar kggsee.jar \
-      --nt 10 \
-      --gene-finemapping \
-      --expression-file resources/hs_scRNA_cluster_mean.tsv.gz \
-      --only-hgnc-gene \
-      --sum-file examples/gwas.sum.stat.gz \
-      --saved-ref  examples/out/geneAssoc \
-      --out examples/out/spa \
-      --excel
-      
-
-3.3 Conditional gene-based association analysis with eDESE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Purpose: Perform conditional gene-based association analysis using different strategies to map variants to genes, i.e., physically nearby variants, gene-level and isoform-level eQTLs (also are variants). Three strategies correspond to three models, i.e., eDESE:dist, eDESE:gene and eDESE:isoform, respectively.
-  
-**eDESE:dist**
-
-- Input data:
-     
-1. GWAS summary statistics compressed in a text file (a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
-     
-2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
-   
-3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*. We have provided the dataset based on the gene-expression profiles of ~50 tissues in GTEX(v8) and has been packaged this file in the download of "KGGSEE+Resources" at http://pmglab.top/kggsee/#/download. Users can also use their own gene expression profiles. The row index is gene name, and the column name is tissue name and tissue name +".SE". Each tissue has two columns, one representing the average expression value of all samples of the tissue and the other representing the standard error of the mean (SE).
-   
-  
-   .. code:: shell
-
-      java -Xmx20g \
-      -jar kggsee.jar \
-      --nt 10 \
-      --sum-file examples/gwas.sum.stat.gz \
-      --chrom-col CHR \
-      --pos-col BP \
-      --p-col P \
-      --gene-finemapping \
-      --saved-ref  examples/out/geneAssoc \
-      --expression-file resources/gtex.v8.gene.mean.tsv.gz \
-      --only-hgnc-gene \
-      --p-value-cutoff 0.05 \
-      --multiple-testing bonf \
-      --calc-selectivity \
-      --regions-out chr6:27477797-34448354 \
-      --out examples/out/geneAssoceQTL
-      
-
-**eDESE:gene**
-
-- Input data:
-     
-1. The GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;     
-2. Genotypes in KGGSEE objects to approximate the correction between summary statistics (generated in `Gene-based association analysis <#gene-based-association-analysis>`_): *examples/out/geneAssoc*;
-3. Gene-level expression data compressed in a .gz or text file: *resources/gtex.v8.gene.mean.tsv.gz*. We have provided the dataset based on the gene-expression profiles of ~50 tissues in GTEX(v8) and has been packaged this file in the download of "KGGSEE+Resources" at http://pmglab.top/kggsee/#/download. Users can also use their own gene expression profiles.
-4. eQTLs data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*. Our pre-calculated gene-level eQTLs based on GTEx(v8) can be downloaded from `here <https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604>`_.
-   
-   .. code:: shell
-
-      java -Xmx20g \
-      -jar kggsee.jar \
-      --nt 10 \
-      --chrom-col CHR \
-      --pos-col BP \
-      --p-col P \
-      --gene-finemapping \
-      --sum-file examples/gwas.sum.stat.gz \
-      --saved-ref  examples/out/geneAssoc \
-      --expression-file resources/gtex.v8.gene.mean.tsv.gz \
-      --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
-      --filter-eqtl-p 0.01 \  
-      --only-hgnc-gene \
-      --p-value-cutoff 0.05 \
-      --multiple-testing bonf \
-      --calc-selectivity \
-      --regions-out chr6:27477797-34448354 \
-      --out examples/out/geneAssoceQTL
-
-**eDESE:isoform**
-
-- Input data:
-     
-1. The GWAS summary statistics compressed in a text file(a fabled data set for education purposes): *examples/gwas.sum.stat.gz*;
-     
-2. Genotypes in KGGSEE objects to approximate the correction between summary statistics(generated in `Gene-based association analysis <#gene-based-association-analysis>`_): *examples/out/geneAssoc*;
-
-3. Isoform-level expression data compressed in a .gz or text file: *resources/gtex.v8.transcript.mean.tsv.gz*. We have provided the dataset based on the isoform/transcript-expression profiles of ~ 50 tissues in GTEX(v8) and has been packaged this file in the download of "KGGSEE+Resources" at http://pmglab.top/kggsee/#/download. Users can also use their own isoform-level expression profiles.
-
-4. IsoQTL data compressed in a gz or text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.Our pre-calculated isoform-level eQTLs based on GTEx(v8) can be downloaded from `here <https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616>`_. 
-
-
-   .. code:: shell
-
-      java -Xmx20g \
-      -jar kggsee.jar \
-      --nt 10 \
-      --sum-file examples/gwas.sum.stat.gz \
-      --chrom-col CHR \
-      --pos-col BP \
-      --p-col P \
-      --gene-finemapping \
-      --saved-ref  examples/out/geneAssoc \
-      --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
-      --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz \ 
-      --filter-eqtl-p 0.01 \  
-      --only-hgnc-gene \
-      --p-value-cutoff 0.05 \
-      --multiple-testing bonf \
-      --calc-selectivity \
-      --regions-out chr6:27477797-34448354 \
-      --out examples/out/geneAssoceQTL
-
+     java -Xmx10g -jar kggsee.jar \
+     --nt 10 \
+     --spa \
+     --expression-file resources/hs_scRNA_cluster_mean.tsv.gz \
+     --only-hgnc-gene \
+     --sum-file examples/gwas.sum.stat.gz \
+     --saved-ref  examples/out/geneAssoc \
+     --out examples/out/spa \
+     --excel
  
-3.4 Gene-based causality analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Purpose: Detect the causal genes of a phenotype using the GWAS summary statistics and eQTL.
-   - Input data:
+Multi-strategy conditional gene-based association analysis
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Purpose**: Perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. Three strategies correspond to three models, i.e., MCGA_Dist, MCGA_isoQTL and MCGA_eQTL.
+
+- MCGA_Dist input data:
+     
+   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   
+   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
+   
+  
+.. code:: shell
+
+    java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --sum-file examples/gwas.sum.stat.gz \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \   
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --out examples/out/geneAssoceQTL
+   
+- MCGA_isoQTL input data:
+     
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+
+   3. Isoform-level expression data compressed in a text file: *resources/gtex.v8.transcript.mean.tsv.gz*;
+
+   4. isoQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz*.
+
+
+.. code:: shell
+
+   java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --sum-file examples/gwas.sum.stat.gz \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.transcript.mean.tsv.gz \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p01.gz.eqtl.txt.gz \ 
+   --filter-eqtl-p 0.01 \  
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --calc-selectivity \
+   --out examples/out/geneAssoceQTL
+
+- MCGA_eQTL input data:
+     
+   1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   3. Gene-level expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*;
+   4. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz*.
+   
+   
+.. code:: shell
+
+   java -Xmx20g \
+   -jar kggsee.jar \
+   --nt 10 \
+   --chrom-col CHR \
+   --pos-col BP \
+   --p-col P \
+   --gene-finemapping \
+   --sum-file examples/gwas.sum.stat.gz \
+   --saved-ref  examples/out/geneAssoc \
+   --expression-file resources/gtex.v8.gene.mean.tsv.gz \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
+   --filter-eqtl-p 0.01 \  
+   --only-hgnc-gene \
+   --p-value-cutoff 0.05 \
+   --multiple-testing bonf \
+   --out examples/out/geneAssoceQTL
+ 
+Gene-based causality analysis
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Purpose: Detect causal genes of a phenotype by GWAS summary statistics and eQTL
+ - Input data:
 
    1. GWAS summary statistics compressed in a text file(a fabled data set for education purpose): *examples/gwas.sum.stat.gz*
    
-   2. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*
+   2. Genotypes in KGGSEE objects(generated in last time) to approximate correction between summary statistics: *examples/out/geneAssoc*
    
    3. eQTL summary statistics compressed in a text file: *resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz*
      
-   .. code:: shell  
+.. code:: shell  
 
-      java -Xmx10g  -jar kggsee.jar \
-      --nt 10 \
-      --emic \
-      --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
-      --sum-file examples/gwas.sum.stat.gz \
-      --beta-type 2 \
-      --saved-ref  examples/out/geneAssoc \
-      --out examples/out/emic \
-      --excel
+   java -Xmx10g  -jar kggsee.jar \
+   --nt 10 \
+   --emic \
+   --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.transcript.maf05.p05.gz.eqtl.txt.gz \
+   --sum-file examples/gwas.sum.stat.gz \
+   --beta-type 2 \
+   --saved-ref  examples/out/geneAssoc \
+   --out examples/out/emic \
+   --excel
  
-3.5 Drug repositioning based on the drug selective perturbation analysis(SelDP)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Purpose: Estimate the drug selective perturbation effect on the phenotype-associated genes' expression to aid the drug repositioning for complex diseases.
-
-  - Input data:  
-  
-    1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
-   
-    2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate the correction between summary statistics: *examples/out/geneAssoc*;
-   
-    3. Drug/compound-induced gene expression fold changes (log2(Treated/Control)) profiles. We provided an example of drug-induced fold changes based on the Level 3 data of LINCS (2017 release) at `raw perturbation profile <https://figshare.com/articles/dataset/allTime_allCelline_combined_level3_log2_foldChanges_LINCS_txt/19091306>`_ or `reverse perturbation profile <https://figshare.com/articles/dataset/allTime_allCelline_combined_reverse_level3_foldChanges_LINCS_txt/19091312>`_;
-   
-    4. eQTL data of phenotype-associated tissues. The eQTL-guided SelDP needs the eQTL data as one of the input datasets. We have procalculated ~50 tissues' gene-level and transcript-level eQTL data based on the GTEx (v8), and the eQTL data can be accessed at `gene-level eQTLs <https://figshare.com/articles/dataset/EUR_gene_eqtl_hg19_tar_gz/16959604>`_ and `transcript-level eQTLs <https://figshare.com/articles/dataset/EUR_transcript_eqtl_hg19_tar_gz/16959616>`_.
-   
-   The command for original SelDP:
-   
-   .. code:: shell  
-   
-      java -Xmx20g \
-      -jar kggsee.jar \
-      --nt 10 \
-      --sum-file examples/gwas.sum.stat.gz \
-      --chrom-col CHR \
-      --pos-col BP \
-      --p-col P \
-      --gene-finemapping \
-      --saved-ref  examples/out/geneAssoc \
-      --expression-file drug-induced.gene.expression.fold.change.profile \
-      --only-hgnc-gene \
-      --p-value-cutoff 0.05 \
-      --multiple-testing bonf \
-      --calc-selectivity \
-      --regions-out chr6:27477797-34448354 \
-      --out examples/out/Selective_Perturbed_Drugs
-      
-   The command for eQTL-guided SelDP:
-   
-   .. code:: shell
-
-      java -Xmx20g \
-      -jar kggsee.jar \
-      --nt 10 \
-      --chrom-col CHR \
-      --pos-col BP \
-      --p-col P \
-      --gene-finemapping \
-      --sum-file examples/gwas.sum.stat.gz \
-      --saved-ref  examples/out/geneAssoc \
-      --expression-file drug-induced.gene.expression.fold.change.profile \
-      --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
-      --filter-eqtl-p 0.01 \  
-      --only-hgnc-gene \
-      --p-value-cutoff 0.05 \
-      --multiple-testing bonf \
-      --calc-selectivity \
-      --regions-out chr6:27477797-34448354 \
-      --out examples/out/Selective_Perturbed_Drugs
  
-4 Functions
-===========
+ 
+Functions
+=========================
 
-4.1 Gene-based association analysis by an effective chi-square statistics(ECS)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Gene-based association analysis by an effective chi-square statistics(ECS)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-One can perform the gene-based association analysis by an effective chi-square statistics (ECS) with the GWAS *p*-values of variants. The *p*-values are converted to chi-square statistics(degree of freedom = 1). The ECS merges all chi-square statistics of a gene after correcting the redundancy of the statistics due to LD. The LD is calculated from genotypes of an ancestrally matched sample in VCF format, e.g., a panel of 1000 Genomes Project. The method of ECS is described in our paper(`Paper Link <http://bing.com>`_).
+One can perform gene-based association analysis by an effective chi-square statistics(ECS) with GWAS *p*-values of variants. The *p*-values are converted to chi-square statistics(degree of freedom = 1). The ECS merges all chi-square statistics of a gene after correcting the redundancy of the statistics due to LD. The LD is calculated from genotypes of an ancestrally matched sample in VCF format, e.g. a panel of 1000 Genomes Project. The method of ECS is described in our paper(`Paper Link <http://bing.com>`_).
 
 Required options
-----------------
+----------------------
 
 - ``--gene-assoc``
 - ``--sum-file [/path/to/summary/file]``
@@ -323,12 +245,12 @@ Required options
 
 
 Explanations and Optional options
----------------------------------
+--------------------------------------
 
 - ``--gene-assoc``: The main function option.
 - ``--sum-file``: The file containing GWAS summary statistics.
 
-    Three columns of the GWAS summary statistic file, i.e., chromosome, physical position and *p*-value are a minimal requirement. The default column names are CHR, BP and P, respectively. Otherwise, users should specify the name by using ``--chrom-col``, ``--pos-col`` and ``--p-col``, respectively.
+    Three columns of the GWAS summary statistic file, chromosome, physical position and *p*-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by ``--chrom-col``, ``--pos-col`` and ``--p-col`` respectively.
 
     .. table::
         :align: center
@@ -344,29 +266,29 @@ Explanations and Optional options
         === ====== ======
 
 
-- ``--vcf-ref``: The file containing the genotypes to calculate the genotypic correlations. For the data separated in multiple files by chromosomes, one can use the asterisk wildcard (e.g., hg19.chr*.vcf.gz) to denote the chromosome names.
-- ``--keep-ref``: If used, the option will enable to save the encoded genotypes in VCF for future usage, which will speed up the next analysis.
-- ``--saved-ref``: Instead of using ``--vcf-ref``, one can directly specify the path of the encoded genotypes generated last time by specifying the last output path.
-- ``--filter-maf-le``: Filter out the variants with minor allele frequency less or equal than the specified value.
-- ``--out``: Specify the path and prefix name of the output files. The main output file of the gene-based analysis is ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The following is an example:
+- ``--vcf-ref``: The file containing genotypes to calculate genotypic correlations. For data separated in multiple files by chromosomes, one can use asterisk wildcard (e.g., hg19.chr*.vcf.gz) to denote the chromosome names.
+- ``--keep-ref``: Save the encoded genotypes in VCF for future usage, which will speed up next analysis.
+- ``--saved-ref``: Instead of using ``--vcf-ref``, one can directly specify the path of encoded genotypes last time by specifying last output path.
+- ``--filter-maf-le``: Filter out variants with minor allele frequency less or equal than the specified value.
+- ``--out``: Specify the path and prefix name of the output files. The main output file of the gene-based analysis is ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The following
 
     .. csv-table::
         :file: ./table/demo.gene.pvalue.csv
         :header-rows: 1
         :align: center
 
-    Columns in the output file are gene symbol, the number of variants in the gene, *p*-values of gene-based association test, and the detailed information of the top variant within the gene(i.e., the variant with the smallest *p*-value). These columns include chromosome, physical position, *p*-value, whether the top variant was ignored in the gene-based association analysis, and gene feature annotations according to RefGene and GENCODE.
+    columns in the output file are gene symbol, number of variants in the gene, *p*-values of gene-based association test, and the detailed information of the top variant within the gene(i.e., the variant with smallest *p*-value). These columns include chromosome, physical position, *p*-value, whether the top variant was ignored in the gene-based association analysis, and gene feature annotations according to RefGene and GENCODE.
 
 
-4.2 Finely map genes and estimate relevant cell types of a phenotype by the single-cell (or bulk-cell) type and phenotype cross annotation framework(SPA)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Finely map genes and estimate relevant cell-types of a phenotype by the single-cell(or bulk-cell) type and phenotype cross annotation framework(SPA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-One can simultaneously prioritize phenotype-associated genes and cell types with GWAS *p*-values and gene/transcript expression profile. The GWAS *p*-values types and expression were analyzed by an iterative prioritization procedure. In the procedure, phenotype-associated genes were prioritized by a conditional gene-based association(using the ECS again) according to the genes’ selective expression in disease related cell-types while the phenotype related cell-types were prioritized by an enrichment analysis of Wilcoxon rank-sum test for phenotype-associated genes’ selective expression. The phenotype-associated gene list and phenotype related cell-type list were updated by turns until the two list were unchanged. The detailed method is described in our paper(`Paper Link <http://bing.com>`_).
+One can simultaneously prioritize phenotype associated genes and cell-types with GWAS *p*-values and gene/transcript expression profile. The GWAS *p*-values types and expression were analyzed by an iterative prioritization procedure. In the procedure, phenotype-associated genes were prioritized by a conditional gene-based association(using the ECS again) according to the genes’ selective expression in disease related cell-types while the phenotype related cell-types were prioritized by an enrichment analysis of Wilcoxon rank-sum test for phenotype-associated genes’ selective expression. The phenotype-associated gene list and phenotype related cell-type list were updated by turns until the two list were unchanged. The detailed method is described in our paper(`Paper Link <http://bing.com>`_).
 
 Required options
 -------------------
 
-- ``--gene-finemapping``
+- ``--spa``
 - ``--expression-file [path/to/expression/file]``
 - ``--only-hgnc-gene``
 - ``--sum-file [/path/to/summary/file]``
@@ -378,7 +300,7 @@ Required options
 Explanations and Optional options
 ----------------------------------
 
-- ``--gene-finemapping``: The main function option.
+- ``--spa``: The main function option.
 - ``--multiple-testing``: The multiple testing method to select significant genes for the conditional analysis. There are three settings. *bonf*: Standard Bonferroni correction given a family-wise error rate specified by ``--p-value-cutoff``.  *benfdr*: Benjamini-Hochberg method to control the false discovery rate. *fixed*: Filtering by a fixed *p*-value cutoff.
 - ``--p-value-cutoff``: The cutoff for the multiple testing.
 - ``--only-hgnc-gene``: Only consider genes with hgnc gene symbols.
@@ -411,19 +333,18 @@ Explanations and Optional options
 
     columns in the output file are tissue or cell-type names, the *p*-value of enrichment according to the selective expression derived from the robust regression *z*-score, the logarithm of *p*-value.
 
-4.3 Multi-strategy Conditional Gene-based Association framework mainly guided by eQTLs (eDESE)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Multi-strategy Conditional Gene-based Association framework (MCGA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-eDESE can be used to perform the conditional gene-based association analysis using different variant sets, i.e., physically nearby variants, gene-level and isoform-level eQTLs. The statistical method is the improved effective chi-square statistics (ECS). The pre-calculated gene-level and isoform-level eQTLs of 50 tissues or cell types from GTEx (v8) have been integrated into the KGGSEE resource (`hg19 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl>`_ and `hg38 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg38%2Feqtl>`_).
+MCGA can be used to perform conditional gene-based association analysis using different SNPs sets, i.e., physically nearby SNPs, isoQTLs and gene-level eQTLs. The statistical method is the improved effective chi-square statistics(ECS). The pre-calculated cis-eQTLs/isoQTLs of gene-level and isoform(transcript)-level expression in 50 tissues or cell-types from GTEx(v8) have been integrated into KGGSEE resource (`hg19 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg19%2Feqtl>`_ and `hg38 <https://mailsysueducn-my.sharepoint.com/personal/limiaoxin_mail_sysu_edu_cn/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9tYWlsc3lzdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2xpbWlhb3hpbl9tYWlsX3N5c3VfZWR1X2NuL0VwWFJxTFhJVG9aSXRFclVIaURORE8wQmstamVpQXRJbEEtYWJHak9DZGJxRXc%5FcnRpbWU9OUt0dVZ1b0QyVWc&id=%2Fpersonal%2Flimiaoxin%5Fmail%5Fsysu%5Fedu%5Fcn%2FDocuments%2Ftools%2Fkggsee%2Fresources%2Fhg38%2Feqtl>`_).
 
 Required options
-----------------
+--------------------
 
 - ``--gene-finemapping``
 - ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
 - ``--filter-eqtl-p``
 - ``--expression-file [path/to/expression/file]``
-- ``--calcu-selectivity``
 - ``--sum-file [/path/to/summary/file]``
 - ``--filter-maf-le``
 - ``--saved-ref  [previous/output/path]``
@@ -438,27 +359,26 @@ Required options
 - ``--regions-out``
 
 
-**See analysis examples at:** `Conditional gene-based association analysis based on the improved ECS and multiple variant-gene mapping strategies <#Conditional gene-based association analysis based on the improved ECS and multiple variant-gene mapping strategies>`_
+**See analysis examples at:** `MCGA <#mcga>`_
 
 Explanations and Optional options
 -----------------------------------
 
-- ``--nt``: Specify the number of CPU cores used for the analysis.
-- ``--gene-finemapping``: No parameters required. The main function option.
-- ``--multiple-testing``: Specify the multiple testing methods to select significant genes for the conditional analysis. There are three settings, i.e., bonf: Standard Bonferroni correction, benfdr: Benjamini-Hochberg method to control the false discovery rate, fixed: Filtering by a fixed p-value cutoff.
-- ``--p-value-cutoff``: Specify the family-wise cutoff for the multiple testing.
-- ``--only-hgnc-gene``: No parameters required. If used, KGGSEE only considers the genes with HGNC gene symbols.
-- ``--expression-file``: Specify the path of the preproceeded gene expression file. The index column of the preprocessed expression file was gene/isoform symbol name, and each of 50 tissues or cell types had two columns: one representing averaged expression value (i.e., mean) of all samples and the other representing the standard error of the mean (SE).
-- ``--calcu-selectivity``: No parameters required. If used, KGGSEE will perform gene-based association analysis by conditioning on the gene-level/isoform-level expression profiles.
+- ``--nt``: CPU cores used for the analysis.
+- ``--gene-finemapping``: The main function option.
+- ``--multiple-testing``: The multiple testing method to select significant genes for the conditional analysis. There are three settings. bonf: Standard Bonferroni correction. benfdr: Benjamini-Hochberg method to control the false discovery rate. fixed: Filtering by a fixed p-value cutoff.
+- ``--p-value-cutoff``: The family-wise cutoff for the multiple testing..
+- ``--only-hgnc-gene``: Only consider genes with HGNC gene symbols.
+- ``--expression-file``: The preproceeded gene expression file. The index column of the preprocessed expression file was gene/isoform symbol name, and each of 50 tissues or cell types had two columns: one representing average expression value (i.e., mean) of all sample and the other representing the standard error of the mean (SE).
 
-- ``--filter-eqtl-p``: Specify the filter to select the significant gene/isoform-level eQTLs to enter the following gene-based association analysis.
-- ``--sum-file``: Specify the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, i.e., chromosome, physical position and p-value are minimally required. The default column names are CHR, BP and P, respectively. Users can also specify these names by using ``--chrom-col``, ``--pos-col`` and ``--p-col``, respectively.
-- ``--filter-maf-le``: Specify the filter used to select the variants with MAF > the cutoff to enter the following gene-based association analysis.
-- ``--regions-out``: Location section, such as chr6:27477797-34448354. Specify the variants in the specified regions to be excluded in the following gene-based association analysis.
+- ``--filter-eqtl-p``: a filter used to filter eQTLs/isoQTLs  < the cutoff.
+- ``--sum-file``: the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, chromosome, physical position and p-value are minimal requirement. The default column names are CHR, BP and P respectively. Otherwise, users should specify the name by ``--chrom-col``, ``--pos-col`` and ``--p-col`` respectively.
+- ``--filter-maf-le``: a filer used to filter variants with MAF > the cutoff.
+- ``--regions-out``: a region used to exclude variants in the specified regions.
 
-- ``--eqtl-file``: Specify the full path of gene-level and isoform-level eQTL file. The format of the eQTL file is similar to the fasta file. The first row starting with "#" is the column name. Then the eQTL data of a gene or transcript starts with the symbol “>”, and the following are the gene symbol, Ensembl gene/transcript ID and chromosome name, which are delimited by tab characters. The subsequent rows contain the summary statistics of the eQTL-gene/isoform association. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in linear regression, respectively. In the regression, the number of alternative alleles is used as an independent variable. Based on KGGSEE, we have pre-calculated the eQTL data using the GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. The commands to compute eQTLs can be seen in `Compute the gene-level and isoform-level eQTLs of each tissue <#compute-the-eqtls-and-isoqtls-of-each-tissue>`_.
+- ``--eqtl-file``: The full path of eQTL/isoQTL file. The format of eQTL/isoQTL file is similar to the fasta file. The first row starting with "#" is the column names. The eQTL data of a gene or transcript start with the symbol “>”. In the same row, the gene symbol, Ensembl gene/transcript ID and chromosome name are included and delimited by tab characters. The subsequent row contains the summary statistics the eQTL/isoQTL for the gene or transcript. The tab-delimited columns are physical position, reference allele, alternative allele, frequency of alternative allele, estimated effect size, standard error of the estimation, *p*-value, effective sample sizes and determination coefficient in a linear regression respectively. In the regression, the number of alternative alleles is used as an independent variable. On KGGSEE, we have pre-calculated the eQTL and isoQTL data using GTEx data(v8). Variants within 1MB upstream and downstream of a gene or a transcript boundary are included. The commands to compute eQTLs/isoQTLs can be seen in `Compute the eQTLs and isoQTLs of each tissue <#compute-the-eqtls-and-isoqtls-of-each-tissue>`_.
     
-    An example of gene-level eQTLs file is as follows:
+    An example of eQTLs file is as follows:
 
     .. code::
 
@@ -472,7 +392,7 @@ Explanations and Optional options
         74681	G	T	0.95	-1.457	0.333	1.19E-5	63	0.239
          …	…	…	…	…	…	…	…	…
         
-    An example of isoform-level eQTLs file is as follows:
+    An example of isoQTLs file is as follows:
  
     .. code::
  
@@ -492,99 +412,108 @@ Explanations and Optional options
 - ``--out``: Specify the path and prefix name of the output files. 
 
 
-    + For eDESE, the six output files are as follows:
-    
-        - The first output file is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We get the susceptible genes based on this file). 
+    + For MCGA_Dist, the three output files are as follows:  
+        First one is the conditional gene-based analysis results, named ***.finemapping.gene.ecs.txt** or ***.finemapping.gene.ecs.xls** (We got the susceptible genes based on this file). The second is the gene-based association result file, named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**. The third is the p-value of all variants belonging to a genes, named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above.
 
-        .. csv-table::      
-           :file: ./table/eDESE_demo.finemapping.gene.ecs.csv
-           :header-rows: 1
-           :align: center
+        The following columns in the output file are gene symbol, number of variants in the gene, chromosome,  , the position of top variant, the *p*-value, coefficient and standard error of the variant for gene expression as an eQTL.
 
-        Gene: gene name;
 
-        Chrom: chromosome position of the gene;
-        
-        StartPos: gene start position (refGene hg19);
-        
-        EndPos: gene end postion (refGene hg19);
-        
-        #Var: the number of variants assigned to the gene according to different strategies (physically nearby variants for eDESE:dist, gene-level eQTLs (also are variants) for eDESE:gene, isoform-level eQTLs (also are variants) for eDESE:isoform);
-        
-        Group: the identifier of LD block to which the gene belongs;
-
-        ECSP: the p-value of effective chi-square test (without conditioning on gene expression profiles);
-
-        CondiECSP: the p-value of the gene by performing the conditional effective chi-square test;
-
-        GeneScore: the tissue-selective score of the gene by the end of the iterative procedure; 
-        
-    
-        - The second output file is the gene-based association result file ("gene-top variant" ECS result), named ***.gene.pvalue.txt** or ***.gene.pvalue.xls**.
-       
         .. csv-table::
-           :file: ./table/eDESE_demo.gene.pvalue.csv
-           :header-rows: 1
-           :align: center
-        
-        
-        Gene: gene name;
-       
-        #Var: the number of variants assigned to the gene according to different strategies (physically nearby SNPs for eDESE:dist, gene-level eQTLs (also are variants) for eDESE:gene, isoform-level eQTLs (also are variants) for eDESE:isoform);
-        
-        ECSP: the p-value of effective chi-square test (without conditioning on gene expression profiles);
-        
-        Chrom: chromosome position of the gene;
-        
-        Pos: the position of top-variant belonging to the gene;
-        
-        GWAS_Var_P: the p-value of the top-variant in GWAS summary statistics.
-        
-        Especially, additional three columns are appended to the ***.gene.pvalue.txt** or ***.gene.pvalue.xls** generated by eDESE:gene and eDESE:isoform (see example below).
-        
+            :file: ./table/MCGA_dist_demo.gene.csv
+            :header-rows: 1
+            :align: center
+
+        Gene : gene name;
+
+        #Var : the number of variants assigned to the gene according to different strategies (physically nearby SNPs for MCGA_Dist, isoQTLs for MCGA_isoQTL and gene-level eQTLs for MCGA_eQTL);
+
+        ECSP : the p value of effective chi-square test;
+
+        Chrom : chromosome position of the gene;
+
+        Pos : the position of top variant belonging to the gene;
+
+        VarP: the *p*-value of top variant in GWAS summary statistics.  
+
         .. csv-table::
-           :file: ./table/eDESE_gene.gene.pvalue.csv
-           :header-rows: 1
-           :align: center
+            :file: ./table/MCGA_dist_demo.finemapping.gene.ecs.csv
+            :header-rows: 1
+            :align: center
         
-        eQTL_P: the variant-gene expression association p-value of the top-variant with the gene;
-        
-        eQTL_Beta: the variant-gene expression association beta value of the top-variant with the gene;
-        
-        eQTL_SE: the standard error of the mean of beta value.
-        
-        - The third output file is the p-value of all variants belonging to a gene (raw ECS results), named ***.gene.var.pvalue.txt.gz**. Their file formats are the same as above. The meaning of the column names in ***.gene.var.pvalue.txt.gz** is the same as that in ***.gene.pvalue.txt**.
+        StartPos: gene start position;
+ 
+        EndPos:gene end position;
+ 
+        CondiECSP:the p value of gene by performing the conditional effective chi-square test;
+ 
+        GeneScore: the tissue selective score of the gene by the end of the iterative procedure;
+ 
+        Group: the identifier of LD block which the gene belong to.  
  
         .. csv-table::
-           :file: ./table/eDESE_demo.gene.var.pvalue.csv
-           :header-rows: 1
-           :align: center
+            :file: ./table/MCGA_dist_demo.gene.var.pvalue.csv
+            :header-rows: 1
+            :align: center
 
-        
-        - The fourth output file is the significance of phenotype-associated tissues, named ***.celltype.txt**.
-     
+        The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that in ***.gene.pvalue.txt**.
+
+    + For MCGA_eQTL, the three output files are as follows: 
+
         .. csv-table::
-           :file: ./table/eDESE_demo.celltype.csv
-           :header-rows: 1
-           :align: center
-     
-     
-        TissueName: tissue names;
-     
-        RobustRegressionZ: The p-value generated by the Wilcoxon rank-sum test based on the robust-regression z-score of the potential susceptibility and non-susceptibility genes.
-     
-        AveragedLog(p): the negative log10 of the p-values generated by averaging the p-values of four selective-expression measures (robust-regression z-score, conventional z-score, MAD robust z-score, and ratio of vector-scalar projection).
-     
-      - The fifth output file is a Q-Q plot, named ***.qq.png**, representing the p-value of the ECS test based on gene, variants insides the gene and variants outside the gene, respectively.
+            :file: ./table/MCGA_eqtl_demo.gene.csv
+            :header-rows: 1
+            :align: center
+        
+        GWAS_Var_P : the *p*-value of top variant in GWAS summary statistics.
+ 
+        .. csv-table::
+            :file: ./table/MCGA_eqtl_demo.finemapping.gene.ecs.csv
+            :header-rows: 1
+            :align: center
+ 
+        The meaning of the column names in ***.finemapping.gene.ecs.txt** is same as that of MCGA_Dist.
+ 
+        .. csv-table::
+            :file: ./table/MCGA_eqtl_demo.gene.var.pvalue.csv
+            :header-rows: 1
+            :align: center
+        
+        The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
+
+    + For MCGA_isoQTL, the three output files are as follows:  
+
+        .. csv-table::
+            :file: ./table/MCGA_isoqtl_demo.gene.csv
+            :header-rows: 1
+            :align: center
+  
+        Gene : gene:isoform pair name;
+ 
+        eQTL_P: p value of the top variant associated with gene;
+ 
+        eQTL_Beta : beta value of the top variant associated with gene;
+ 
+        eQTL_SE : se value of the top variant associated with gene.  
+  
+        .. csv-table::
+            :file: ./table/MCGA_isoqtl_demo.finemapping.gene.ecs.csv
+            :header-rows: 1
+            :align: center
+        
+        The meaning of the column names in ***.finemapping.gene.ecs.txt** is same as that of MCGA_Dist.
+        
+        .. csv-table::
+            :file: ./table/MCGA_isoqtl_demo.gene.var.pvalue.csv
+            :header-rows: 1
+            :align: center
+
+        The meaning of the column names in ***.gene.var.pvalue.txt.gz** is same as that of MCGA_Dist.
 
 
-      - The sixth output file is the log file in which the detailed parameter settings and computation procedures can be found.
+Infer causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(EMIC)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-4.4 Infer the causal genes based on GWAS summary statistics and eQTLs by Mendelian randomization analysis framework for causal gene estimation(EMIC)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-One can perform multiple IVs-based MR analyses to infer the causal genes or transcripts by using the integrative framework named EMIC. EMIC adopted two multiple IVs-based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. EMIC needs two major inputs, GWAS and eQTL summary statistics, respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating the association between IVs and the expression of genes or transcripts in a tissue or cell type. EMIC has integrated the pre-calculated cis-eQTLs in 50 tissues or cell-types with gene-level and isoform-level expression from GTEx(version 8).
+One can perform multiple IVs based MR analysis to infer casual gene or transcript by an integrative framework named EMIC. EMIC adopted two multiple IVs based MR methods for causality test and casual effect estimation of a gene’s expression to a phenotype, median-based MR and ML-based MR. EMIC needs two major inputs, GWAS and eQTL summary statistics respectively. The GWAS summary statistics refer to the logarithm of odds ratio or regression coefficients and the corresponding standard errors(SEs) from a large-scale GWAS study, indicating the association between IVs and a phenotype. The eQTL summary statistics are similar to that of the GWAS, indicating association between IVs and expression of genes or transcripts in a tissue or cell type. EMIC has integrated the pre-calculated cis-eQTLs in 55 tissues or cell-types with gene-level and transcript-level expression from GTEx(version 8).
 
 Required options
 ---------------------
@@ -601,10 +530,10 @@ Required options
 Explanations and Optional options
 ---------------------------------------
 
-- ``--emic``: No parameters required. The main function option.
+- ``--emic``: The main function option.
 - ``--eqtl-file``: See above description.
 - ``--sum-file``: See above description.
-- ``--beta-type``: The altenative values are 0, 1 or 2. Specially, 0 represents the coefficients of linear regression for a quantitative phenotype; 1 represents the coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 represents the odds ratio for a qualitative phenotype.
+- ``--beta-type``: Indicate whether the coefficients(i.e., betas) in the summary statistics file. 0 means coefficients of linear regression for a quantitative phenotype beta; 1 means coefficients of logistic regression or the logarithms of odds ratio for a qualitative phenotype; 2 means the odds ratio for a qualitative phenotype.
 - ``--saved-ref``: See above description.
 - ``--out``: Specify the path and prefix name of the output files. The main output file is the Mendelian randomization analysis results for causal gene estimation, named ***.mr.gene.txt** or ***. gene.mr.gene.xls**. The following
 
@@ -613,21 +542,19 @@ Explanations and Optional options
         :header-rows: 1
         :align: center
 
-    Columns in the output file are gene symbol, the number of variants in the gene, *p*-values of causality tests by Median-based MR, detailed causality estimation by Median-based MR, *p*-values of causality tests by maximal likelihood-based MR, detailed causality estimation by maximal likelihood-based MR, chromosome, top GWAS variant position, *p*-value, beta and SE of the top GWAS variant, *p*-value, beta and SE of the top GWAS variant as an eQTL. When a gene has multiple transcripts, the detailed MR results will show MR analysis of all transcripts. Each MR analysis result has four components, the number IVs for the estimation, the estimated causal effect, the standard error of the estimation, and the *p*-values.
+    columns in the output file are gene symbol, number of variants in the gene, *p*-values of causality tests by Median-based MR, detailed causality estimation by Median-based MR, *p*-values of causality tests by maximal likelihood-based MR, detailed causality estimation by maximal likelihood-based MR, chromosome, top GWAS variant position, *p*-value, beta and SE of the top GWAS variant, *p*-value, beta and SE of the top GWAS variant as an eQTL. When a gene has multiple transcripts, the detailed MR results will show MR analysis of all transcripts. Each MR analysis result has four components, the number IVs for the estimation, the estimated causal effect, the standard error of the estimation, and the *p*-values.
     
  
-4.5 Compute the gene/isoform-level eQTLs of each tissue
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compute the eQTLs and isoQTLs of each tissue
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
-**Purpose**: compute the gene/isoform-level eQTLs based on the gene-level expression and isoform-level expression profiles of the target tissue.
+**Purpose**: compute the eQTLs and isoQTLs based on the gene-level expression and isoform-level expression profiles of target tissue.
 
  - Input data:
      
-   1. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_). Here genotypes in GTEx v8 were used as example input. When computing the gene/isoform-level eQTLs of certain tissue, only subjects simultaneously containing the genotype data and expression data were used;
+   1. Genotypes in KGGSEE objects(generated in `Gene-based association analysis <#gene-based-association-analysis>`_). Here genotypes in GTEx v8 were used as example input. When computing the eQTLs/isoQTLs of certain tissue, only subjects simultaneously containg genotype data and expression data were used;
      
-   2. Gene expression data of certain tissues corresponding to genotype data from the same subjects;
-   
-   3. Subject information, such as subject ID and subject-related covariates.
+   2. Gene expression data of certain tissues corresponding to genotype data from the same subject.
      
     .. code:: shell
 
@@ -635,9 +562,8 @@ Explanations and Optional options
         -jar kggsee.jar \
         --nt 10 \
         --calc-eqtl \
-        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression \
+        --expression-gty-vcf  path/to/vcf/file/of/subjects/with/expression
         --gene-expression resources/Adipose-Subcutaneous.expression.subjectid.gene.fmt.gz \
-        --expression-subjects path/to/subjectID/covariates.txt \
         --filter-eqtl-p 0.01 \
         --hwe-all 0.001 \
         --filter-maf-le 0.05 \
@@ -648,10 +574,44 @@ Explanations and Optional options
 Details of the options can be seen in `Options Index <#id18>`_.
 
 
-5 Options Index
+Estimate the potential driver tissues of a complex phenotype
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+**Purpose**: Estimate the potential driver tissues by selective expression of genes associated with complex phenotypes.
+
+ - Input data:
+    
+   1. GWAS summary statistics compressed in a text file (a fabled data set for education purpose): *examples/gwas.sum.stat.gz*;
+     
+   2. Genotypes in KGGSEE objects (generated in `Gene-based association analysis <#gene-based-association-analysis>`_) to approximate correction between summary statistics: *examples/out/geneAssoc*;
+   
+   3. Gene expression data compressed in a text file: *resources/gtex.v8.gene.mean.tsv.gz*.
+     
+    .. code:: shell
+
+        java -Xmx10g \
+        -jar kggsee.jar \
+        --nt 10 \
+        --sum-file examples/gwas.sum.stat.gz \
+        --chrom-col CHR
+        --pos-col BP
+        --p-col P
+        --gene-finemapping
+        --saved-ref examples/out/geneAssoc \
+        --out examples/out/geneAssoceQTL \
+        --only-hgnc-gene \
+        --p-value-cutoff 0.05 \
+        --multiple-testing bonf \
+        --calc-selectivity \
+        --expression-file resources/gtex.v8.gene.mean.tsv.gz
+        
+Details of the options can be seen in `Options Index <#id18>`_.
+
+
+Options Index
 ===============
 
-5.1 Inputs/outputs
+Inputs/outputs
 ~~~~~~~~~~~~~~~~
 
     .. csv-table::
@@ -659,7 +619,7 @@ Details of the options can be seen in `Options Index <#id18>`_.
         :header-rows: 1
         :align: center
 
-5.2 Quality control
+Quality control
 ~~~~~~~~~~~~~~~~~~~
 
     .. csv-table::
@@ -667,7 +627,7 @@ Details of the options can be seen in `Options Index <#id18>`_.
         :header-rows: 1
         :align: center
 
-5.3 Functions
+Functions
 ~~~~~~~~~~~
 
     .. csv-table::
@@ -675,7 +635,7 @@ Details of the options can be seen in `Options Index <#id18>`_.
         :header-rows: 1
         :align: center
 
-5.4 Utilities
+Utilities
 ~~~~~~~~~~~
 
     .. csv-table::
