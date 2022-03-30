@@ -166,7 +166,6 @@ Multi-strategy conditional gene-based association analysis
    --only-hgnc-gene \
    --p-value-cutoff 0.05 \
    --multiple-testing bonf \
-   --calc-selectivity \
    --out examples/out/geneAssoceQTL
 
 - MCGA_eQTL input data:
@@ -602,7 +601,6 @@ Estimate the potential driver tissues of a complex phenotype
         --only-hgnc-gene \
         --p-value-cutoff 0.05 \
         --multiple-testing bonf \
-        --calc-selectivity \
         --expression-file resources/gtex.v8.gene.mean.tsv.gz
         
 Details of the options can be seen in `Options Index <#id18>`_.
