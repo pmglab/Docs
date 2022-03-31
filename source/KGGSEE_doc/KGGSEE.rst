@@ -93,7 +93,7 @@ Purpose: Detect the phenotype-associated genes of a phenotype using the GWAS sum
       --out examples/out/geneAssoc
 **Important Note:** The parameter of "--vcf-ref" is the genotypes in VCF format and can be downloaded from https://pmglab.top/genotypes/#/. The users should download the proper vcf files according to their research subjects' ancestry. The combination of "--vcf-ref" and "--keep-ref" can keep the parsed vcf data (KGGSEE object format) in a local folder named like "VCFRefhg19" under the output folder (here is the "examples/out/geneAssoc"). When the users want to run another analysis, the users can use the option "--saved-ref" instead of the "--vcf-ref" and "keep-ref" to save time. The parameter of "--saved-ref" is the full path of folder "VCFRefhg19" (see example in the following part).
 
-3.2 Estimate the phenotype-associated cell-types of a phenotype
+3.2 Estimate the phenotype-associated cell-types of a phenotype (DESE)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 Purpose: Estimate the relevant cell-types of a phenotype and finely map associated genes according to selective expression.
@@ -149,7 +149,6 @@ Purpose: Perform conditional gene-based association analysis using different str
       --only-hgnc-gene \
       --p-value-cutoff 0.05 \
       --multiple-testing bonf \
-      --calc-selectivity \
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
       
@@ -180,7 +179,6 @@ Purpose: Perform conditional gene-based association analysis using different str
       --only-hgnc-gene \
       --p-value-cutoff 0.05 \
       --multiple-testing bonf \
-      --calc-selectivity \
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
 
@@ -214,7 +212,6 @@ Purpose: Perform conditional gene-based association analysis using different str
       --only-hgnc-gene \
       --p-value-cutoff 0.05 \
       --multiple-testing bonf \
-      --calc-selectivity \
       --regions-out chr6:27477797-34448354 \
       --out examples/out/geneAssoceQTL
 
@@ -274,7 +271,6 @@ Purpose: Estimate the drug selective perturbation effect on the phenotype-associ
       --only-hgnc-gene \
       --p-value-cutoff 0.05 \
       --multiple-testing bonf \
-      --calc-selectivity \
       --regions-out chr6:27477797-34448354 \
       --out examples/out/Selective_Perturbed_Drugs
       
@@ -297,7 +293,6 @@ Purpose: Estimate the drug selective perturbation effect on the phenotype-associ
       --only-hgnc-gene \
       --p-value-cutoff 0.05 \
       --multiple-testing bonf \
-      --calc-selectivity \
       --regions-out chr6:27477797-34448354 \
       --out examples/out/Selective_Perturbed_Drugs
  
@@ -358,7 +353,7 @@ Explanations and Optional options
     Columns in the output file are gene symbol, the number of variants in the gene, *p*-values of gene-based association test, and the detailed information of the top variant within the gene(i.e., the variant with the smallest *p*-value). These columns include chromosome, physical position, *p*-value, whether the top variant was ignored in the gene-based association analysis, and gene feature annotations according to RefGene and GENCODE.
 
 
-4.2 Finely map genes and estimate relevant cell types of a phenotype by the single-cell (or bulk-cell) type and phenotype cross annotation framework(SPA)
+4.2 Finely map genes and estimate relevant cell types of a phenotype by the single-cell (or bulk-cell) type and phenotype cross annotation framework(DESE)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One can simultaneously prioritize phenotype-associated genes and cell types with GWAS *p*-values and gene/transcript expression profile. The GWAS *p*-values types and expression were analyzed by an iterative prioritization procedure. In the procedure, phenotype-associated genes were prioritized by a conditional gene-based association(using the ECS again) according to the genes’ selective expression in disease related cell-types while the phenotype related cell-types were prioritized by an enrichment analysis of Wilcoxon rank-sum test for phenotype-associated genes’ selective expression. The phenotype-associated gene list and phenotype related cell-type list were updated by turns until the two list were unchanged. The detailed method is described in our paper(`Paper Link <http://bing.com>`_).
@@ -423,7 +418,6 @@ Required options
 - ``--eqtl-file [path/to/eQTL/file of genes or transcripts]``
 - ``--filter-eqtl-p``
 - ``--expression-file [path/to/expression/file]``
-- ``--calcu-selectivity``
 - ``--sum-file [/path/to/summary/file]``
 - ``--filter-maf-le``
 - ``--saved-ref  [previous/output/path]``
@@ -449,7 +443,6 @@ Explanations and Optional options
 - ``--p-value-cutoff``: Specify the family-wise cutoff for the multiple testing.
 - ``--only-hgnc-gene``: No parameters required. If used, KGGSEE only considers the genes with HGNC gene symbols.
 - ``--expression-file``: Specify the path of the preproceeded gene expression file. The index column of the preprocessed expression file was gene/isoform symbol name, and each of 50 tissues or cell types had two columns: one representing averaged expression value (i.e., mean) of all samples and the other representing the standard error of the mean (SE).
-- ``--calcu-selectivity``: No parameters required. If used, KGGSEE will perform gene-based association analysis by conditioning on the gene-level/isoform-level expression profiles.
 
 - ``--filter-eqtl-p``: Specify the filter to select the significant gene/isoform-level eQTLs to enter the following gene-based association analysis.
 - ``--sum-file``: Specify the full path of the GWAS summary statistics. Three columns of the GWAS summary statistic file, i.e., chromosome, physical position and p-value are minimally required. The default column names are CHR, BP and P, respectively. Users can also specify these names by using ``--chrom-col``, ``--pos-col`` and ``--p-col``, respectively.
