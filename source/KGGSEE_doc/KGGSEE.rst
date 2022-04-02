@@ -174,7 +174,7 @@ Purpose: Perform conditional gene-based association analysis using different str
       --sum-file examples/gwas.sum.stat.gz \
       --saved-ref  examples/out/geneAssoc \
       --expression-file resources/gtex.v8.gene.mean.tsv.gz \
-      --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9_.gene.maf05.p01.gz.eqtl.txt.gz \
+      --eqtl-file resources/hg19/eqtl/Brain-FrontalCortex_BA9.gene.maf05.p01.gz.eqtl.txt.gz \
       --filter-eqtl-p 0.01 \  
       --only-hgnc-gene \
       --p-value-cutoff 0.05 \
